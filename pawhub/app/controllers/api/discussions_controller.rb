@@ -1,4 +1,4 @@
-class DiscussionsController < ApplicationController
+class Api::DiscussionsController < ApplicationController
   before_action :set_discussion, only: [:show, :update, :destroy]
 
   # GET /discussions
