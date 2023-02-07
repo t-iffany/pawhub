@@ -1,5 +1,5 @@
 import './App.css';
-import DiscussionList from './components/DiscussionList';
+import DiscussionList from './components/Discussion/DiscussionList';
 import NavigationBar from './components/NavigationBar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
