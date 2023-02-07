@@ -3,12 +3,12 @@ import DiscussionListItem from "./DiscussionListItem";
 import SimpleContainer from "../SimpleContainer";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import DiscussionForm from "./DiscussionForm";
 
 export default function DiscussionList() {
   const [state, setState] = useState({
     discussions: [],
-    users: [],
-    categories: ["Swap", "Meetup", "Other"],
+    users: []
   });
 
   useEffect(() => {
@@ -51,7 +51,7 @@ export default function DiscussionList() {
         <Buttons variant="outlined">Meetup</Buttons>
         <Buttons variant="outlined">Other</Buttons>
       </div>
-
+      <DiscussionForm />
       <SimpleContainer>{discussionPosts}</SimpleContainer>
     </div>
   );

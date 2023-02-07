@@ -4,13 +4,15 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import axios from 'axios'
 
 export default function DiscussionForm() {
+  const categories = ["Swap", "Meetup", "Other"];
 
   const [newDiscussion, setNewDiscussion] = useState({
     title: "",
     content: "",
-    category: "",
+    category: "Swap",
     user_id: 1,
   });
 
@@ -19,8 +21,8 @@ export default function DiscussionForm() {
   };
 
   const handleClick = (e) => {
-    if (newDiscussion.title === "") {
-      alert("Message should not be empty.");
+    if (newDiscussion.title === "" || newDiscussion.content === ""){
+      alert("Please fill all required fields.");
       return;
     }
 
@@ -36,7 +38,7 @@ export default function DiscussionForm() {
           <TextField
             name="title"
             id="title"
-            label="Outlined"
+            label="Title"
             variant="outlined"
             onChange={handleChange}
             value={newDiscussion.title}
@@ -44,14 +46,13 @@ export default function DiscussionForm() {
           <TextField
             name="content"
             id="content"
-            label="Multiline"
+            label="Discussion Content"
             multiline
             maxRows={4}
             onChange={handleChange}
             value={newDiscussion.content}
           />
 
-          <InputLabel id="demo-simple-select-label">Category</InputLabel>
           <Select
             labelId="category"
             id="category"
@@ -60,7 +61,7 @@ export default function DiscussionForm() {
             onChange={handleChange}
             name="category"
           >
-            {state.categories.map((category) => (
+            {categories.map((category) => (
               <MenuItem value={category}>{category}</MenuItem>
             ))}
           </Select>
