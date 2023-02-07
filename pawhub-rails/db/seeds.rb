@@ -19,7 +19,7 @@ user1 = User.create({
   breed: 'poodle',
   description: 'woof',
   image: 'https://worldanimalfoundation.org/wp-content/uploads/2022/10/About-the-Breed-review-1.jpg',
-  avatar: 'https://www.thesprucepets.com/thmb/G0MGCtP9uMt7AtPHWcirnm38T5w=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-1153019783-212f3a30f2874e01b82582f65010d569.jpg'
+  avatar: 'https://imgur.com/a/xlfz5Ki'
 })
 
 user2 = User.create({
