@@ -7,7 +7,7 @@ export default function SimpleContainer(props) {
   return (
     <React.Fragment>
       <CssBaseline />
-      <Container maxWidth="sm">
+      <Container className="discussion-container" maxWidth="md">
         <Box sx={{ bgcolor: "transparent", height: "80vh" }}>
           {props.children}
         </Box>
