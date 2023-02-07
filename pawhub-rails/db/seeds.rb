@@ -65,3 +65,12 @@ user3.discussions.create({
   content: 'How often should I be bringing my dog to a dog park and for how long?',
   category: 'Other',
 })
+
+# Comments
+Comment.destroy_all
+
+comment1 = Comment.create({body: 'sick post!', user_id: 1, discussion_id: 1})
+
+
+
+
