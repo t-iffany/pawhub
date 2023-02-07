@@ -18,7 +18,7 @@ class Api::DiscussionsController < ApplicationController
     @discussion = Discussion.new(discussion_params)
 
     if @discussion.save
-      render json: @discussion, status: :created, location: @discussion
+      render json: @discussion, status: 201
     else
       render json: @discussion.errors, status: :unprocessable_entity
     end
