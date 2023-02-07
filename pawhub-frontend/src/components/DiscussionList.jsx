@@ -14,7 +14,7 @@ export default function DiscussionList() {
   useEffect(() => {
     Promise.all([
       axios.get("http://localhost:3001/api/discussions"),
-      axios.get("http://localhost:3001/api/users"),
+      axios.get("http://localhost:3001/api/users")
     ])
       // Our res is an array of the response received: [{discussions}, {users}]
       .then((res) => {
