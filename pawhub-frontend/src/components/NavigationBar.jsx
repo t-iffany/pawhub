@@ -1,24 +1,56 @@
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
+import { Link } from "react-router-dom";
 
 export default function NavigationBar() {
   return (
     <Navbar collapseOnSelect expand="lg">
       <Container>
-        <Navbar.Brand href="/">Pethub</Navbar.Brand>
+        <Navbar.Brand>
+          <Link className="nav-link" to="/">
+            Pethub
+          </Link>
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="/resources">Resources</Nav.Link>
-            <Nav.Link href="/discussions">Discussion</Nav.Link>
-            <Nav.Link href="/maps">Maps</Nav.Link>
+            <Nav.Link>
+              <Link className="nav-link" to="/resources">
+                Resources
+              </Link>
+            </Nav.Link>
+
+            <Nav.Link>
+              <Link className="nav-link" to="/discussions">
+                Discussions
+              </Link>
+            </Nav.Link>
+
+            <Nav.Link>
+              <Link className="nav-link" to="/map">
+                Map
+              </Link>
+            </Nav.Link>
           </Nav>
 
           <Nav>
-            <Nav.Link href="/login">Login</Nav.Link>
-            <Nav.Link eventKey={2} href="/signup">
-              Signup
+            <Nav.Link>
+              <Link className="nav-link" to="/profile">
+                Profile
+              </Link>
+            </Nav.Link>
+
+            <Nav.Link>
+              <Link className="nav-link" to="/login">
+                Login
+              </Link>
+            </Nav.Link>
+
+            <Nav.Link>
+              <Link className="nav-link" to="/signup">
+                Signup
+              </Link>
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
