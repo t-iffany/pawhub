@@ -1,6 +1,12 @@
 import { React, useCallback, useMemo, useRef, useState } from "react";
-import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
-import Places from "./places";
+import {
+  GoogleMap,
+  useLoadScript,
+  Marker,
+  Circle,
+} from "@react-google-maps/api";
+import Places from "./Places";
+import { googleAPIKey, placeType } from "../../helpers/GooglePlacesAPI";
 
 export default function Map() {
   const [location, setLocation] = useState();
@@ -14,17 +20,31 @@ export default function Map() {
   const options = useMemo(
     () => ({
       mapId: "30817c9c0541d59e",
-      disableDefaultUI: true,
+      disableDefaultUI: false,
     }),
     []
   );
+
+  // Map-circle colors
+  const closeOptions = {
+    strokeOpacity: 0.5,
+    strokeWeight: 2,
+    clickable: false,
+    draggable: false,
+    editable: false,
+    visible: true,
+    zIndex: 3,
+    fillOpacity: 0.125,
+    strokeColor: "#8BC34A",
+    fillColor: "#8BC34A",
+  };
 
   // a function that generates a version on initial render, and won't re-generate unless dependencies change (we have none in arr)
   // (for optimization of re-rendering)
   const onLoad = useCallback((map) => (mapRef.current = map), []);
 
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: "AIzaSyDRii-QG1bSXUWEz7bypIOSrFS7y68PDtM",
+    googleMapsApiKey: googleAPIKey,
     libraries,
   });
 
@@ -52,7 +72,14 @@ export default function Map() {
           mapContainerClassName="map-container"
           options={options}
           onLoad={onLoad}
-        ></GoogleMap>
+        >
+          {location && (
+            <>
+              <Marker position={location} icon="" />
+              <Circle center={location} radius={5000} options={closeOptions} />
+            </>
+          )}
+        </GoogleMap>
       </div>
     </div>
   );

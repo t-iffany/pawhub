@@ -1,31 +1,65 @@
-import { useState } from "react";
-import Button from "@mui/material/Button";
+import React, { useState } from "react";
+import { TextField, Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
-export default function Login() {
+export default function Login({setCurrentUser}) {
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+  });
 
-  const [userId, setUserId] = useState();
+  const navigate = useNavigate();
 
-  const handleLogin = () => {
-    fetch("http://localhost:3000/api/login/1")
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        console.log('data', data);
-        setUserId(data.userId);
-        localStorage.setItem('userId', data.userId);
-      });
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
   };
-
-  const handleLogout = () => {
-    
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    fetch("http://localhost:3001/api/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    }).then((res) => {
+      if (res.ok) {
+        res.json().then((user) => {
+          setCurrentUser(user);
+        });
+        navigate("/discussions");
+      } else {
+        res.json().then((errors) => {
+          console.error(errors);
+        });
+      }
+    });
   };
 
   return (
-    <div>
-      <p>{userId ? `Logged in as: ${userId}` : 'Not logged in'}</p>
-      <Button variant="outlined" onClick={handleLogin}>Login</Button>
-      <Button variant="outlined" onClick={handleLogout}>Logout</Button>
-    </div>
+    <form onSubmit={handleSubmit}>
+    <TextField
+            name="username"
+            id="username"
+            label="Username"
+            variant="outlined"
+            onChange={handleChange}
+            value={formData.username}
+          />
+    <TextField
+            name="password"
+            id="password"
+            type="password"
+            label="Password"
+            variant="outlined"
+            onChange={handleChange}
+            value={formData.password}
+          />
+      <Button type="submit" variant="contained">
+          Submit
+      </Button>
+    </form>
   );
-}
+};
