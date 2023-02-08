@@ -3,6 +3,7 @@ import DiscussionList from './components/Discussion/DiscussionList';
 import NavigationBar from './components/NavigationBar';
 import Map from './components/Map';
 import Login from './components/Login';
+import SignUp from './components/User/SignUp';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
@@ -16,7 +17,8 @@ function App() {
           <Routes>
             <Route path="/map" element={<Map />} />
             <Route path="/discussions" element={<DiscussionList />} />
-            <Route path="/login" element={<Login />} /> 
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} /> 
           </Routes>
         </div>
       </div>
