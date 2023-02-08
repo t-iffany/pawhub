@@ -31,27 +31,20 @@ function App() {
     return <div></div>;
   }
 
-  if (currentUser) {
-    return (
-      <Router>
-        <div className="App">
-          <NavigationBar />
-          <div className="content">
-            <Routes>
-              <Route path="/map" element={<Map />} />
-              <Route path="/discussions" element={<DiscussionList />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<SignUp />} /> 
-            </Routes>
-          </div>
-        </div>
-      </Router>
-    );
-  }
   return (
-    <div className="App">
-      <Login setCurrentUser={setCurrentUser}/>
-    </div>
+    <Router>
+      <div className="App">
+        <NavigationBar />
+        <div className="content">
+          <Routes>
+            <Route path="/map" element={<Map />} />
+            <Route path="/discussions" element={<DiscussionList />} />
+            <Route path="/login" element={<Login setCurrentUser={setCurrentUser}/>} />
+            <Route path="/signup" element={<SignUp />} /> 
+          </Routes>
+        </div>
+      </div>
+    </Router>
   );
 }
 

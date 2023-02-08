@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { TextField, Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 export default function Login({setCurrentUser}) {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
   });
+
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({
@@ -26,6 +29,7 @@ export default function Login({setCurrentUser}) {
         res.json().then((user) => {
           setCurrentUser(user);
         });
+        navigate("/discussions");
       } else {
         res.json().then((errors) => {
           console.error(errors);
