@@ -1,5 +1,5 @@
 import './App.css';
-import DiscussionList from './components/DiscussionList';
+import DiscussionList from './components/Discussion/DiscussionList';
 import NavigationBar from './components/NavigationBar';
 import Map from './components/Map';
 import 'bootstrap/dist/css/bootstrap.min.css';
