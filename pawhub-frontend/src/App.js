@@ -1,9 +1,10 @@
 import './App.css';
 import DiscussionList from './components/Discussion/DiscussionList';
 import NavigationBar from './components/NavigationBar';
-import Map from './components/Map';
+import Map from './components/Map/Map';
 import Login from './components/Login';
 import SignUp from './components/User/SignUp';
+import Profile from './components/Profile';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { useState, useEffect } from "react";
@@ -41,6 +42,8 @@ function App() {
             <Route path="/discussions" element={<DiscussionList />} />
             <Route path="/login" element={<Login setCurrentUser={setCurrentUser}/>} />
             <Route path="/signup" element={<SignUp />} /> 
+            <Route path="/login" element={<Login />} />
+            <Route path="/profile" element={<Profile />} />
           </Routes>
         </div>
       </div>
@@ -49,3 +52,4 @@ function App() {
 }
 
 export default App;
+
