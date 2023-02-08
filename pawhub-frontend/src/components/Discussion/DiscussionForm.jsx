@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { TextField, Button } from "@mui/material";
-import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import axios from 'axios'
+import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
-export default function DiscussionForm() {
+export default function DiscussionForm({setOpenPopup}) {
   const categories = ["Swap", "Meetup", "Other"];
+  const navigate = useNavigate();
 
   const [newDiscussion, setNewDiscussion] = useState({
     title: "",
@@ -20,7 +20,8 @@ export default function DiscussionForm() {
     setNewDiscussion({ ...newDiscussion, [e.target.name]: e.target.value });
   };
 
-  const handleClick = (e) => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     if (newDiscussion.title === "" || newDiscussion.content === ""){
       alert("Please fill all required fields.");
       return;
@@ -28,13 +29,13 @@ export default function DiscussionForm() {
 
     axios
       .post("http://localhost:3001/api/discussions", newDiscussion)
-      .then((res) => {})
+      .then((res) => setOpenPopup(false))
       .catch((err) => console.log(err));
-  };
+  }
 
   return (
     <div>
-      <FormControl fullWidth>
+      <form onSubmit={handleSubmit}>
           <TextField
             name="title"
             id="title"
@@ -61,14 +62,15 @@ export default function DiscussionForm() {
             onChange={handleChange}
             name="category"
           >
-            {categories.map((category) => (
-              <MenuItem value={category}>{category}</MenuItem>
+            {categories.map((category, id) => (
+              <MenuItem value={category} key={id}>{category}</MenuItem>
             ))}
           </Select>
-        </FormControl>
-        <Button variant="contained" onClick={handleClick}>
-          Post
-        </Button>
+        
+          <Button type="submit" variant="contained">
+            Add Discussion
+          </Button>
+      </form>
     </div>
   );
 }

@@ -1,15 +1,17 @@
-import Buttons from "../Buttons";
+import Buttons from "../controls/Buttons";
 import DiscussionListItem from "./DiscussionListItem";
-import SimpleContainer from "../SimpleContainer";
+import SimpleContainer from "./SimpleContainer";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import DiscussionForm from "./DiscussionForm";
+import Popup from "../controls/Popup";
 
 export default function DiscussionList() {
   const [state, setState] = useState({
     discussions: [],
     users: []
   });
+  const [openPopup, setOpenPopup] = useState(false)
 
   useEffect(() => {
     Promise.all([
@@ -25,7 +27,7 @@ export default function DiscussionList() {
         }));
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [openPopup]);
 
   const findUserById = (userId) =>
     state.users.find((user) => user.id === userId);
@@ -51,8 +53,15 @@ export default function DiscussionList() {
         <Buttons variant="outlined">Meetup</Buttons>
         <Buttons variant="outlined">Other</Buttons>
       </div>
-      <DiscussionForm />
+      <Popup 
+        title="Create a new discussion"
+        openPopup = {openPopup}
+        setOpenPopup = {setOpenPopup}
+      >
+        <DiscussionForm setOpenPopup={setOpenPopup}/>
+      </Popup>
       <SimpleContainer>{discussionPosts}</SimpleContainer>
+      <Buttons variant="outlined" onClick={() => setOpenPopup(true)}>Add a discussion</Buttons>
     </div>
   );
 }
