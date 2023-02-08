@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "@material-ui/core": "^4.12.4",
+    "@mui/material": "^5.11.8",
+    "@reach/combobox": "^0.18.0"
+  },
+  "devDependencies": {
+    "react-scripts": "^5.0.1"
+  }
+}
