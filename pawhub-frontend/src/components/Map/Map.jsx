@@ -1,12 +1,14 @@
 import { React, useCallback, useMemo, useRef, useState } from "react";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
-import Places from "./Places";
+import Places from "./places";
 
 export default function Map() {
   const [location, setLocation] = useState();
+  const libraries = ["places"];
 
-  // MapRef is an instance of <GoogleMap />
+  // MapRef is an instance of <GoogleMap />. This hook lets us reference this without re-rendering
   const mapRef = useRef();
+
   // Coordinates for Oakridge Mall
   const center = useMemo(() => ({ lat: 49.232332, lng: -123.116773 }), []);
   const options = useMemo(
@@ -23,7 +25,7 @@ export default function Map() {
 
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: "AIzaSyDRii-QG1bSXUWEz7bypIOSrFS7y68PDtM",
-    libraries: ["places"],
+    libraries,
   });
 
   if (!isLoaded) {
@@ -38,7 +40,7 @@ export default function Map() {
         <Places
           setLocation={(position) => {
             setLocation(position);
-            mapRef.current?.panTo(position);
+            mapRef.current.panTo(position);
           }}
         />
       </div>
