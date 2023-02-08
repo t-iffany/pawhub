@@ -1,7 +1,10 @@
-import { React, useCallback, useMemo, useRef } from "react";
+import { React, useCallback, useMemo, useRef, useState } from "react";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
+import Places from "./Places";
 
 export default function Map() {
+  const [location, setLocation] = useState();
+
   // MapRef is an instance of <GoogleMap />
   const mapRef = useRef();
   // Coordinates for Oakridge Mall
@@ -31,6 +34,13 @@ export default function Map() {
     <div className="map-page-container">
       <div className="map-controls">
         <h1 className="map-text">Search</h1>
+
+        <Places
+          setLocation={(position) => {
+            setLocation(position);
+            mapRef.current?.panTo(position);
+          }}
+        />
       </div>
 
       <div className="map">
