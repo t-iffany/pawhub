@@ -16,7 +16,7 @@ function App() {
           <Routes>
             <Route path="/map" element={<Map />} />
             <Route path="/discussions" element={<DiscussionList />} />
-            <Route path="/login" element={<Login />} /> 
+            <Route path="/login" element={<Login />} />
           </Routes>
         </div>
       </div>
