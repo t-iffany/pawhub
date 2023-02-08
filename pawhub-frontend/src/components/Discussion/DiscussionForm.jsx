@@ -3,11 +3,9 @@ import { TextField, Button } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import axios from 'axios';
-import { useNavigate } from "react-router-dom";
 
 export default function DiscussionForm({setOpenPopup}) {
   const categories = ["Swap", "Meetup", "Other"];
-  const navigate = useNavigate();
 
   const [newDiscussion, setNewDiscussion] = useState({
     title: "",

@@ -20,6 +20,7 @@ export default function DiscussionList() {
     ])
       // Our res is an array of the response received: [{discussions}, {users}]
       .then((res) => {
+
         setState((prev) => ({
           ...prev,
           discussions: res[0].data,
@@ -32,7 +33,9 @@ export default function DiscussionList() {
   const findUserById = (userId) =>
     state.users.find((user) => user.id === userId);
 
-  const discussionPosts = state.discussions.map((discussion) => {
+  const discussionPosts = state.discussions
+    .sort((a,b) => b.id > a.id ? 1 : -1)
+    .map((discussion) => {
     const user = findUserById(discussion.user_id);
 
     return (
