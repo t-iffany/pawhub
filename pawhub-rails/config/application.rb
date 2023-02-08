@@ -36,5 +36,10 @@ module Pawhub
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    config.middleware.use ActionDispatch::Coookies
+    config.middleware.use ActionDispatch::Session::CoookieStore
+
+    config.action_dispatch.cookies_same_site_protection = :strict #ensures that cookies are only shared on the same domain
   end
 end
