@@ -7,11 +7,11 @@ export default function Profile() {
 
     <div style={{ display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center", height: "100vh" }}>
       <div style={{ width: "25%", height: "50%", backgroundColor: "transparent" }}>
-        <div>Username</div>
         <div>
+          Username
           <Avatar alt={Avatar}
             src="https://www.publicdomainpictures.net/pictures/250000/nahled/dog-puppy-illustration.jpg"
-            sx={{ width: 100, height: 100 }}
+            sx={{ width: 130, height: 130 }}
           />
         </div>
       </div>
