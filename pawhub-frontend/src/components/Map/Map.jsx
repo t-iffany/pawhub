@@ -5,7 +5,7 @@ import {
   Marker,
   Circle,
 } from "@react-google-maps/api";
-import Places from "./places";
+import Places from "./Places";
 import { googleAPIKey, placeType } from "../../helpers/GooglePlacesAPI";
 
 export default function Map() {
