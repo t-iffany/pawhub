@@ -1,5 +1,5 @@
 class Api::UsersController < ApplicationController
-  #before_action :set_user, only: [:show, :update, :destroy]
+  before_action :set_user, only: [:show, :update, :destroy, :respond_user_info]
 
   # GET /users
   def index
@@ -8,13 +8,9 @@ class Api::UsersController < ApplicationController
     render json: @users
   end
 
-  # GET /users/1
+  # GET /users/1 
   def show
-    if current_user
-      render json: current_user, status: :ok
-    else
-      render json: "Not Authenticated", status: :unauthorized
-    end
+    render json: @user
   end
 
   # POST /users
@@ -47,9 +43,9 @@ class Api::UsersController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    #def set_user
-    #  @user = User.find(params[:id])
-    #end
+    def set_user
+      @user = User.find(params[:id])
+    end
 
     # Only allow a list of trusted parameters through.
     def user_params

@@ -71,3 +71,34 @@
 .combobox-option {
   list-style-type: none;
 }
+
+.blog-post {
+  padding: 16px;
+  margin: 24px 0;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  font-weight: bold;
+  color: #3e3e3e;
+}
+
+.author {
+  color: #8c8c8c;
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+.content {
+  margin-top: 16px;
+  font-size: 16px;
+  color: #3e3e3e;
+}
+
+.date {
+  color: #8c8c8c;
+  font-size: 12px;
+  margin-top: 16px;
+}
