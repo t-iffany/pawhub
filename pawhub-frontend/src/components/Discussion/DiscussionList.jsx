@@ -7,7 +7,7 @@ import DiscussionForm from "./DiscussionForm";
 import Popup from "../controls/Popup";
 import { Link } from "react-router-dom";
 
-export default function DiscussionList() {
+export default function DiscussionList({currentUser}) {
   const [state, setState] = useState({
     discussions: [],
     users: []
@@ -58,15 +58,17 @@ export default function DiscussionList() {
         <Buttons variant="outlined">Meetup</Buttons>
         <Buttons variant="outlined">Other</Buttons>
       </div>
-      <Popup 
-        title="Create a new discussion"
-        openPopup = {openPopup}
-        setOpenPopup = {setOpenPopup}
-      >
-        <DiscussionForm setOpenPopup={setOpenPopup}/>
-      </Popup>
       <SimpleContainer>{discussionPosts}</SimpleContainer>
-      <Buttons variant="outlined" onClick={() => setOpenPopup(true)}>Add a discussion</Buttons>
+      {currentUser && <div>
+        <Popup 
+          title="Create a new discussion"
+          openPopup = {openPopup}
+          setOpenPopup = {setOpenPopup}
+        >
+          <DiscussionForm currentUser={currentUser} setOpenPopup={setOpenPopup}/>
+        </Popup>
+        <Buttons variant="outlined" onClick={() => setOpenPopup(true)}>Add a discussion</Buttons>
+      </div>}
     </div>
   );
 }
