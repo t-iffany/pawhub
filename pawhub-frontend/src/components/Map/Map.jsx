@@ -22,10 +22,14 @@ import {
   defaultLat,
   defaultLng,
   getUrl,
+  petStoreIcon,
+  vetIcon,
+  homeIcon,
 } from "../../helpers/GooglePlacesAPI";
 import axios from "axios";
-import { Button } from "@mui/material";
 import InfoBox from "./InfoBox";
+import ToggleButton from "react-bootstrap/ToggleButton";
+import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
 
 export default function Map() {
   const [state, setState] = useState({
@@ -99,21 +103,24 @@ export default function Map() {
             mapRef.current.panTo(position);
           }}
         />
-        <Button
-          className="filter"
-          variant="contained"
-          onClick={() => setState({ ...state, placeType: "veterinary_care" })}
-        >
-          Vets
-        </Button>
 
-        <Button
-          className="filter"
-          variant="contained"
-          onClick={() => setState({ ...state, placeType: "pet_store" })}
-        >
-          Pet Stores
-        </Button>
+        <ToggleButtonGroup type="radio" name="options">
+          <ToggleButton
+            id="tbg-radio-1"
+            value={1}
+            onClick={() => setState({ ...state, placeType: "veterinary_care" })}
+          >
+            Veterinarians
+          </ToggleButton>
+
+          <ToggleButton
+            id="tbg-radio-2"
+            value={2}
+            onClick={() => setState({ ...state, placeType: "pet_store" })}
+          >
+            Pet Stores
+          </ToggleButton>
+        </ToggleButtonGroup>
       </div>
 
       <div className="map">
@@ -124,7 +131,9 @@ export default function Map() {
           options={options}
           onLoad={onLoad}
         >
-          {state.location && <Marker position={state.location} icon="" />}
+          {state.location && (
+            <Marker position={state.location} icon={homeIcon} />
+          )}
 
           {state.circle ? (
             <Circle
@@ -142,7 +151,9 @@ export default function Map() {
                 <Marker
                   key={index}
                   position={{ lat, lng }}
-                  icon="http://maps.google.com/mapfiles/ms/micons/lightblue.png"
+                  icon={
+                    state.placeType === "pet_store" ? petStoreIcon : vetIcon
+                  }
                   onClick={() =>
                     setState({
                       ...state,
