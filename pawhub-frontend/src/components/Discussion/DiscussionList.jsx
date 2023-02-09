@@ -5,6 +5,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import DiscussionForm from "./DiscussionForm";
 import Popup from "../controls/Popup";
+import { Link } from "react-router-dom";
 
 export default function DiscussionList() {
   const [state, setState] = useState({
@@ -39,13 +40,14 @@ export default function DiscussionList() {
     const user = findUserById(discussion.user_id);
 
     return (
-      <DiscussionListItem
-        key={discussion.id}
-        title={discussion.title}
-        timestamp={discussion.created_at}
-        name={user.username}
-        avatar={user.avatar}
-      />
+      <Link to={`/discussions/${discussion.id}`} key={discussion.id} >
+        <DiscussionListItem
+          title={discussion.title}
+          timestamp={discussion.created_at}
+          name={user.username}
+          avatar={user.avatar}
+        />
+      </Link> 
     );
   });
 

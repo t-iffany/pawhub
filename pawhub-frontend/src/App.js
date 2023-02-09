@@ -8,6 +8,7 @@ import Profile from './components/Profile';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { useState, useEffect } from "react";
+import DiscussionDetails from './components/Discussion/DiscussionDetails';
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
@@ -27,6 +28,7 @@ function App() {
           <Routes>
             <Route path="/map" element={<Map currentUser={currentUser} />} />
             <Route path="/discussions" element={<DiscussionList currentUser={currentUser} />} />
+            <Route path="/discussions/:id" element={<DiscussionDetails currentUser={currentUser} />} />
             <Route path="/login" element={<Login currentUser={currentUser} setCurrentUser={setCurrentUser} />} />
             <Route path="/signup" element={<SignUp currentUser={currentUser} />} />
             <Route path="/profile" element={<Profile currentUser={currentUser} />} />
