@@ -34,7 +34,8 @@ export default function Places(props) {
 
     // geocode takes in object that has an address (whatever we select)
     const results = await getGeocode({ address: val });
-    console.log(results);
+    // console.log(results);
+
     const { lat, lng } = await getLatLng(results[0]);
     props.setLocation({ lat, lng });
   };

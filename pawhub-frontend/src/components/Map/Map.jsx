@@ -1,4 +1,11 @@
-import { React, useCallback, useMemo, useRef, useState } from "react";
+import {
+  React,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import {
   GoogleMap,
   useLoadScript,
@@ -6,17 +13,38 @@ import {
   Circle,
 } from "@react-google-maps/api";
 import Places from "./Places";
-import { googleAPIKey, placeType } from "../../helpers/GooglePlacesAPI";
+import {
+  googleAPIKey,
+  placeType,
+  libraries,
+  closeOptions,
+  radius,
+  defaultLat,
+  defaultLng,
+  getUrl,
+} from "../../helpers/GooglePlacesAPI";
+import axios from "axios";
 
 export default function Map() {
   const [location, setLocation] = useState();
-  const libraries = ["places"];
+
+  useEffect(() => {
+    if (location) {
+      const currentLat = location.lat;
+      const currentLng = location.lng;
+
+      axios
+        .get(getUrl(currentLat, currentLng, radius, placeType))
+        .then((res) => console.log(res.data.results))
+        .catch((err) => console.log(err));
+    }
+  }, [location]);
 
   // MapRef is an instance of <GoogleMap />. This hook lets us reference this without re-rendering
   const mapRef = useRef();
 
   // Coordinates for Oakridge Mall
-  const center = useMemo(() => ({ lat: 49.232332, lng: -123.116773 }), []);
+  const center = useMemo(() => ({ lat: defaultLat, lng: defaultLng }), []);
   const options = useMemo(
     () => ({
       mapId: "30817c9c0541d59e",
@@ -24,20 +52,6 @@ export default function Map() {
     }),
     []
   );
-
-  // Map-circle colors
-  const closeOptions = {
-    strokeOpacity: 0.5,
-    strokeWeight: 2,
-    clickable: false,
-    draggable: false,
-    editable: false,
-    visible: true,
-    zIndex: 3,
-    fillOpacity: 0.125,
-    strokeColor: "#8BC34A",
-    fillColor: "#8BC34A",
-  };
 
   // a function that generates a version on initial render, and won't re-generate unless dependencies change (we have none in arr)
   // (for optimization of re-rendering)
@@ -76,7 +90,12 @@ export default function Map() {
           {location && (
             <>
               <Marker position={location} icon="" />
-              <Circle center={location} radius={5000} options={closeOptions} />
+              <Circle
+                center={location}
+                radius={radius}
+                options={closeOptions}
+              />
+              <Marker />
             </>
           )}
         </GoogleMap>

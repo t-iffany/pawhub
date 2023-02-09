@@ -20,7 +20,7 @@ function App() {
           setCurrentUser(user);
           setIsAuthenticated(true);
         })
-        .catch(err => console.log(err));
+          .catch(err => console.log(err));
       } else {
         setCurrentUser(null);
         setIsAuthenticated(true);
@@ -40,8 +40,8 @@ function App() {
           <Routes>
             <Route path="/map" element={<Map />} />
             <Route path="/discussions" element={<DiscussionList />} />
-            <Route path="/login" element={<Login setCurrentUser={setCurrentUser}/>} />
-            <Route path="/signup" element={<SignUp />} /> 
+            <Route path="/login" element={<Login setCurrentUser={setCurrentUser} />} />
+            <Route path="/signup" element={<SignUp />} />
             <Route path="/login" element={<Login />} />
             <Route path="/profile" element={<Profile />} />
           </Routes>
