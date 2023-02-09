@@ -28,26 +28,39 @@ import { Button } from "@mui/material";
 import InfoBox from "./InfoBox";
 
 export default function Map() {
-  const [location, setLocation] = useState(null);
-  const [selectedCenter, setSelectedCenter] = useState(null);
-  const [placeType, setPlaceType] = useState("");
-  const [nearbyLocations, setNearbyLocations] = useState([]);
+  const [state, setState] = useState({
+    location: null,
+    selectedCenter: null,
+    placeType: null,
+    nearbyLocations: [],
+    circle: false,
+  });
 
   // console.log("place type", placeType);
-  console.log("nearby", nearbyLocations);
-  console.log("opening hours", selectedCenter);
+  // console.log("nearby", nearbyLocations);
+  // console.log("opening hours", selectedCenter);
+  console.log("circle", state.circle);
 
   useEffect(() => {
-    if (location && placeType) {
-      const currentLat = location.lat;
-      const currentLng = location.lng;
+    if (state.location) {
+      setState((prev) => ({ ...prev, circle: true }));
+    }
+
+    if (state.placeType) {
+      const currentLat = state.location.lat;
+      const currentLng = state.location.lng;
 
       axios
-        .get(getUrl(currentLat, currentLng, radius, placeType))
-        .then((res) => setNearbyLocations(res.data.results))
+        .get(getUrl(currentLat, currentLng, radius, state.placeType))
+        .then((res) =>
+          setState({
+            ...state,
+            nearbyLocations: res.data.results,
+          })
+        )
         .catch((err) => console.log(err));
     }
-  }, [placeType, location]);
+  }, [state.placeType, state.location]);
 
   // MapRef is an instance of <GoogleMap />. This hook lets us reference this without re-rendering
   const mapRef = useRef();
@@ -82,14 +95,14 @@ export default function Map() {
 
         <Places
           setLocation={(position) => {
-            setLocation(position);
+            setState({ ...state, location: position, circle: false });
             mapRef.current.panTo(position);
           }}
         />
         <Button
           className="filter"
           variant="contained"
-          onClick={() => setPlaceType("veterinary_care")}
+          onClick={() => setState({ ...state, placeType: "veterinary_care" })}
         >
           Vets
         </Button>
@@ -97,7 +110,7 @@ export default function Map() {
         <Button
           className="filter"
           variant="contained"
-          onClick={() => setPlaceType("pet_store")}
+          onClick={() => setState({ ...state, placeType: "pet_store" })}
         >
           Pet Stores
         </Button>
@@ -111,19 +124,18 @@ export default function Map() {
           options={options}
           onLoad={onLoad}
         >
-          {location && (
-            <>
-              <Marker position={location} icon="" />
-              <Circle
-                center={location}
-                radius={radius}
-                options={closeOptions}
-              />
-            </>
-          )}
+          {state.location && <Marker position={state.location} icon="" />}
 
-          {nearbyLocations &&
-            nearbyLocations.map((location, index) => {
+          {state.circle ? (
+            <Circle
+              center={state.location}
+              radius={radius}
+              options={closeOptions}
+            />
+          ) : null}
+
+          {state.nearbyLocations &&
+            state.nearbyLocations.map((location, index) => {
               let lat = location.geometry.location.lat;
               let lng = location.geometry.location.lng;
               return (
@@ -132,36 +144,39 @@ export default function Map() {
                   position={{ lat, lng }}
                   icon="http://maps.google.com/mapfiles/ms/micons/lightblue.png"
                   onClick={() =>
-                    setSelectedCenter({
-                      lat,
-                      lng,
-                      name: location.name,
-                      address: location.vicinity,
-                      open: location.opening_hours,
-                      rating: location.rating,
-                      user_ratings: location.user_ratings_total,
+                    setState({
+                      ...state,
+                      selectedCenter: {
+                        lat,
+                        lng,
+                        name: location.name,
+                        address: location.vicinity,
+                        open: location.opening_hours,
+                        rating: location.rating,
+                        user_ratings: location.user_ratings_total,
+                      },
                     })
                   }
                 />
               );
             })}
 
-          {selectedCenter && (
+          {state.selectedCenter && (
             <InfoWindowF
               onCloseClick={() => {
-                setSelectedCenter(null);
+                setState({ ...state, selectedCenter: null });
               }}
               position={{
-                lat: selectedCenter.lat + 0.00001,
-                lng: selectedCenter.lng,
+                lat: state.selectedCenter.lat + 0.00001,
+                lng: state.selectedCenter.lng,
               }}
             >
               <InfoBox
-                name={selectedCenter.name}
-                address={selectedCenter.address}
-                open={selectedCenter.open}
-                rating={selectedCenter.rating}
-                user_rating={selectedCenter.user_ratings}
+                name={state.selectedCenter.name}
+                address={state.selectedCenter.address}
+                open={state.selectedCenter.open}
+                rating={state.selectedCenter.rating}
+                user_rating={state.selectedCenter.user_ratings}
               />
             </InfoWindowF>
           )}
