@@ -46,7 +46,7 @@ export default function Places(props) {
         value={value}
         onChange={(e) => setValue(e.target.value)}
         className="combobox-input"
-        placeholder="Search anything!"
+        placeholder="Where are you located?"
       />
       <ComboboxPopover>
         {status === "OK" &&

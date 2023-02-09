@@ -65,6 +65,7 @@
 .combobox-input {
   width: 100%;
   padding: 0.5rem;
+  margin-top: 7.5px;
 }
 
 .combobox-option {
