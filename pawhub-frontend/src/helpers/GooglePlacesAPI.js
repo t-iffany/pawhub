@@ -1,5 +1,4 @@
 const googleAPIKey = "AIzaSyDRii-QG1bSXUWEz7bypIOSrFS7y68PDtM";
-const placeType = "pet_store";
 const libraries = ["places"];
 const closeOptions = {
   strokeOpacity: 0.5,
@@ -9,7 +8,7 @@ const closeOptions = {
   editable: false,
   visible: true,
   zIndex: 3,
-  fillOpacity: 0.125,
+  fillOpacity: 0.0625,
   strokeColor: "#8BC34A",
   fillColor: "#8BC34A",
 };
@@ -23,7 +22,6 @@ const getUrl = (lat, lng, radius, placeType) => `https://maps.googleapis.com/map
 
 export {
   googleAPIKey,
-  placeType,
   libraries,
   closeOptions,
   radius,

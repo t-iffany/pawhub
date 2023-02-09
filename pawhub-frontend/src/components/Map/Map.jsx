@@ -11,11 +11,11 @@ import {
   useLoadScript,
   Marker,
   Circle,
+  InfoWindowF,
 } from "@react-google-maps/api";
 import Places from "./Places";
 import {
   googleAPIKey,
-  placeType,
   libraries,
   closeOptions,
   radius,
@@ -24,9 +24,16 @@ import {
   getUrl,
 } from "../../helpers/GooglePlacesAPI";
 import axios from "axios";
+import { Button } from "@mui/material";
 
 export default function Map() {
-  const [location, setLocation] = useState();
+  const [location, setLocation] = useState(null);
+  const [selectedCenter, setSelectedCenter] = useState(null);
+  const [placeType, setPlaceType] = useState("");
+  const [nearbyLocations, setNearbyLocations] = useState([]);
+
+  // console.log("place type", placeType);
+  // console.log("nearby", nearbyLocations);
 
   useEffect(() => {
     if (location) {
@@ -35,10 +42,10 @@ export default function Map() {
 
       axios
         .get(getUrl(currentLat, currentLng, radius, placeType))
-        .then((res) => console.log(res.data.results))
+        .then((res) => setNearbyLocations(res.data.results))
         .catch((err) => console.log(err));
     }
-  }, [location]);
+  }, [placeType]);
 
   // MapRef is an instance of <GoogleMap />. This hook lets us reference this without re-rendering
   const mapRef = useRef();
@@ -70,7 +77,21 @@ export default function Map() {
     <div className="map-page-container">
       <div className="map-controls">
         <h1 className="map-text">Search</h1>
+        <Button
+          className="filter"
+          variant="contained"
+          onClick={() => setPlaceType("veterinary_care")}
+        >
+          Vets
+        </Button>
 
+        <Button
+          className="filter"
+          variant="contained"
+          onClick={() => setPlaceType("pet_store")}
+        >
+          Pet Stores
+        </Button>
         <Places
           setLocation={(position) => {
             setLocation(position);
@@ -95,8 +116,35 @@ export default function Map() {
                 radius={radius}
                 options={closeOptions}
               />
-              <Marker />
             </>
+          )}
+
+          {nearbyLocations &&
+            nearbyLocations.map((location, index) => {
+              let lat = location.geometry.location.lat;
+              let lng = location.geometry.location.lng;
+              return (
+                <Marker
+                  key={index}
+                  position={{ lat, lng }}
+                  icon="http://maps.google.com/mapfiles/ms/micons/lightblue.png"
+                  onClick={() => setSelectedCenter({ lat, lng })}
+                />
+              );
+            })}
+
+          {selectedCenter && (
+            <InfoWindowF
+              onCloseClick={() => {
+                setSelectedCenter(null);
+              }}
+              position={{
+                lat: selectedCenter.lat + 0.00001,
+                lng: selectedCenter.lng,
+              }}
+            >
+              <div>poop</div>
+            </InfoWindowF>
           )}
         </GoogleMap>
       </div>
