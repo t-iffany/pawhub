@@ -10,40 +10,26 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { useState, useEffect } from "react";
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:3001/api/").then((res) => {
-      if (res.ok) {
-        res.json().then((user) => {
-          setCurrentUser(user);
-          setIsAuthenticated(true);
-        })
-          .catch(err => console.log(err));
-      } else {
-        setCurrentUser(null);
-        setIsAuthenticated(true);
-      }
-    });
-  }, []);
-
-  if (!isAuthenticated) {
-    return <div></div>;
-  }
+    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+    if (!currentUser) {
+      setCurrentUser(userInfo);
+    }
+  }, [currentUser]);
 
   return (
     <Router>
       <div className="App">
-        <NavigationBar />
+        <NavigationBar currentUser={currentUser} setCurrentUser={setCurrentUser} />
         <div className="content">
           <Routes>
-            <Route path="/map" element={<Map />} />
-            <Route path="/discussions" element={<DiscussionList />} />
-            <Route path="/login" element={<Login setCurrentUser={setCurrentUser} />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/profile" element={<Profile />} />
+            <Route path="/map" element={<Map currentUser={currentUser} />} />
+            <Route path="/discussions" element={<DiscussionList currentUser={currentUser} />} />
+            <Route path="/login" element={<Login currentUser={currentUser} setCurrentUser={setCurrentUser} />} />
+            <Route path="/signup" element={<SignUp currentUser={currentUser} />} />
+            <Route path="/profile" element={<Profile currentUser={currentUser} />} />
           </Routes>
         </div>
       </div>

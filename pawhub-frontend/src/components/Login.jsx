@@ -28,8 +28,9 @@ export default function Login({setCurrentUser}) {
       if (res.ok) {
         res.json().then((user) => {
           setCurrentUser(user);
+          localStorage.setItem("userInfo", JSON.stringify(user));
+          navigate("/discussions");
         });
-        navigate("/discussions");
       } else {
         res.json().then((errors) => {
           console.error(errors);
