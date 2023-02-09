@@ -7,16 +7,12 @@ import {
   Combobox,
   ComboboxInput,
   ComboboxPopover,
-  ComboboxList,
   ComboboxOption,
-  ComboboxOptionText,
 } from "@reach/combobox";
 import "@reach/combobox/styles.css";
 
 export default function Places(props) {
   const {
-    // Is the script ready to use?
-    ready,
     // State of the search box
     value,
     setValue,

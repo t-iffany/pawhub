@@ -25,6 +25,7 @@ import {
 } from "../../helpers/GooglePlacesAPI";
 import axios from "axios";
 import { Button } from "@mui/material";
+import InfoBox from "./InfoBox";
 
 export default function Map() {
   const [location, setLocation] = useState(null);
@@ -33,10 +34,11 @@ export default function Map() {
   const [nearbyLocations, setNearbyLocations] = useState([]);
 
   // console.log("place type", placeType);
-  // console.log("nearby", nearbyLocations);
+  console.log("nearby", nearbyLocations);
+  console.log("opening hours", selectedCenter);
 
   useEffect(() => {
-    if (location) {
+    if (location && placeType) {
       const currentLat = location.lat;
       const currentLng = location.lng;
 
@@ -45,7 +47,7 @@ export default function Map() {
         .then((res) => setNearbyLocations(res.data.results))
         .catch((err) => console.log(err));
     }
-  }, [placeType]);
+  }, [placeType, location]);
 
   // MapRef is an instance of <GoogleMap />. This hook lets us reference this without re-rendering
   const mapRef = useRef();
@@ -77,6 +79,13 @@ export default function Map() {
     <div className="map-page-container">
       <div className="map-controls">
         <h1 className="map-text">Search</h1>
+
+        <Places
+          setLocation={(position) => {
+            setLocation(position);
+            mapRef.current.panTo(position);
+          }}
+        />
         <Button
           className="filter"
           variant="contained"
@@ -92,12 +101,6 @@ export default function Map() {
         >
           Pet Stores
         </Button>
-        <Places
-          setLocation={(position) => {
-            setLocation(position);
-            mapRef.current.panTo(position);
-          }}
-        />
       </div>
 
       <div className="map">
@@ -128,7 +131,17 @@ export default function Map() {
                   key={index}
                   position={{ lat, lng }}
                   icon="http://maps.google.com/mapfiles/ms/micons/lightblue.png"
-                  onClick={() => setSelectedCenter({ lat, lng })}
+                  onClick={() =>
+                    setSelectedCenter({
+                      lat,
+                      lng,
+                      name: location.name,
+                      address: location.vicinity,
+                      open: location.opening_hours,
+                      rating: location.rating,
+                      user_ratings: location.user_ratings_total,
+                    })
+                  }
                 />
               );
             })}
@@ -143,7 +156,13 @@ export default function Map() {
                 lng: selectedCenter.lng,
               }}
             >
-              <div>poop</div>
+              <InfoBox
+                name={selectedCenter.name}
+                address={selectedCenter.address}
+                open={selectedCenter.open}
+                rating={selectedCenter.rating}
+                user_rating={selectedCenter.user_ratings}
+              />
             </InfoWindowF>
           )}
         </GoogleMap>
