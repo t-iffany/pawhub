@@ -3,7 +3,12 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { Link } from "react-router-dom";
 
-export default function NavigationBar() {
+export default function NavigationBar({currentUser, setCurrentUser}) {
+  const handleClick = () => {
+    setCurrentUser(null);
+    localStorage.removeItem("userInfo")
+  }
+
   return (
     <Navbar collapseOnSelect expand="lg">
       <Container>
@@ -41,17 +46,23 @@ export default function NavigationBar() {
               </Link>
             </Nav.Link>
 
-            <Nav.Link>
+            {!currentUser && <Nav.Link>
               <Link className="nav-link" to="/login">
                 Login
               </Link>
-            </Nav.Link>
+            </Nav.Link>}
 
-            <Nav.Link>
+            {currentUser && <Nav.Link>
+              <Link className="nav-link" to="/discussions" onClick={handleClick}>
+                Log out
+              </Link>
+            </Nav.Link>}
+
+            {!currentUser && <Nav.Link>
               <Link className="nav-link" to="/signup">
                 Signup
               </Link>
-            </Nav.Link>
+            </Nav.Link>}
           </Nav>
         </Navbar.Collapse>
       </Container>
