@@ -2,7 +2,6 @@ import Avatar from '@mui/material/Avatar';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-
 export default function Profile() {
 
   const [state, setState] = useState({ users: [] });
@@ -57,6 +56,10 @@ export default function Profile() {
       });
   };
 
+  const handleCancel = () => {
+    setEditMode(false);
+  };
+
   return (
     <div style={{ display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center", height: "100vh" }}>
       <div style={{ width: "25%", height: "50%", backgroundColor: "transparent", display: "flex", flexDirection: "column", alignItems: "center" }}>
@@ -75,6 +78,7 @@ export default function Profile() {
             <input type="text" name="breed" defaultValue={user ? user.breed : "breed"} />
             <textarea type="text" name="description" defaultValue={user ? user.description : "description/content"} />
             <button type="submit">Save</button>
+            <button type="button" onClick={handleCancel}>Cancel</button>
           </form>
           :
           <div>
