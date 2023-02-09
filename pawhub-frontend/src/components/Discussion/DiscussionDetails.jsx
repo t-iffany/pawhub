@@ -17,7 +17,7 @@ export default function DiscussionDetails() {
           ...prev,
           discussion: res.data
         }));
-        return axios.get(`http://localhost:3001/api/users/${state.discussion.user_id}`);
+        return axios.get(`http://localhost:3001/api/users/${res.data.user_id}`);
       })
       .then((res)=> {
         setState((prev) => ({
@@ -31,7 +31,7 @@ export default function DiscussionDetails() {
   return (
     <div className="blog-post">
     <h2 className="title">{state.discussion.title}</h2>
-    <p className="author">by Author</p>
+    <p className="author">by {state.user.username}</p>
     <p className="content">{state.discussion.content}</p>
     <p className="date">posted {moment(state.discussion.created_at).fromNow()} </p>
   </div>
