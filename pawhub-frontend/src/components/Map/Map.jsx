@@ -11,6 +11,7 @@ import {
   useLoadScript,
   Marker,
   Circle,
+  InfoWindowF,
 } from "@react-google-maps/api";
 import Places from "./Places";
 import {
@@ -21,13 +22,13 @@ import {
   defaultLat,
   defaultLng,
   getUrl,
-  placeType,
 } from "../../helpers/GooglePlacesAPI";
 import axios from "axios";
 import { Button } from "@mui/material";
 
 export default function Map() {
-  const [location, setLocation] = useState();
+  const [location, setLocation] = useState(null);
+  const [selectedCenter, setSelectedCenter] = useState(null);
   const [placeType, setPlaceType] = useState("");
   const [nearbyLocations, setNearbyLocations] = useState([]);
 
@@ -35,7 +36,6 @@ export default function Map() {
   // console.log("nearby", nearbyLocations);
 
   useEffect(() => {
-    
     if (location) {
       const currentLat = location.lat;
       const currentLng = location.lng;
@@ -118,21 +118,34 @@ export default function Map() {
               />
             </>
           )}
+
           {nearbyLocations &&
             nearbyLocations.map((location, index) => {
+              let lat = location.geometry.location.lat;
+              let lng = location.geometry.location.lng;
               return (
                 <Marker
                   key={index}
-                  position={{
-                    lat: location.geometry.location.lat,
-                    lng: location.geometry.location.lng,
-                  }}
+                  position={{ lat, lng }}
                   icon="http://maps.google.com/mapfiles/ms/micons/lightblue.png"
-                  animation="bounce"
-                  clickable="true"
+                  onClick={() => setSelectedCenter({ lat, lng })}
                 />
               );
             })}
+
+          {selectedCenter && (
+            <InfoWindowF
+              onCloseClick={() => {
+                setSelectedCenter(null);
+              }}
+              position={{
+                lat: selectedCenter.lat + 0.00001,
+                lng: selectedCenter.lng,
+              }}
+            >
+              <div>poop</div>
+            </InfoWindowF>
+          )}
         </GoogleMap>
       </div>
     </div>
