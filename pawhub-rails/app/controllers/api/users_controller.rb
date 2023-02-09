@@ -31,13 +31,15 @@ class Api::UsersController < ApplicationController
 
   # PATCH/PUT /users/1
   def update
+    @user = User.find_by(id: params[:id])
+    
     if @user.update(user_params)
       render json: @user
     else
       render json: @user.errors, status: :unprocessable_entity
     end
   end
-
+  
   # DELETE /users/1
   def destroy
     @user.destroy
@@ -51,6 +53,6 @@ class Api::UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.permit(:username, :email, :dog_name, :breed, :description, :image, :avatar, :password)
+      params.permit(:username, :email, :dog_name, :breed, :description, :image, :avatar, :password, :user, :id)
     end
 end
