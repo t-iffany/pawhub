@@ -5,13 +5,14 @@ import moment from "moment";
 import CommentList from "./CommentList";
 import CommentForm from "./CommentForm";
 
-export default function DiscussionDetails() {
+export default function DiscussionDetails({currentUser}) {
   const { id } = useParams();
   const [state, setState] = useState({
     discussion: {},
     users: [],
     comments: []
   });
+  const [addComment, setAddComment] = useState(false)
 
   useEffect(() => {
     Promise.all([
@@ -28,7 +29,8 @@ export default function DiscussionDetails() {
         }));
       })
       .catch((err) => console.log(err));
-  }, []);
+      setAddComment(false);
+  }, [addComment]);
 
   const findUserById = (userId) =>
     state.users.find((user) => user.id === userId);
@@ -42,9 +44,9 @@ export default function DiscussionDetails() {
       <p className="content">{state.discussion.content}</p>
       <p className="date">posted {moment(state.discussion.created_at).fromNow()} </p>
       <CommentList discussionId={id} comments={state.comments} users={state.users}/>
-      <div>
-        <CommentForm />
-      </div>
+      {currentUser && <div>
+        <CommentForm discussionId={id} currentUserId={currentUser.id}setAddComment={setAddComment}/>
+      </div>}
     </div>
     
   );
