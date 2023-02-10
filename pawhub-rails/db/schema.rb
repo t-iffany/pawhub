@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_02_08_044544) do
+ActiveRecord::Schema.define(version: 2023_02_10_044022) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,14 @@ ActiveRecord::Schema.define(version: 2023_02_08_044544) do
     t.index ["user_id"], name: "index_discussions_on_user_id"
   end
 
+  create_table "images", force: :cascade do |t|
+    t.binary "file_data"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_images_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "email"
@@ -51,4 +59,5 @@ ActiveRecord::Schema.define(version: 2023_02_08_044544) do
   add_foreign_key "comments", "discussions"
   add_foreign_key "comments", "users"
   add_foreign_key "discussions", "users"
+  add_foreign_key "images", "users"
 end

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :images
   namespace :api do
     resources :discussions
     resources :users
