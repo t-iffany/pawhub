@@ -1,3 +1,5 @@
+require 'base64'
+
 class Api::ImagesController < ApplicationController
   before_action :set_image, only: [:show, :update, :destroy]
 
@@ -16,6 +18,12 @@ class Api::ImagesController < ApplicationController
   # POST /images
   def create
     @image = Image.new(image_params)
+
+    uploaded_file = params[:image][:file_data]
+    file_data = uploaded_file.read
+    encoded_file = Base64.encode64(file_data)
+
+    @image.file_data = encoded_file
 
     if @image.save
       render json: @image, status: :created, location: @image
