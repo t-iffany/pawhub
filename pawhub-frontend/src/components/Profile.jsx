@@ -52,11 +52,9 @@ export default function Profile() {
       .then(res => {
         // update user information in the state
         setState({ users: [...state.users, res.data] });
-      //  setEditMode(false);
-
 
         const imageData = new FormData();
-        imageData.append("file", selectedFile);
+        imageData.append("file_data", selectedFile);
         imageData.append("user_id", user.id);
 
         axios
@@ -107,7 +105,7 @@ export default function Profile() {
             <input type="text" name="breed" defaultValue={user ? user.breed : "breed"} />
             <textarea type="text" name="description" defaultValue={user ? user.description : "description/content"} />
             <input type="file" name="image" onChange={handleFileSelect} accept="image/*" />
-            <button type="button" onClick={handleSubmit} disabled={uploading}>Upload Image</button>
+            {/* <button type="button" onClick={handleSubmit} disabled={uploading}>Upload Image</button> */}
             <button type="submit">Save</button>
             <button type="button" onClick={handleCancel}>Cancel</button>
           </form>

@@ -40,7 +40,7 @@ class Api::UsersController < ApplicationController
   def upload_image
     @user = User.find_by(id: params[:id])
 
-    if @user.update(image: paramd[:image])
+    if @user.update(image: params[:images])
       render json: { message: 'Image uploaded successfully' }
     else
       render json: { error: 'Error uploading image' }, status: :unprocessable_entity
@@ -60,6 +60,6 @@ class Api::UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.permit(:username, :email, :dog_name, :breed, :description, :image, :avatar, :password, :user, :id)
+      params.permit(:username, :email, :dog_name, :breed, :description, :avatar, :password, :user, :id, :images)
     end
 end

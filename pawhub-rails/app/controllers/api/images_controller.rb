@@ -20,14 +20,14 @@ class Api::ImagesController < ApplicationController
     puts "image_params: #{image_params}"
     @image = Image.new(image_params)
 
-    uploaded_file = params[:image][:file_data]
+    uploaded_file = params[:file_data]
     file_data = uploaded_file.read
     encoded_file = Base64.encode64(file_data)
 
     @image.file_data = encoded_file
 
     if @image.save
-      render json: @image, status: :created, location: @image
+      render json: @image, status: :created
     else
       render json: @image.errors, status: :unprocessable_entity
     end
