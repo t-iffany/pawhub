@@ -1,4 +1,4 @@
-class ImagesController < ApplicationController
+class Api::ImagesController < ApplicationController
   before_action :set_image, only: [:show, :update, :destroy]
 
   # GET /images
