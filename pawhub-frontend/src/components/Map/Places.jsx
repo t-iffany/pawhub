@@ -13,6 +13,7 @@ export default function Places(props) {
 
   return (
     <Autocomplete
+      className="search"
       apiKey={googleAPIKey}
       style={{ width: "90%" }}
       onPlaceSelected={handleSelect}

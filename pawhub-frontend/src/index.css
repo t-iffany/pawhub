@@ -102,3 +102,11 @@
   font-size: 12px;
   margin-top: 16px;
 }
+
+.toggle-button {
+  display: flex;
+  margin-top: 7.5px;
+  justify-content: center;
+  width: 100%;
+  color: black;
+}

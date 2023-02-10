@@ -48,21 +48,21 @@ export default function Map() {
   useEffect(() => {
     if (state.location) {
       setState((prev) => ({ ...prev, circle: true }));
-    }
 
-    if (state.placeType) {
-      const currentLat = state.location.lat;
-      const currentLng = state.location.lng;
+      if (state.placeType) {
+        const currentLat = state.location.lat;
+        const currentLng = state.location.lng;
 
-      axios
-        .get(getUrl(currentLat, currentLng, radius, state.placeType))
-        .then((res) =>
-          setState({
-            ...state,
-            nearbyLocations: res.data.results,
-          })
-        )
-        .catch((err) => console.log(err));
+        axios
+          .get(getUrl(currentLat, currentLng, radius, state.placeType))
+          .then((res) =>
+            setState((prev) => ({
+              ...prev,
+              nearbyLocations: res.data.results,
+            }))
+          )
+          .catch((err) => console.log(err));
+      }
     }
   }, [state.placeType, state.location]);
 
@@ -99,16 +99,26 @@ export default function Map() {
 
         <Places
           setLocation={(position) => {
-            setState({ ...state, location: position, circle: false });
+            setState((prev) => ({
+              ...prev,
+              location: position,
+              circle: false,
+            }));
             mapRef.current.panTo(position);
           }}
         />
 
-        <ToggleButtonGroup type="radio" name="options">
+        <ToggleButtonGroup
+          className="toggle-button"
+          type="radio"
+          name="options"
+        >
           <ToggleButton
             id="tbg-radio-1"
             value={1}
-            onClick={() => setState({ ...state, placeType: "veterinary_care" })}
+            onClick={() =>
+              setState((prev) => ({ ...prev, placeType: "veterinary_care" }))
+            }
           >
             Veterinarians
           </ToggleButton>
@@ -116,7 +126,9 @@ export default function Map() {
           <ToggleButton
             id="tbg-radio-2"
             value={2}
-            onClick={() => setState({ ...state, placeType: "pet_store" })}
+            onClick={() =>
+              setState((prev) => ({ ...prev, placeType: "pet_store" }))
+            }
           >
             Pet Stores
           </ToggleButton>
@@ -155,8 +167,8 @@ export default function Map() {
                     state.placeType === "pet_store" ? petStoreIcon : vetIcon
                   }
                   onClick={() =>
-                    setState({
-                      ...state,
+                    setState((prev) => ({
+                      ...prev,
                       selectedCenter: {
                         lat,
                         lng,
@@ -166,7 +178,7 @@ export default function Map() {
                         rating: location.rating,
                         user_ratings: location.user_ratings_total,
                       },
-                    })
+                    }))
                   }
                 />
               );
@@ -175,7 +187,7 @@ export default function Map() {
           {state.selectedCenter && (
             <InfoWindowF
               onCloseClick={() => {
-                setState({ ...state, selectedCenter: null });
+                setState((prev) => ({ ...prev, selectedCenter: null }));
               }}
               position={{
                 lat: state.selectedCenter.lat + 0.00001,
