@@ -30,6 +30,7 @@ import axios from "axios";
 import InfoBox from "./InfoBox";
 import ToggleButton from "react-bootstrap/ToggleButton";
 import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
+import Slider from "./Slider";
 
 export default function Map() {
   const [state, setState] = useState({
@@ -38,6 +39,7 @@ export default function Map() {
     placeType: null,
     nearbyLocations: [],
     circle: false,
+    sliderValue: 50,
   });
 
   // console.log("place type", placeType);
@@ -133,6 +135,13 @@ export default function Map() {
             Pet Stores
           </ToggleButton>
         </ToggleButtonGroup>
+
+        <Slider
+          sliderValue={state.sliderValue}
+          onChange={(e) =>
+            setState((prev) => ({ ...prev, sliderValue: e.target.value }))
+          }
+        />
       </div>
 
       <div className="map">
