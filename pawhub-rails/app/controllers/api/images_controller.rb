@@ -17,6 +17,7 @@ class Api::ImagesController < ApplicationController
 
   # POST /images
   def create
+    puts "image_params: #{image_params}"
     @image = Image.new(image_params)
 
     uploaded_file = params[:image][:file_data]
@@ -54,6 +55,6 @@ class Api::ImagesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def image_params
-      params.require(:image).permit(:file_data, :user_id)
+      params.permit(:file_data, :user_id)
     end
 end
