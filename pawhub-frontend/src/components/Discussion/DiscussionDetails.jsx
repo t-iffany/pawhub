@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import moment from "moment";
 import CommentList from "./CommentList";
+import CommentForm from "./CommentForm";
 
 export default function DiscussionDetails() {
   const { id } = useParams();
@@ -44,6 +45,9 @@ export default function DiscussionDetails() {
       <p className="content">{state.discussion.content}</p>
       <p className="date">posted {moment(state.discussion.created_at).fromNow()} </p>
       <CommentList discussionId={id} comments={state.comments}/>
+      <div>
+        <CommentForm />
+      </div>
     </div>
     
   );
