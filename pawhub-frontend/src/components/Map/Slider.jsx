@@ -6,12 +6,12 @@ export default function Slider(props) {
       <Form.Range
         type="range"
         min={0}
-        max={100}
+        max={10000}
         value={props.sliderValue}
         className="slider"
         onChange={props.onChange}
       />
-      <div>{props.sliderValue}</div>
+      <div>{props.sliderValue / 1000} kilometres</div>
     </div>
   );
 }

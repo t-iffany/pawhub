@@ -39,7 +39,7 @@ export default function Map() {
     placeType: null,
     nearbyLocations: [],
     circle: false,
-    sliderValue: 50,
+    sliderValue: 5000,
   });
 
   // console.log("place type", placeType);
@@ -48,6 +48,8 @@ export default function Map() {
   // console.log("circle", state.circle);
 
   useEffect(() => {
+    console.log("circleref", circleRef);
+
     if (state.location) {
       setState((prev) => ({ ...prev, circle: true }));
 
@@ -56,7 +58,9 @@ export default function Map() {
         const currentLng = state.location.lng;
 
         axios
-          .get(getUrl(currentLat, currentLng, radius, state.placeType))
+          .get(
+            getUrl(currentLat, currentLng, state.sliderValue, state.placeType)
+          )
           .then((res) =>
             setState((prev) => ({
               ...prev,
@@ -66,10 +70,11 @@ export default function Map() {
           .catch((err) => console.log(err));
       }
     }
-  }, [state.placeType, state.location]);
+  }, [state.placeType, state.location, state.sliderValue]);
 
   // MapRef is an instance of <GoogleMap />. This hook lets us reference this without re-rendering
   const mapRef = useRef();
+  const circleRef = useRef();
 
   // Coordinates for Oakridge Mall
   const center = useMemo(() => ({ lat: defaultLat, lng: defaultLng }), []);
@@ -84,6 +89,16 @@ export default function Map() {
   // a function that generates a version on initial render, and won't re-generate unless dependencies change (we have none in arr)
   // (for optimization of re-rendering)
   const onLoad = useCallback((map) => (mapRef.current = map), []);
+
+  const onUnmount = () => {
+    if (circleRef.current) {
+      circleRef.current.setMap(null);
+    }
+  };
+
+  const onCircleLoad = (circle) => {
+    circleRef.current = circle;
+  };
 
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: googleAPIKey,
@@ -108,6 +123,7 @@ export default function Map() {
             }));
             mapRef.current.panTo(position);
           }}
+          circleRef={circleRef}
         />
 
         <ToggleButtonGroup
@@ -139,7 +155,10 @@ export default function Map() {
         <Slider
           sliderValue={state.sliderValue}
           onChange={(e) =>
-            setState((prev) => ({ ...prev, sliderValue: e.target.value }))
+            setState((prev) => ({
+              ...prev,
+              sliderValue: parseInt(e.target.value),
+            }))
           }
         />
       </div>
@@ -151,15 +170,17 @@ export default function Map() {
           mapContainerClassName="map-container"
           options={options}
           onLoad={onLoad}
+          onUnmount={onUnmount}
         >
           {state.location && (
             <Marker position={state.location} icon={homeIcon} />
           )}
 
-          {state.circle ? (
+          {circleRef.current ? (
             <Circle
+              ref={onCircleLoad}
               center={state.location}
-              radius={radius}
+              radius={state.sliderValue + 500}
               options={closeOptions}
             />
           ) : null}
