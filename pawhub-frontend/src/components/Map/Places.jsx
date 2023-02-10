@@ -1,59 +1,25 @@
-import usePlacesAutocomplete, {
-  getGeocode,
-  getLatLng,
-} from "use-places-autocomplete";
-
-import {
-  Combobox,
-  ComboboxInput,
-  ComboboxPopover,
-  ComboboxOption,
-} from "@reach/combobox";
-import "@reach/combobox/styles.css";
+import { getGeocode, getLatLng } from "use-places-autocomplete";
+import Autocomplete from "react-google-autocomplete";
+import { googleAPIKey } from "../../helpers/GooglePlacesAPI";
 
 export default function Places(props) {
-  const {
-    // State of the search box
-    value,
-    setValue,
-    // Status of whether or not we received any, and the suggestion data
-    suggestions: { status, data },
-    // When we select one, this removes the list from the screen
-    clearSuggestions,
-  } = usePlacesAutocomplete();
-
-  // console.log(status, data);
-
   const handleSelect = async (val) => {
-    setValue(val, false);
-    clearSuggestions();
-
     // geocode takes in object that has an address (whatever we select)
-    const results = await getGeocode({ address: val });
-    // console.log(results);
+    const results = await getGeocode({ address: val.formatted_address });
+    const { lat, lng } = getLatLng(results[0]);
 
-    const { lat, lng } = await getLatLng(results[0]);
     props.setLocation({ lat, lng });
   };
 
   return (
-    <Combobox onSelect={handleSelect}>
-      <ComboboxInput
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-        className="combobox-input"
-        placeholder="Where are you located?"
-      />
-      <ComboboxPopover>
-        {status === "OK" &&
-          data.map(({ place_id, description }) => (
-            <ComboboxOption
-              className="combobox-option"
-              key={place_id}
-              value={description}
-            />
-          ))}
-      </ComboboxPopover>
-    </Combobox>
+    <Autocomplete
+      apiKey={googleAPIKey}
+      style={{ width: "90%" }}
+      onPlaceSelected={handleSelect}
+      options={{
+        types: ["geocode"],
+        componentRestrictions: { country: ["ca"] },
+      }}
+    />
   );
 }

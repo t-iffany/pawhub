@@ -43,7 +43,7 @@ export default function Map() {
   // console.log("place type", placeType);
   // console.log("nearby", nearbyLocations);
   // console.log("opening hours", selectedCenter);
-  console.log("circle", state.circle);
+  // console.log("circle", state.circle);
 
   useEffect(() => {
     if (state.location) {
