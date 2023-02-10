@@ -1,12 +1,12 @@
 import React from "react";
 import moment from "moment";
 
-export default function CommentList ({ comments }) {
+export default function CommentList ({ comments, discussionId }) {
   return (
     <div className="comments-list-container">
       <h2 className="comments-list-title">Comments</h2>
       <div className="comments-list-scrollable">
-        {comments.map((comment, index) => (
+        {comments.filter((comment) => comment.discussion_id === Number(discussionId)).map((comment, index) => (
           <div key={index} className="comment">
             <div className="comment-header">
               <h3 className="comment-author">Commenter's name</h3>

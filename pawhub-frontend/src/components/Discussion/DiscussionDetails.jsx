@@ -43,7 +43,7 @@ export default function DiscussionDetails() {
       <p className="author">by {state.user.username}</p>
       <p className="content">{state.discussion.content}</p>
       <p className="date">posted {moment(state.discussion.created_at).fromNow()} </p>
-      <CommentList comments={state.comments}/>
+      <CommentList discussionId={id} comments={state.comments}/>
     </div>
     
   );
