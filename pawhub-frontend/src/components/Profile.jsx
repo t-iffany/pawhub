@@ -41,6 +41,7 @@ export default function Profile() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    setUploading(true);
     // send PUT request to the server to update the user information
     axios.put(`http://localhost:3001/api/users/${user.id}`, {
       username: event.target.username.value,
@@ -55,7 +56,7 @@ export default function Profile() {
 
 
         const imageData = new FormData();
-        imageData.append("image", selectedFile);
+        imageData.append("file", selectedFile);
         imageData.append("user_id", user.id);
 
         axios
