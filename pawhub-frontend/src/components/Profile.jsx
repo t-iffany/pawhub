@@ -6,6 +6,8 @@ export default function Profile() {
 
   const [state, setState] = useState({ users: [] });
   const [editMode, setEditMode] = useState(false);
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [uploading, setUploading] = useState(false);
 
   useEffect(() => {
     axios
@@ -49,8 +51,30 @@ export default function Profile() {
       .then(res => {
         // update user information in the state
         setState({ users: [...state.users, res.data] });
-        setEditMode(false);
+      //  setEditMode(false);
+
+
+        const imageData = new FormData();
+        imageData.append("image", selectedFile);
+        imageData.append("user_id", user.id);
+
+        axios
+          .post("http://localhost:3001/api/images", imageData, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          })
+          .then(() => {
+            setEditMode(false);
+            setUploading(false);
+          })
+          .catch(err => {
+            console.log(err);
+            setUploading(false);
+          });
       })
+
+      
       .catch(err => {
         console.log(err);
       });
@@ -58,6 +82,10 @@ export default function Profile() {
 
   const handleCancel = () => {
     setEditMode(false);
+  };
+
+  const handleFileSelect = (event) => {
+    setSelectedFile(event.target.files[0]);
   };
 
   return (
@@ -77,6 +105,8 @@ export default function Profile() {
             <input type="text" name="dog_name" defaultValue={user ? user.dog_name : "dog_name"} />
             <input type="text" name="breed" defaultValue={user ? user.breed : "breed"} />
             <textarea type="text" name="description" defaultValue={user ? user.description : "description/content"} />
+            <input type="file" name="image" onChange={handleFileSelect} accept="image/*" />
+            <button type="button" onClick={handleSubmit} disabled={uploading}>Upload Image</button>
             <button type="submit">Save</button>
             <button type="button" onClick={handleCancel}>Cancel</button>
           </form>
