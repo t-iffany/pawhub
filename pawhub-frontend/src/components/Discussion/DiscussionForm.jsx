@@ -4,14 +4,14 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import axios from 'axios';
 
-export default function DiscussionForm({setOpenPopup}) {
+export default function DiscussionForm({currentUser, setOpenPopup}) {
   const categories = ["Swap", "Meetup", "Other"];
 
   const [newDiscussion, setNewDiscussion] = useState({
     title: "",
     content: "",
     category: "Swap",
-    user_id: 1,
+    user_id: currentUser.id,
   });
 
   const handleChange = (e) => {
