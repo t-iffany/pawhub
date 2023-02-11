@@ -17,7 +17,7 @@ export default function Places(props) {
     <Autocomplete
       className="search"
       apiKey={googleAPIKey}
-      style={{ width: "90%" }}
+      style={{ width: "100%" }}
       onPlaceSelected={handleSelect}
       options={{
         types: ["geocode"],

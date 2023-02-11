@@ -12,25 +12,30 @@ import {
   Marker,
   Circle,
   InfoWindowF,
+  DirectionsRenderer,
 } from "@react-google-maps/api";
 import Places from "./Places";
 import {
   googleAPIKey,
   libraries,
   closeOptions,
-  radius,
   defaultLat,
   defaultLng,
   getUrl,
   petStoreIcon,
   vetIcon,
   homeIcon,
+  mapId,
 } from "../../helpers/GooglePlacesAPI";
 import axios from "axios";
 import InfoBox from "./InfoBox";
 import ToggleButton from "react-bootstrap/ToggleButton";
 import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
+import Spinner from "react-bootstrap/Spinner";
 import Slider from "./Slider";
+import Distance from "./Distance";
+
+/* eslint-disable no-undef */
 
 export default function Map() {
   const [state, setState] = useState({
@@ -39,16 +44,19 @@ export default function Map() {
     placeType: null,
     nearbyLocations: [],
     circle: false,
-    sliderValue: 5000,
+    radius: 5000,
+    directions: null,
   });
 
   // console.log("place type", placeType);
-  // console.log("nearby", nearbyLocations);
+  // console.log("nearby", state.nearbyLocations);
   // console.log("opening hours", selectedCenter);
   // console.log("circle", state.circle);
+  // console.log(state.nearbyLocations);
+  // console.log("directions", state.directions);
 
   useEffect(() => {
-    console.log("circleref", circleRef);
+    // console.log("circleref", circleRef);
 
     if (state.location) {
       setState((prev) => ({ ...prev, circle: true }));
@@ -58,9 +66,7 @@ export default function Map() {
         const currentLng = state.location.lng;
 
         axios
-          .get(
-            getUrl(currentLat, currentLng, state.sliderValue, state.placeType)
-          )
+          .get(getUrl(currentLat, currentLng, state.radius, state.placeType))
           .then((res) =>
             setState((prev) => ({
               ...prev,
@@ -70,7 +76,7 @@ export default function Map() {
           .catch((err) => console.log(err));
       }
     }
-  }, [state.placeType, state.location, state.sliderValue]);
+  }, [state.placeType, state.location, state.radius]);
 
   // MapRef is an instance of <GoogleMap />. This hook lets us reference this without re-rendering
   const mapRef = useRef();
@@ -80,7 +86,7 @@ export default function Map() {
   const center = useMemo(() => ({ lat: defaultLat, lng: defaultLng }), []);
   const options = useMemo(
     () => ({
-      mapId: "30817c9c0541d59e",
+      mapId,
       disableDefaultUI: false,
     }),
     []
@@ -89,12 +95,6 @@ export default function Map() {
   // a function that generates a version on initial render, and won't re-generate unless dependencies change (we have none in arr)
   // (for optimization of re-rendering)
   const onLoad = useCallback((map) => (mapRef.current = map), []);
-
-  const onUnmount = () => {
-    if (circleRef.current) {
-      circleRef.current.setMap(null);
-    }
-  };
 
   const onCircleLoad = (circle) => {
     circleRef.current = circle;
@@ -105,8 +105,28 @@ export default function Map() {
     libraries,
   });
 
+  const fetchDirections = (position) => {
+    if (!state.location) {
+      return;
+    }
+
+    const service = new google.maps.DirectionsService();
+    service.route(
+      {
+        origin: state.location,
+        destination: state.selectedCenter,
+        travelMode: google.maps.TravelMode.DRIVING,
+      },
+      (result, status) => {
+        if (status === "OK" && result) {
+          setState((prev) => ({ ...prev, directions: result }));
+        }
+      }
+    );
+  };
+
   if (!isLoaded) {
-    return <div>Loading...</div>;
+    return <Spinner animation="border" />;
   }
 
   return (
@@ -127,11 +147,12 @@ export default function Map() {
         />
 
         <ToggleButtonGroup
-          className="toggle-button"
+          className="toggle-buttons"
           type="radio"
           name="options"
         >
           <ToggleButton
+            className=""
             id="tbg-radio-1"
             value={1}
             onClick={() =>
@@ -153,14 +174,18 @@ export default function Map() {
         </ToggleButtonGroup>
 
         <Slider
-          sliderValue={state.sliderValue}
+          radius={state.radius}
           onChange={(e) =>
             setState((prev) => ({
               ...prev,
-              sliderValue: parseInt(e.target.value),
+              radius: parseInt(e.target.value),
             }))
           }
         />
+
+        {state.directions && (
+          <Distance leg={state.directions.routes[0].legs[0]} />
+        )}
       </div>
 
       <div className="map">
@@ -170,20 +195,23 @@ export default function Map() {
           mapContainerClassName="map-container"
           options={options}
           onLoad={onLoad}
-          onUnmount={onUnmount}
         >
+          {state.directions && (
+            <DirectionsRenderer directions={state.directions} />
+          )}
+
           {state.location && (
             <Marker position={state.location} icon={homeIcon} />
           )}
 
-          {circleRef.current ? (
+          {circleRef.current && (
             <Circle
               ref={onCircleLoad}
               center={state.location}
-              radius={state.sliderValue + 500}
+              radius={state.radius + 500}
               options={closeOptions}
             />
-          ) : null}
+          )}
 
           {state.nearbyLocations &&
             state.nearbyLocations.map((location, index) => {
@@ -230,6 +258,8 @@ export default function Map() {
                 open={state.selectedCenter.open}
                 rating={state.selectedCenter.rating}
                 user_rating={state.selectedCenter.user_ratings}
+                selected={state.selectedCenter}
+                fetchDirections={fetchDirections}
               />
             </InfoWindowF>
           )}
