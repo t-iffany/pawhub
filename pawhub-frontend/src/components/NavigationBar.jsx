@@ -19,6 +19,7 @@ export default function NavigationBar({ currentUser, setCurrentUser }) {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
+
           <Nav className="me-auto">
             <Nav.Link>
               <Link className="nav-link" to="/resources">
@@ -37,13 +38,9 @@ export default function NavigationBar({ currentUser, setCurrentUser }) {
                 Map
               </Link>
             </Nav.Link>
-          </Nav>
 
-          <Nav.Link>
-              <Link className="nav-link" to="/explore">
-                Explore
-              </Link>
-            </Nav.Link>
+
+
           </Nav>
 
           <Nav>
@@ -81,6 +78,7 @@ export default function NavigationBar({ currentUser, setCurrentUser }) {
               </Nav.Link>
             )}
           </Nav>
+
         </Navbar.Collapse>
       </Container>
     </Navbar>

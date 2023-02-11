@@ -9,6 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import DiscussionDetails from './components/Discussion/DiscussionDetails';
+import Explore from './components/Explore';
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
