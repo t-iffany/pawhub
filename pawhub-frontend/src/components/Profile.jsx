@@ -95,25 +95,28 @@ export default function Profile({currentUser, setCurrentUser}) {
     event.preventDefault();
     setUploading(true);
 
-    // console.log("currentUser.image.id: ", currentUser.image.id)
-
     axios
-      .delete(`http://localhost:3001/api/images/1`, {
+      .delete(`http://localhost:3001/api/images/5`, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       })
-      .then(() => {
+      .then((res) => {
+        //console.log("res.data: ", res.data)
+        setState((prevState) => ({
+          ...prevState, images: res.data
+        }));
+
         setEditMode(true);
         setUploading(false);
         alert("Image Deleted!")
+ 
       })
       .catch(err => {
         console.log(err);
         setUploading(false);
       });
   };
-    
 
   const handleCancel = () => {
     setEditMode(false);
