@@ -1,4 +1,5 @@
 const googleAPIKey = "AIzaSyDRii-QG1bSXUWEz7bypIOSrFS7y68PDtM";
+const mapId = "30817c9c0541d59e";
 const libraries = ["places"];
 const closeOptions = {
   strokeOpacity: 0.5,
@@ -33,6 +34,7 @@ export {
   getUrl,
   petStoreIcon,
   vetIcon,
-  homeIcon
+  homeIcon,
+  mapId
 }
 

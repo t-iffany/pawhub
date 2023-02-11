@@ -22,6 +22,12 @@ export default function InfoBox(props) {
           Closed
         </Button>
       )}
+      <Button
+        variant="outline-primary btn-sm"
+        onClick={() => props.fetchDirections(props.selected)}
+      >
+        Directions
+      </Button>
     </div>
   );
 }
