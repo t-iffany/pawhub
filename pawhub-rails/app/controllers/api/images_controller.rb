@@ -13,6 +13,8 @@ class Api::ImagesController < ApplicationController
   # GET /images/1
   def show
     render json: @image
+    # @image = Image.find(params[:id])
+    # send_data @image.data, type: 'image/png', disposition: 'inline'
   end
 
   # POST /images
