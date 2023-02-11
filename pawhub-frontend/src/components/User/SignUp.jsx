@@ -43,7 +43,7 @@ export default function SignUp ({setCurrentUser}) {
     <Container className="signup-container">
       <Row className="justify-content-center">
         <Col xs={12} sm={8} md={6} lg={4}>
-          <h1 className="text-center">Sign Up to PawBub</h1>
+          <h1 className="text-center">Sign Up to PawHub</h1>
           <p>Join the fun in the discussions and connect with other users</p>
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId="username">
