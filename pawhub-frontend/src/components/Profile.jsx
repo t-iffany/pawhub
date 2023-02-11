@@ -116,6 +116,8 @@ export default function Profile({currentUser, setCurrentUser}) {
         console.log(res.data);
         setCurrentUser(res.data);
         localStorage.setItem("userInfo", JSON.stringify(res.data));
+        setEditMode(false);
+        alert("Edits Saved!")
         return { ...prevState, users: updatedUsers };
       });
       })   
@@ -194,7 +196,7 @@ export default function Profile({currentUser, setCurrentUser}) {
               onChange={handleFileSelect} 
               accept="image/*" 
             />
-            <button type="button" onClick={handleUpload} disabled={uploading}>Upload Image</button>
+            <button type="button" onClick={handleUpload}>Upload Image</button>
           </form>
           </>
           :
