@@ -28,16 +28,6 @@ export default function Profile({currentUser, setCurrentUser}) {
   }, [editMode]);
 
 
-  // const findUserById = (userId) => {
-  //   if (!state.users) {
-  //     return;
-  //   }
-
-  //   return state.users.find((user) => user.id === userId);
-  // };
-
-  //const user = findUserById(3);
-
   // create an edit form and button that toggles the display of the form
   const handleEdit = () => {
     setEditMode(!editMode);
@@ -101,6 +91,30 @@ export default function Profile({currentUser, setCurrentUser}) {
           });
   };
 
+  const handleDelete = (event) => {
+    event.preventDefault();
+    setUploading(true);
+
+    // console.log("currentUser.image.id: ", currentUser.image.id)
+
+    axios
+      .delete(`http://localhost:3001/api/images/1`, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then(() => {
+        setEditMode(true);
+        setUploading(false);
+        alert("Image Deleted!")
+      })
+      .catch(err => {
+        console.log(err);
+        setUploading(false);
+      });
+  };
+    
+
   const handleCancel = () => {
     setEditMode(false);
   };
@@ -146,13 +160,16 @@ export default function Profile({currentUser, setCurrentUser}) {
                 state.images.filter((image) => 
                   image.user_id === currentUser.id
                 ).map((image, index) => (
+                  <div key={index}>
                   <img 
                     key={index}
                     src={`data:image/jpeg;base64,${image.file_data}`} 
                     alt={currentUser.dog_name} 
                     width="150" 
                     height="150" 
-                  />  
+                  /> 
+                  <button type="button" onClick={(event) => handleDelete(event)}>Delete Image</button>
+                  </div>
                 ))
               }
             </div>
@@ -162,9 +179,6 @@ export default function Profile({currentUser, setCurrentUser}) {
             Profile
             <ul>
               <li>Name: {currentUser ? currentUser.dog_name : "user.breed not found"}</li>
-                {/* {currentUser ? state.users.find((user) =>
-                user.id === currentUser.id).dog_name
-                : "user.dog_name not found"} */}
               <li>Breed: {currentUser ? currentUser.breed : "user.breed not found"}</li>
               <li>Description: {currentUser ? currentUser.description : "user.description not found"}</li>
             </ul>
