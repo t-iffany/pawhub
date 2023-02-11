@@ -9,6 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import DiscussionDetails from './components/Discussion/DiscussionDetails';
+import Footer from './components/Footer';
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
@@ -34,6 +35,7 @@ function App() {
             <Route path="/profile" element={<Profile currentUser={currentUser} setCurrentUser={setCurrentUser}/>} />
           </Routes>
         </div>
+        <Footer />
       </div>
     </Router>
   );
