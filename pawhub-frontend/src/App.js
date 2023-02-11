@@ -10,6 +10,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import DiscussionDetails from './components/Discussion/DiscussionDetails';
 import Footer from './components/Footer';
+import Explore from './components/Explore';
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
@@ -32,6 +33,7 @@ function App() {
             <Route path="/discussions/:id" element={<DiscussionDetails currentUser={currentUser} />} />
             <Route path="/login" element={<Login currentUser={currentUser} setCurrentUser={setCurrentUser} />} />
             <Route path="/signup" element={<SignUp currentUser={currentUser} />} />
+            <Route path="/explore" element={<Explore currentUser={currentUser} />} />
             <Route path="/profile" element={<Profile currentUser={currentUser} setCurrentUser={setCurrentUser}/>} />
           </Routes>
         </div>
