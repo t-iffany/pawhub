@@ -140,6 +140,22 @@ export default function Profile({currentUser, setCurrentUser}) {
             />
             <button type="button" onClick={handleUpload}>Upload Image</button>
           </form>
+          <div> Current Images: </div>
+            <div>
+              { state.images && 
+                state.images.filter((image) => 
+                  image.user_id === currentUser.id
+                ).map((image, index) => (
+                  <img 
+                    key={index}
+                    src={`data:image/jpeg;base64,${image.file_data}`} 
+                    alt={currentUser.dog_name} 
+                    width="150" 
+                    height="150" 
+                  />  
+                ))
+              }
+            </div>
           </>
           :
           <div>
@@ -160,7 +176,7 @@ export default function Profile({currentUser, setCurrentUser}) {
                   <img 
                     key={index}
                     src={`data:image/jpeg;base64,${image.file_data}`} 
-                    alt={`Image of: ${currentUser.dog_name}`} 
+                    alt={currentUser.dog_name} 
                     width="150" 
                     height="150" 
                   />  
