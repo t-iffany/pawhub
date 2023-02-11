@@ -7,11 +7,11 @@ export default function Slider(props) {
         type="range"
         min={0}
         max={10000}
-        value={props.sliderValue}
+        value={props.radius}
         className="slider"
         onChange={props.onChange}
       />
-      <div>{props.sliderValue / 1000} kilometres</div>
+      <div>{props.radius / 1000} kilometres</div>
     </div>
   );
 }
