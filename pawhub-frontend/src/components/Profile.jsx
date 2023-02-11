@@ -2,7 +2,7 @@ import Avatar from '@mui/material/Avatar';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-export default function Profile({currentUser}) {
+export default function Profile({currentUser, setCurrentUser}) {
 
   const [state, setState] = useState({ users: [], images: [] });
   const [editMode, setEditMode] = useState(false);
@@ -63,7 +63,9 @@ export default function Profile({currentUser}) {
           }
           return user;
         });
-
+        console.log(res.data);
+        setCurrentUser(res.data);
+        localStorage.setItem("userInfo", JSON.stringify(res.data));
         return { ...prevState, users: updatedUsers };
       });
 
