@@ -91,12 +91,12 @@ export default function Profile({currentUser, setCurrentUser}) {
           });
   };
 
-  const handleDelete = (event) => {
+  const handleDelete = (event, imageId) => {
     event.preventDefault();
     setUploading(true);
 
     axios
-      .delete(`http://localhost:3001/api/images/5`, {
+      .delete(`http://localhost:3001/api/images/${imageId}`, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -157,7 +157,7 @@ export default function Profile({currentUser, setCurrentUser}) {
             />
             <button type="button" onClick={handleUpload}>Upload Image</button>
           </form>
-          <div> Current Images: </div>
+          <div> Saved images: </div>
             <div>
               { state.images && 
                 state.images.filter((image) => 
@@ -171,7 +171,7 @@ export default function Profile({currentUser, setCurrentUser}) {
                     width="150" 
                     height="150" 
                   /> 
-                  <button type="button" onClick={(event) => handleDelete(event)}>Delete Image</button>
+                  <button type="button" onClick={(event) => handleDelete(event, image.id)}>Delete Image</button>
                   </div>
                 ))
               }
