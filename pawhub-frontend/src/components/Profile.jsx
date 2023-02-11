@@ -43,6 +43,56 @@ export default function Profile({currentUser, setCurrentUser}) {
     setEditMode(!editMode);
   };
 
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   setUploading(true);
+  //   // send PUT request to the server to update the user information
+  //   axios.put(`http://localhost:3001/api/users/${currentUser.id}`, {
+  //     username: event.target.username.value,
+  //     dog_name: event.target.dog_name.value,
+  //     breed: event.target.breed.value,
+  //     description: event.target.description.value
+  //   })
+  //     .then(res => {
+  //       // update user information in the state
+  //       // setState({ users: [...state.users, res.data] });
+  //       setState((prevState) => {
+  //       const updatedUsers = prevState.users.map((user) => {
+  //         if (user.id === currentUser.id) {
+  //           return res.data;
+  //         }
+  //         return user;
+  //       });
+  //       console.log(res.data);
+  //       setCurrentUser(res.data);
+  //       localStorage.setItem("userInfo", JSON.stringify(res.data));
+  //       return { ...prevState, users: updatedUsers };
+  //     });
+
+  //       const imageData = new FormData();
+  //       imageData.append("file_data", selectedFile);
+  //       imageData.append("user_id", currentUser.id);
+
+  //       axios
+  //         .post("http://localhost:3001/api/images", imageData, {
+  //           headers: {
+  //             "Content-Type": "multipart/form-data",
+  //           },
+  //         })
+  //         .then(() => {
+  //           setEditMode(false);
+  //           setUploading(false);
+  //         })
+  //         .catch(err => {
+  //           console.log(err);
+  //           setUploading(false);
+  //         });
+  //     })   
+  //     .catch(err => {
+  //       console.log(err);
+  //     });
+  // };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     setUploading(true);
@@ -68,8 +118,18 @@ export default function Profile({currentUser, setCurrentUser}) {
         localStorage.setItem("userInfo", JSON.stringify(res.data));
         return { ...prevState, users: updatedUsers };
       });
+      })   
+      .catch(err => {
+        console.log(err);
+      });
+  };
 
-        const imageData = new FormData();
+
+  const handleUpload = (event) => {
+    event.preventDefault();
+    setUploading(true);
+
+    const imageData = new FormData();
         imageData.append("file_data", selectedFile);
         imageData.append("user_id", currentUser.id);
 
@@ -80,17 +140,14 @@ export default function Profile({currentUser, setCurrentUser}) {
             },
           })
           .then(() => {
-            setEditMode(false);
+            setEditMode(true);
             setUploading(false);
+            alert("Upload Successful")
           })
           .catch(err => {
             console.log(err);
             setUploading(false);
           });
-      })   
-      .catch(err => {
-        console.log(err);
-      });
   };
 
   const handleCancel = () => {
@@ -114,21 +171,32 @@ export default function Profile({currentUser, setCurrentUser}) {
       </div>
       <div style={{ width: "50%", height: "50%", backgroundColor: "transparent" }}>
         {editMode ?
+          <>
           <form onSubmit={handleSubmit}>
             <input type="text" name="username" defaultValue={currentUser ? currentUser.username : "username"} />
             <input type="text" name="dog_name" defaultValue={currentUser ? currentUser.dog_name : "dog_name"} />
             <input type="text" name="breed" defaultValue={currentUser ? currentUser.breed : "breed"} />
             <textarea type="text" name="description" defaultValue={currentUser ? currentUser.description : "description/content"} />
+            {/* <input 
+              type="file" 
+              name="image" 
+              onChange={handleFileSelect} 
+              accept="image/*" 
+            />
+            <button type="button" onClick={handleUpload} disabled={uploading}>Upload Image</button> */}
+            <button type="submit">Save</button>
+            <button type="button" onClick={handleCancel}>Cancel</button>
+          </form>
+          <form onSubmit={handleUpload}>
             <input 
               type="file" 
               name="image" 
               onChange={handleFileSelect} 
               accept="image/*" 
             />
-            {/* <button type="button" onClick={handleSubmit} disabled={uploading}>Upload Image</button> */}
-            <button type="submit">Save</button>
-            <button type="button" onClick={handleCancel}>Cancel</button>
+            <button type="button" onClick={handleUpload} disabled={uploading}>Upload Image</button>
           </form>
+          </>
           :
           <div>
             Profile
