@@ -53,7 +53,7 @@ export default function Map() {
   // console.log("opening hours", selectedCenter);
   // console.log("circle", state.circle);
   // console.log(state.nearbyLocations);
-  console.log("directions", state.directions);
+  // console.log("directions", state.directions);
 
   useEffect(() => {
     // console.log("circleref", circleRef);
@@ -147,11 +147,12 @@ export default function Map() {
         />
 
         <ToggleButtonGroup
-          className="toggle-button"
+          className="toggle-buttons"
           type="radio"
           name="options"
         >
           <ToggleButton
+            className=""
             id="tbg-radio-1"
             value={1}
             onClick={() =>

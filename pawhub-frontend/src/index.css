@@ -62,12 +62,11 @@
   height: 100vh;
 }
 
-.toggle-button {
+.toggle-buttons {
   display: flex;
   margin: 7.5px 0;
   justify-content: center;
   width: 100%;
-  color: black;
 }
 .slider-row {
   display: flex;
@@ -80,7 +79,7 @@
 }
 
 .slider-value {
-  color: black;
+  color: #889bae;
   background: #fff;
   border-radius: 15px;
   border-color: #fff;
@@ -98,7 +97,9 @@
   margin: 5px 0;
 }
 
-.infobox-button {
+.btn-primary {
+  background-color: #fff !important;
+  color: #889bae !important;
 }
 
 /*  */
