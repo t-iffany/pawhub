@@ -87,6 +87,16 @@ export default function Profile() {
     setSelectedFile(event.target.files[0]);
   };
 
+  const renderImages = () => {
+    if (!user) {
+      return null;
+    }
+  
+    return user.images.map((image) => (
+      <img key={image.id} src={`data:image/jpeg;base64,${image.file_data}`} alt={`Pic of ${user.dog_name}`} />
+    ));
+  };
+
   return (
     <div style={{ display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center", height: "100vh" }}>
       <div style={{ width: "25%", height: "50%", backgroundColor: "transparent", display: "flex", flexDirection: "column", alignItems: "center" }}>
@@ -117,6 +127,9 @@ export default function Profile() {
               <li>Breed: {user ? user.breed : "user.breed not found"}</li>
               <li>Description: {user ? user.description : "user.description not found"}</li>
             </ul>
+            <div>
+              {renderImages()}
+            </div>
           </div>
         }
       </div>
