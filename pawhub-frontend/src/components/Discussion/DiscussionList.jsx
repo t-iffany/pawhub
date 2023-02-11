@@ -10,7 +10,8 @@ import { Link } from "react-router-dom";
 export default function DiscussionList({currentUser}) {
   const [state, setState] = useState({
     discussions: [],
-    users: []
+    users: [],
+    comments: []
   });
   const [openPopup, setOpenPopup] = useState(false)
 
@@ -18,6 +19,7 @@ export default function DiscussionList({currentUser}) {
     Promise.all([
       axios.get("http://localhost:3001/api/discussions"),
       axios.get("http://localhost:3001/api/users"),
+      axios.get("http://localhost:3001/api/comments")
     ])
       // Our res is an array of the response received: [{discussions}, {users}]
       .then((res) => {
@@ -26,6 +28,7 @@ export default function DiscussionList({currentUser}) {
           ...prev,
           discussions: res[0].data,
           users: res[1].data,
+          comments: res[2].data
         }));
       })
       .catch((err) => console.log(err));
@@ -34,6 +37,10 @@ export default function DiscussionList({currentUser}) {
   const findUserById = (userId) =>
     state.users.find((user) => user.id === userId);
 
+  const commentCount = (discussionId) => {
+    return state.comments.filter((comment) => comment.discussion_id === Number(discussionId)).length;
+  };
+    
   const discussionPosts = state.discussions
     .sort((a,b) => b.id > a.id ? 1 : -1)
     .map((discussion) => {
@@ -43,6 +50,7 @@ export default function DiscussionList({currentUser}) {
       <Link to={`/discussions/${discussion.id}`} key={discussion.id} >
         <DiscussionListItem
           title={discussion.title}
+          count={commentCount(discussion.id)}
           timestamp={discussion.created_at}
           name={user.username}
           avatar={user.avatar}
