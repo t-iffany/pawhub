@@ -13,21 +13,23 @@ export default function InfoBox(props) {
         </div>
       )}
 
-      {props.open && props.open.open_now ? (
-        <Button className="infobox-button btn-sm" variant="success">
-          Open
+      <div className="infobox-buttons">
+        {props.open && props.open.open_now ? (
+          <Button className="infobox-button btn-sm" variant="success">
+            Open
+          </Button>
+        ) : (
+          <Button className="infobox-button btn-sm" variant="danger">
+            Closed
+          </Button>
+        )}
+        <Button
+          variant="outline-primary btn-sm"
+          onClick={() => props.fetchDirections(props.selected)}
+        >
+          Directions
         </Button>
-      ) : (
-        <Button className="infobox-button btn-sm" variant="danger">
-          Closed
-        </Button>
-      )}
-      <Button
-        variant="outline-primary btn-sm"
-        onClick={() => props.fetchDirections(props.selected)}
-      >
-        Directions
-      </Button>
+      </div>
     </div>
   );
 }

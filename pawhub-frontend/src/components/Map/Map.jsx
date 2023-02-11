@@ -53,7 +53,7 @@ export default function Map() {
   // console.log("opening hours", selectedCenter);
   // console.log("circle", state.circle);
   // console.log(state.nearbyLocations);
-  // console.log("directions", state.directions);
+  console.log("directions", state.directions);
 
   useEffect(() => {
     // console.log("circleref", circleRef);
