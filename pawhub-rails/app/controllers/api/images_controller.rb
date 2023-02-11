@@ -19,7 +19,7 @@ class Api::ImagesController < ApplicationController
 
   # POST /images
   def create
-    puts "image_params: #{image_params}"
+    # puts "image_params: #{image_params}"
     @image = Image.new(image_params)
 
     uploaded_file = params[:file_data]
@@ -47,6 +47,10 @@ class Api::ImagesController < ApplicationController
   # DELETE /images/1
   def destroy
     @image.destroy
+    
+    @images = Image.all
+
+    render json: @images
   end
 
   private
