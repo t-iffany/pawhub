@@ -38,7 +38,8 @@ export default function Distance(props) {
                   .replace(/<\/?b>/g, "")
                   .replace(/<div style="font-size:0.9em">/g, `.`)
                   .replace(/<\/div>/g, " ")}
-            {index !== steps.length - 1 && ` for ${step.distance.text}.`}
+            {index !== steps.length - 1 &&
+              `, and drive for ${step.distance.text}.`}
           </p>
         ))}
         <Card.Link href={mapsUrl} target="_blank">

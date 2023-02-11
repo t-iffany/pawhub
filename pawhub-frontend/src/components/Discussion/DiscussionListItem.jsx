@@ -1,7 +1,7 @@
 import Avatar from "@mui/material/Avatar";
 import moment from "moment";
 
-export default function DiscussionListItem({ title, timestamp, name, avatar }) {
+export default function DiscussionListItem({ title, timestamp, name, avatar, count }) {
   return (
     <div className="discussion-list-item-class">
       <div>
@@ -14,7 +14,7 @@ export default function DiscussionListItem({ title, timestamp, name, avatar }) {
       <div>
         <div className="post-likes-comments">
           <i className="fa-solid fa-heart">50</i>
-          <i className="fa-solid fa-comment">25</i>
+          <i className="fa-solid fa-comment">{count}</i>
         </div>
         <div>{moment(timestamp).fromNow()}</div>
       </div>

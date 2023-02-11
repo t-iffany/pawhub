@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { TextField, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { Form, Button, Container, Row, Col } from "react-bootstrap";
+import "./Login.css";
 
-export default function Login({setCurrentUser}) {
+const Login = ({setCurrentUser}) => {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -40,27 +41,54 @@ export default function Login({setCurrentUser}) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-    <TextField
-            name="username"
-            id="username"
-            label="Username"
-            variant="outlined"
-            onChange={handleChange}
-            value={formData.username}
-          />
-    <TextField
-            name="password"
-            id="password"
-            type="password"
-            label="Password"
-            variant="outlined"
-            onChange={handleChange}
-            value={formData.password}
-          />
-      <Button type="submit" variant="contained">
-          Submit
-      </Button>
-    </form>
+    <Container className="login-container">
+      <Row className="d-flex align-items-center">
+        <Col md={6} className="description-container">
+          <h3 className="description-header">Welcome to PawHub</h3>
+          <p className="description-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam
+            placerat mauris vel dolor maximus, id commodo nibh euismod.
+            Aliquam eget elit velit. Sed hendrerit, risus vitae congue
+            blandit, urna massa euismod quam, vel pharetra odio velit vel
+            eros.
+          </p>
+        </Col>
+        <Col md={6} className="form-container">
+          <h3 className="form-header">Login</h3>
+          <Form onSubmit={handleSubmit}>
+            <Form.Group controlId="username">
+              <Form.Label className="form-label">Username</Form.Label>
+              <Form.Control
+                className="form-input"
+                name="username"
+                label="Username"
+                variant="outlined"
+                onChange={handleChange}
+                value={formData.username}
+              />
+            </Form.Group>
+
+            <Form.Group controlId="password">
+              <Form.Label className="form-label">Password</Form.Label>
+              <Form.Control
+                className="form-input"
+                name="password"
+                type="password"
+                label="Password"
+                variant="outlined"
+                onChange={handleChange}
+                value={formData.password}
+              />
+            </Form.Group>
+
+            <Button className="form-button" variant="primary" type="submit">
+              Login
+            </Button>
+          </Form>
+        </Col>
+      </Row>
+    </Container>
   );
 };
+
+export default Login;
