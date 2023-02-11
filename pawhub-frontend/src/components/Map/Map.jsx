@@ -98,7 +98,9 @@ export default function Map() {
 
   const onUnmount = () => {
     if (circleRef.current) {
-      circleRef.current.setMap(null);
+      if (mapRef.current) {
+        circleRef.current.setMap(null);
+      }
     }
   };
 
