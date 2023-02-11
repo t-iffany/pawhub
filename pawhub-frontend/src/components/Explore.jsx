@@ -4,9 +4,11 @@ import axios from "axios";
 
 import { Carousel, CarouselItem } from "react-round-carousel";
 import "react-round-carousel/src/index.css";
+import { useNavigate } from "react-router-dom";
 
 export default function Explore() {
   const [state, setState] = useState({ users: [], images: [] });
+  const navigate = useNavigate();
 
   useEffect(() => {
     Promise.all([
@@ -39,14 +41,19 @@ export default function Explore() {
       height: "190",
       width: "190",
       content: (
-        <div key={index} onClick={() => console.log("clicked")}>
+        <div key={index} onClick={() => handleClick()}>
           <strong>{getUserByImage(index).username}</strong>
           <span>{getUserByImage(index).dog_name}</span>
         </div>
       ),
     }));
 
-  console.log("items", items);
+  // console.log("items", items);
+
+  const handleClick = () => {
+    // redirect to another page
+    navigate("/");
+  };
 
   return (
     <div>
