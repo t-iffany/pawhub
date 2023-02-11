@@ -39,6 +39,13 @@ export default function NavigationBar({ currentUser, setCurrentUser }) {
             </Nav.Link>
           </Nav>
 
+          <Nav.Link>
+              <Link className="nav-link" to="/explore">
+                Explore
+              </Link>
+            </Nav.Link>
+          </Nav>
+
           <Nav>
             <Nav.Link>
               <Link className="nav-link" to="/profile">
