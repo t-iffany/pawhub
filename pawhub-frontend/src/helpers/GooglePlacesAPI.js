@@ -12,7 +12,7 @@ const closeOptions = {
   strokeColor: "#8BC34A",
   fillColor: "#8BC34A",
 };
-const radius = 5 * 1000;
+
 const defaultLat = 49.232332;
 const defaultLng = -123.116773;
 
@@ -28,7 +28,6 @@ export {
   googleAPIKey,
   libraries,
   closeOptions,
-  radius,
   defaultLat,
   defaultLng,
   getUrl,

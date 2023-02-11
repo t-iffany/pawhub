@@ -152,3 +152,10 @@
   font-size: 18px;
   line-height: 1.5;
 }
+.toggle-button {
+  display: flex;
+  margin-top: 7.5px;
+  justify-content: center;
+  width: 100%;
+  color: black;
+}

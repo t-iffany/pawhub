@@ -30,6 +30,7 @@ import axios from "axios";
 import InfoBox from "./InfoBox";
 import ToggleButton from "react-bootstrap/ToggleButton";
 import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
+import Slider from "./Slider";
 
 export default function Map() {
   const [state, setState] = useState({
@@ -38,6 +39,7 @@ export default function Map() {
     placeType: null,
     nearbyLocations: [],
     circle: false,
+    sliderValue: 5000,
   });
 
   // console.log("place type", placeType);
@@ -46,28 +48,33 @@ export default function Map() {
   // console.log("circle", state.circle);
 
   useEffect(() => {
+    console.log("circleref", circleRef);
+
     if (state.location) {
       setState((prev) => ({ ...prev, circle: true }));
-    }
 
-    if (state.placeType) {
-      const currentLat = state.location.lat;
-      const currentLng = state.location.lng;
+      if (state.placeType) {
+        const currentLat = state.location.lat;
+        const currentLng = state.location.lng;
 
-      axios
-        .get(getUrl(currentLat, currentLng, radius, state.placeType))
-        .then((res) =>
-          setState({
-            ...state,
-            nearbyLocations: res.data.results,
-          })
-        )
-        .catch((err) => console.log(err));
+        axios
+          .get(
+            getUrl(currentLat, currentLng, state.sliderValue, state.placeType)
+          )
+          .then((res) =>
+            setState((prev) => ({
+              ...prev,
+              nearbyLocations: res.data.results,
+            }))
+          )
+          .catch((err) => console.log(err));
+      }
     }
-  }, [state.placeType, state.location]);
+  }, [state.placeType, state.location, state.sliderValue]);
 
   // MapRef is an instance of <GoogleMap />. This hook lets us reference this without re-rendering
   const mapRef = useRef();
+  const circleRef = useRef();
 
   // Coordinates for Oakridge Mall
   const center = useMemo(() => ({ lat: defaultLat, lng: defaultLng }), []);
@@ -82,6 +89,16 @@ export default function Map() {
   // a function that generates a version on initial render, and won't re-generate unless dependencies change (we have none in arr)
   // (for optimization of re-rendering)
   const onLoad = useCallback((map) => (mapRef.current = map), []);
+
+  const onUnmount = () => {
+    if (circleRef.current) {
+      circleRef.current.setMap(null);
+    }
+  };
+
+  const onCircleLoad = (circle) => {
+    circleRef.current = circle;
+  };
 
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: googleAPIKey,
@@ -99,16 +116,27 @@ export default function Map() {
 
         <Places
           setLocation={(position) => {
-            setState({ ...state, location: position, circle: false });
+            setState((prev) => ({
+              ...prev,
+              location: position,
+              circle: false,
+            }));
             mapRef.current.panTo(position);
           }}
+          circleRef={circleRef}
         />
 
-        <ToggleButtonGroup type="radio" name="options">
+        <ToggleButtonGroup
+          className="toggle-button"
+          type="radio"
+          name="options"
+        >
           <ToggleButton
             id="tbg-radio-1"
             value={1}
-            onClick={() => setState({ ...state, placeType: "veterinary_care" })}
+            onClick={() =>
+              setState((prev) => ({ ...prev, placeType: "veterinary_care" }))
+            }
           >
             Veterinarians
           </ToggleButton>
@@ -116,11 +144,23 @@ export default function Map() {
           <ToggleButton
             id="tbg-radio-2"
             value={2}
-            onClick={() => setState({ ...state, placeType: "pet_store" })}
+            onClick={() =>
+              setState((prev) => ({ ...prev, placeType: "pet_store" }))
+            }
           >
             Pet Stores
           </ToggleButton>
         </ToggleButtonGroup>
+
+        <Slider
+          sliderValue={state.sliderValue}
+          onChange={(e) =>
+            setState((prev) => ({
+              ...prev,
+              sliderValue: parseInt(e.target.value),
+            }))
+          }
+        />
       </div>
 
       <div className="map">
@@ -130,15 +170,17 @@ export default function Map() {
           mapContainerClassName="map-container"
           options={options}
           onLoad={onLoad}
+          onUnmount={onUnmount}
         >
           {state.location && (
             <Marker position={state.location} icon={homeIcon} />
           )}
 
-          {state.circle ? (
+          {circleRef.current ? (
             <Circle
+              ref={onCircleLoad}
               center={state.location}
-              radius={radius}
+              radius={state.sliderValue + 500}
               options={closeOptions}
             />
           ) : null}
@@ -155,8 +197,8 @@ export default function Map() {
                     state.placeType === "pet_store" ? petStoreIcon : vetIcon
                   }
                   onClick={() =>
-                    setState({
-                      ...state,
+                    setState((prev) => ({
+                      ...prev,
                       selectedCenter: {
                         lat,
                         lng,
@@ -166,7 +208,7 @@ export default function Map() {
                         rating: location.rating,
                         user_ratings: location.user_ratings_total,
                       },
-                    })
+                    }))
                   }
                 />
               );
@@ -175,7 +217,7 @@ export default function Map() {
           {state.selectedCenter && (
             <InfoWindowF
               onCloseClick={() => {
-                setState({ ...state, selectedCenter: null });
+                setState((prev) => ({ ...prev, selectedCenter: null }));
               }}
               position={{
                 lat: state.selectedCenter.lat + 0.00001,

@@ -10,7 +10,7 @@ export default function CommentList ({ comments, discussionId, users }) {
     <div className="comments-list-container">
       <h2 className="comments-list-title">Comments</h2>
       <div className="comments-list-scrollable">
-        {comments.filter((comment) => comment.discussion_id === Number(discussionId)).map((comment, index) => (
+        {comments.filter((comment) => comment.discussion_id === Number(discussionId)).sort((a,b) => b.id > a.id ? 1 : -1).map((comment, index) => (
           <div key={index} className="comment">
             <div className="comment-header">
               <div className="comment-author-info">

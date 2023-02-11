@@ -8,11 +8,14 @@ export default function Places(props) {
     const results = await getGeocode({ address: val.formatted_address });
     const { lat, lng } = getLatLng(results[0]);
 
+    props.circleRef.current = true;
+
     props.setLocation({ lat, lng });
   };
 
   return (
     <Autocomplete
+      className="search"
       apiKey={googleAPIKey}
       style={{ width: "90%" }}
       onPlaceSelected={handleSelect}
