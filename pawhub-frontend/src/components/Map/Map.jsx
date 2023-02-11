@@ -96,14 +96,6 @@ export default function Map() {
   // (for optimization of re-rendering)
   const onLoad = useCallback((map) => (mapRef.current = map), []);
 
-  const onUnmount = () => {
-    if (circleRef.current) {
-      if (mapRef.current) {
-        circleRef.current.setMap(null);
-      }
-    }
-  };
-
   const onCircleLoad = (circle) => {
     circleRef.current = circle;
   };
@@ -202,7 +194,6 @@ export default function Map() {
           mapContainerClassName="map-container"
           options={options}
           onLoad={onLoad}
-          onUnmount={onUnmount}
         >
           {state.directions && (
             <DirectionsRenderer directions={state.directions} />
