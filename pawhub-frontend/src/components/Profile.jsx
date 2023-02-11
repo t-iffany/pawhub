@@ -28,13 +28,13 @@ export default function Profile({currentUser}) {
   }, [editMode]);
 
 
-  const findUserById = (userId) => {
-    if (!state.users) {
-      return;
-    }
+  // const findUserById = (userId) => {
+  //   if (!state.users) {
+  //     return;
+  //   }
 
-    return state.users.find((user) => user.id === userId);
-  };
+  //   return state.users.find((user) => user.id === userId);
+  // };
 
   //const user = findUserById(3);
 
@@ -55,7 +55,17 @@ export default function Profile({currentUser}) {
     })
       .then(res => {
         // update user information in the state
-        setState({ users: [...state.users, res.data] });
+        // setState({ users: [...state.users, res.data] });
+        setState((prevState) => {
+        const updatedUsers = prevState.users.map((user) => {
+          if (user.id === currentUser.id) {
+            return res.data;
+          }
+          return user;
+        });
+
+        return { ...prevState, users: updatedUsers };
+      });
 
         const imageData = new FormData();
         imageData.append("file_data", selectedFile);
@@ -121,13 +131,18 @@ export default function Profile({currentUser}) {
           <div>
             Profile
             <ul>
-              <li>Name: {currentUser ? currentUser.dog_name : "user.dog_name not found"}</li>
+              <li>Name: {currentUser ? currentUser.dog_name : "user.breed not found"}</li>
+                {/* {currentUser ? state.users.find((user) =>
+                user.id === currentUser.id).dog_name
+                : "user.dog_name not found"} */}
               <li>Breed: {currentUser ? currentUser.breed : "user.breed not found"}</li>
               <li>Description: {currentUser ? currentUser.description : "user.description not found"}</li>
             </ul>
             <div>
               { state.images && 
-                state.images.map((image, index) => (
+                state.images.filter((image) => 
+                  image.user_id === currentUser.id
+                ).map((image, index) => (
                   <img 
                     key={index}
                     src={`data:image/jpeg;base64,${image.file_data}`} 
