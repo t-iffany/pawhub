@@ -30,7 +30,7 @@ export default function Distance(props) {
                   .replace(/<\/?b>/g, "")
                   .replace(
                     /<div style="font-size:0.9em">/g,
-                    `. After ${step.distance.text}, `
+                    `. After ${step.distance.text}, the `
                   )
                   .replace(/<\/div>/g, ". ")
                   .replace("D", "d")
