@@ -31,6 +31,7 @@ import axios from "axios";
 import InfoBox from "./InfoBox";
 import ToggleButton from "react-bootstrap/ToggleButton";
 import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
+import Spinner from "react-bootstrap/Spinner";
 import Slider from "./Slider";
 import Distance from "./Distance";
 
@@ -48,7 +49,7 @@ export default function Map() {
   });
 
   // console.log("place type", placeType);
-  console.log("nearby", state.nearbyLocations);
+  // console.log("nearby", state.nearbyLocations);
   // console.log("opening hours", selectedCenter);
   // console.log("circle", state.circle);
   // console.log(state.nearbyLocations);
@@ -131,7 +132,7 @@ export default function Map() {
   };
 
   if (!isLoaded) {
-    return <div>Loading...</div>;
+    return <Spinner animation="border" />;
   }
 
   return (

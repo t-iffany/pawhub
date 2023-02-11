@@ -62,16 +62,7 @@
   height: 100vh;
 }
 
-.combobox-input {
-  width: 100%;
-  padding: 0.5rem;
-  margin-top: 7.5px;
-}
-
-.combobox-option {
-  list-style-type: none;
-}
-
+/*  */
 .blog-post {
   padding: 16px;
   margin: 24px 0;
