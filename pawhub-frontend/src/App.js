@@ -32,8 +32,8 @@ function App() {
             <Route path="/discussions/:id" element={<DiscussionDetails currentUser={currentUser} />} />
             <Route path="/login" element={<Login currentUser={currentUser} setCurrentUser={setCurrentUser} />} />
             <Route path="/signup" element={<SignUp currentUser={currentUser} />} />
-            <Route path="/profile" element={<Profile currentUser={currentUser} />} />
             <Route path="/explore" element={<Explore currentUser={currentUser} />} />
+            <Route path="/profile" element={<Profile currentUser={currentUser} setCurrentUser={setCurrentUser}/>} />
           </Routes>
         </div>
       </div>
