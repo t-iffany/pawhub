@@ -1,80 +1,30 @@
 import Avatar from '@mui/material/Avatar';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { imageListItemBarClasses } from '@mui/material';
 
 export default function Profile() {
 
-  const [state, setState] = useState({ users: [], image: { file_data: ""} });
+  const [state, setState] = useState({ users: [], images: [] });
   const [editMode, setEditMode] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const [uploading, setUploading] = useState(false);
-  //const [userImage, setUserImage] = useState("");
-
-  // useEffect(() => {
-  //   axios
-  //     .get("http://localhost:3001/api/users")
-  //     .then((response) => {
-  //       if (response.status === 200) {
-  //         setState({ users: response.data });
-  //       } else {
-  //         console.log('Error:', response.status);
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-
-  //   // Make a GET request to retrieve the base64 encoded image  
-  //   axios
-  //     .get(`http://localhost:3001/api/images/1`)
-  //     .then((response) => {
-  //       if (response.status === 200) {
-  //         // access the base64 encoded image data from the response
-  //         console.log("response.data: ", response.data)
-  //         console.log("response.data.file_data", response.data.file_data)
-  //         //setState(`data:image/jpeg;base64,${response.data}`);
-  //         // setState((prev) => ({
-  //         //   ...prev, image: { file_data: response.data.file_data }
-  //         // }))
-  //         const data = {...response.data};
-  //         setState((prev) => ({
-  //           ...prev, image: { file_data: data.file_data }
-  //         }))
-  //       } else {
-  //         console.log('Error:', response.status);
-  //       }
-  //     })
-  //     .catch(error => {
-  //       console.error(error);
-  //     });
-
-  // }, [editMode]);
 
   useEffect(() => {
     Promise.all([
       axios.get("http://localhost:3001/api/users"),
-      axios.get("http://localhost:3001/api/images/1"),
+      axios.get("http://localhost:3001/api/images"),
     ])
-      // Our res is an array of the response received: [{discussions}, {users}]
+      // Our res is an array of the response received: [{users}, {images}]
       .then((response) => {
-
-        // const base64 = btoa(
-        //   new Uint8Array(response[1].data).reduce((data, byte) => {
-        //     return data + String.fromCharCode(byte);
-        //   }, '')
-        //   );
-        
-
-        console.log("response[1].data.file_data", response[1].data.file_data)
-        // console.log("base64", base64)
 
         setState((prev) => ({
           ...prev,
           users: response[0].data,
-          image: `data:image/jpeg;base64,${response[1].data.file_data}`
+          // images: `data:image/jpeg;base64,${response[1].data.file_data}`
+          images: response[1].data
         }));
       })
+
       .catch((err) => console.log(err));
   }, [editMode]);
 
@@ -126,11 +76,7 @@ export default function Profile() {
             console.log(err);
             setUploading(false);
           });
-
-
-      })
-
-      
+      })   
       .catch(err => {
         console.log(err);
       });
@@ -142,46 +88,8 @@ export default function Profile() {
 
   const handleFileSelect = (event) => {
     setSelectedFile(event.target.files[0]);
-    // let imageFile = event.target.files[0]
-
-    // if (imageFile) {
-    //   const reader = new FileReader();
-
-    //   reader.onload = this._handleReaderLoaded.bind(this)
-
-    //   reader.readAsBinaryString(imageFile)
-    // }
-
-    // const handleReaderLoaded = (readerEvt) => {
-    //   let binaryString = readerEvt.target.result
-    //   this.setState({
-    //     base64TextString: btoa(binaryString)
-    //   })
-    // }
   };
 
-  // const renderImages = () => {
-  //   if (!user) {
-  //     return null;
-  //   }
-  
-  //   return user.images.map((image) => (
-  //     <img key={image.id} src={`data:image/jpeg;base64,${image.file_data}`} alt={`Pic of ${user.dog_name}`} />
-  //   ));
-  // };
-
-  // const renderImg = () => {
-  //   <img src={`data:image/jpeg;base64,${image.file_data}`} alt={`Pic of ${user.dog_name}`} />
-  // }
-  // const imageURL = `data:image/jpeg;base64,${state.images[0].file_data}`
-  // const imageURL = state.images[0].file_data
-  // console.log('state.images[0].file_data: ', state.images[0].file_data)
-  // console.log('imageURL', imageURL)
-  console.log("state.image", state.image)
-
-  // const renderImage = (imageData) => {
-  //   return `data:image/jpeg;base64,${imageData}`
-  // }
 
   return (
     <div style={{ display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center", height: "100vh" }}>
@@ -219,12 +127,16 @@ export default function Profile() {
               <li>Description: {user ? user.description : "user.description not found"}</li>
             </ul>
             <div>
-              Images: { state.image && 
-                <img src={state.image} alt="dog" />
+              { state.images && 
+                state.images.map((image, index) => (
+                  <img 
+                    key={index}
+                    src={`data:image/jpeg;base64,${image.file_data}`} 
+                    alt="dog" 
+                    width="150" 
+                    height="150" />  
+                ))
               }
-              {/* Images: <img src={imageURL ? imageURL : "imageurl not working"} alt="dog" /> */}
-              {/* {renderImages()} */}
-              {/* {renderImg()} */}
             </div>
           </div>
         }
