@@ -45,6 +45,15 @@ export default function NavigationBar({ currentUser, setCurrentUser }) {
           </Nav>
 
           <Nav>
+
+            {currentUser && (
+              <Nav.Link>
+                <Link className="nav-link" to="/profile">
+                Logged In As: {currentUser.username}
+                </Link>
+              </Nav.Link>
+            )}
+
             {currentUser && (
               <Nav.Link>
                 <Link className="nav-link" to="/profile">
