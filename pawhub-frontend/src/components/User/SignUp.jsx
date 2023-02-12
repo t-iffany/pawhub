@@ -3,6 +3,7 @@ import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import './SignUp.css';
+import DropdownTypeAhead from '../controls/DropdownTypeAhead';
 
 export default function SignUp ({setCurrentUser}) {
   const [formData, setFormData] = useState({
@@ -132,6 +133,7 @@ export default function SignUp ({setCurrentUser}) {
                 placeholder="Enter avatar URL"
               />
             </Form.Group>
+            <DropdownTypeAhead />
             <Button variant="primary" type="submit">
               Sign-Up
             </Button>
