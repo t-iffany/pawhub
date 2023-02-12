@@ -190,3 +190,14 @@
   width: 100%;
   color: black;
 }
+
+/* Carousel */
+/* .carousel__container > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+} */
+.explore-header {
+  margin-left: 5em;
+  margin-top: 25px;
+}

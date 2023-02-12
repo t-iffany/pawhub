@@ -18,7 +18,7 @@ user1 = User.create({
   dog_name: 'bella',
   breed: 'poodle',
   description: 'woof',
-  avatar: 'https://imgur.com/a/xlfz5Ki'
+  avatar: 'https://i.imgur.com/IVtGnJj.png'
 })
 
 user2 = User.create({
@@ -40,6 +40,57 @@ user3 = User.create({
   description: 'A splooting floof',
   avatar: 'https://www.publicdomainpictures.net/pictures/250000/nahled/dog-puppy-illustration.jpg'
 })
+
+user4 = User.create({
+  username: 'fluffy',
+  email: 'fluffy@gmail.com',
+  password: 'pass',
+  dog_name: 'Fluffy',
+  breed: 'Golden Retriever',
+  description: 'One big golden retriever. Loves people!',
+  avatar: 'https://www.rover.com/blog/wp-content/uploads/2018/11/golden-retriever-2061715_1920.jpg'
+})
+
+user5 = User.create({
+  username: 'wonton',
+  email: 'wonton@gmail.com',
+  password: 'pass',
+  dog_name: 'Wonton',
+  breed: 'Havanese',
+  description: 'Looks like a wonton. Loves to eat wontons too! You are what you eat!',
+  avatar: 'https://www.rd.com/wp-content/uploads/2021/03/GettyImages-560640849-e1617043874845.jpg?resize=1536,1025'
+})
+
+user6 = User.create({
+  username: 'bloopy',
+  email: 'bloopy@gmail.com',
+  password: 'pass',
+  dog_name: 'Bloopy',
+  breed: 'Siberian Husky',
+  description: 'Woof woof!!',
+  avatar: 'https://www.rd.com/wp-content/uploads/2021/03/GettyImages-1200336846.jpg?resize=1536,1024'
+})
+
+user7 = User.create({
+  username: 'tootsie',
+  email: 'tootsie@gmail.com',
+  password: 'pass',
+  dog_name: 'Tootsie',
+  breed: 'Pomeranian',
+  description: 'Small dog. Big attitude.',
+  avatar: 'https://www.rd.com/wp-content/uploads/2021/03/GettyImages-1014940472-scaled.jpg?resize=1536,1024'
+})
+
+user8 = User.create({
+  username: 'charlie',
+  email: 'charlie@gmail.com',
+  password: 'pass',
+  dog_name: 'Charlie',
+  breed: 'Labrador Retriever',
+  description: 'Hello, my name is Charlie :D.',
+  avatar: 'https://i.pinimg.com/originals/e9/46/02/e946026df22acfc533f37e95634cdf3e.jpg'
+})
+
 
 # Discussions
 
@@ -63,6 +114,36 @@ user3.discussions.create({
   category: 'Other',
 })
 
+user4.discussions.create({
+  title: 'Dog is getting fat...',
+  content: 'So my doggy is getting a lil chonky. Anyone have tips on how to slowly help a dog lose weight? He is a picky one..',
+  category: 'Other',
+})
+
+user5.discussions.create({
+  title: 'Anyone have this problem?',
+  content: 'My puppy has been really mean to me and I cannot figure out why. He is turning one, and I have not done anything bad! ',
+  category: 'Other',
+})
+
+user6.discussions.create({
+  title: 'Anyone want to meet at the dog park later?',
+  content: 'I will be going at 2 PM. See you there.',
+  category: 'Meetup',
+})
+
+user7.discussions.create({
+  title: 'Extra peepads.',
+  content: 'Bought too many peepads on Amazon. Would anyone like to take some off my hands?',
+  category: 'Swap',
+})
+
+user8.discussions.create({
+  title: 'Looking to sell my crate!',
+  content: 'My puppy quickly outgrew this crate I bought, and I am looking to sell it. Anyone interested, please comment!',
+  category: 'Swap',
+})
+
 # Comments
 Comment.destroy_all
 
@@ -81,3 +162,29 @@ Comment.create({body: 'Velit euismod in pellentesque massa placerat duis ultrici
 Comment.create({body: 'Vitae ultricies leo integer malesuada nunc vel risus commodo viverra. Malesuada bibendum arcu vitae elementum curabitur vitae nunc sed. Phasellus vestibulum lorem sed risus ultricies.', user_id: 1, discussion_id: 3})
 Comment.create({body: 'Faucibus purus in massa tempor nec feugiat nisl pretium fusce. Orci porta non pulvinar neque laoreet suspendisse.', user_id: 2, discussion_id: 2})
 Comment.create({body: 'Fermentum odio eu feugiat pretium. Quisque non tellus orci ac auctor augue mauris. Morbi tristique senectus et netus et malesuada. Feugiat sed lectus vestibulum mattis ullamcorper.', user_id: 1, discussion_id: 1})
+
+# Post 4
+Comment.create({body: 'Hahaha please upload some pictures!', user_id: 2, discussion_id: 4})
+Comment.create({body: 'Give him more food', user_id: 6, discussion_id: 4})
+Comment.create({body: 'Fluffy is eating better than me!', user_id: 8, discussion_id: 4})
+
+# Post 5
+Comment.create({body: 'Hmmm, give him more treats!', user_id: 6, discussion_id: 5})
+
+# Post 6
+Comment.create({body: 'Meow', user_id: 2, discussion_id: 6})
+Comment.create({body: 'Will be there if it does not rain!', user_id: 3, discussion_id: 6})
+Comment.create({body: 'Great, see you there!', user_id: 6, discussion_id: 6})
+Comment.create({body: 'Yes, cant wait!', user_id: 3, discussion_id: 6})
+
+# Post 7
+Comment.create({body: 'Interested! I have some extra puzzle toys that my puppy does not use anymore. How many pads do you have?', user_id: 2, discussion_id: 7})
+Comment.create({body: 'Woof woof', user_id: 3, discussion_id: 7})
+Comment.create({body: 'Which brand have you been using? I am considering the AmazonBasics ones', user_id: 5, discussion_id: 7})
+Comment.create({body: 'They are the AmazonBasics ones! Very good for the price. Super absorbent and works great for my pupper', user_id: 7, discussion_id: 7})
+
+# Post 8
+Comment.create({body: 'I am very interested! How much are you looking for?', user_id: 5, discussion_id: 8})
+Comment.create({body: 'What are the dimensions of the crate? How long have you owned it?', user_id: 6, discussion_id: 8})
+Comment.create({body: 'Sold, sorry friends :( Thanks for the interest though!', user_id: 8, discussion_id: 8})
+

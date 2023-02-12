@@ -20,10 +20,12 @@ export default function Profile({ currentUser, setCurrentUser }) {
           users: response[0].data,
           images: response[1].data,
         }));
+
+        // console.log("state useeffect", state);
       })
 
       .catch((err) => console.log(err));
-  }, [editMode]);
+  }, [editMode, uploading]);
 
   // create an edit form and button that toggles the display of the form
   const handleEdit = () => {
@@ -78,7 +80,7 @@ export default function Profile({ currentUser, setCurrentUser }) {
           "Content-Type": "multipart/form-data",
         },
       })
-      .then(() => {
+      .then((res) => {
         setEditMode(true);
         setUploading(false);
         alert("Upload Successful");
@@ -100,7 +102,7 @@ export default function Profile({ currentUser, setCurrentUser }) {
         },
       })
       .then((res) => {
-        //console.log("res.data: ", res.data)
+        // console.log("res.data: ", res.data);
         setState((prevState) => ({
           ...prevState,
           images: res.data,

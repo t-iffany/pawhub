@@ -2,7 +2,7 @@ import * as React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-import { Carousel, CarouselItem } from "react-round-carousel";
+import { Carousel } from "react-round-carousel";
 import "react-round-carousel/src/index.css";
 import { useNavigate } from "react-router-dom";
 
@@ -27,10 +27,14 @@ export default function Explore() {
       .catch((err) => console.log(err));
   }, []);
 
-  console.log("State.images", state.images);
+  // console.log("State.images", state.images);
 
   const getUserByImage = (index) => {
     return state.users.find((user) => user.id === state.images[index].user_id);
+  };
+
+  const handleClick = (index) => {
+    navigate(`/profile/${getUserByImage(index).id}`);
   };
 
   const items = Array(state.images.length)
@@ -38,26 +42,18 @@ export default function Explore() {
     .map((image, index) => ({
       alt: `${getUserByImage(index).username}`,
       image: `data:image/jpeg;base64,${state.images[index].file_data}`,
-      height: "190",
-      width: "190",
+
       content: (
-        <div key={index} onClick={() => handleClick()}>
+        <div key={index} onClick={() => handleClick(index)}>
           <strong>{getUserByImage(index).username}</strong>
           <span>{getUserByImage(index).dog_name}</span>
         </div>
       ),
     }));
 
-  // console.log("items", items);
-
-  const handleClick = () => {
-    // redirect to another page
-    navigate("/");
-  };
-
   return (
     <div>
-      <h1>Explore</h1>
+      <h1 className="explore-header">Explore</h1>
       <Carousel itemWidth="275" showControls={false} items={items} />
     </div>
   );
