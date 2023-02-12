@@ -162,3 +162,29 @@ Comment.create({body: 'Velit euismod in pellentesque massa placerat duis ultrici
 Comment.create({body: 'Vitae ultricies leo integer malesuada nunc vel risus commodo viverra. Malesuada bibendum arcu vitae elementum curabitur vitae nunc sed. Phasellus vestibulum lorem sed risus ultricies.', user_id: 1, discussion_id: 3})
 Comment.create({body: 'Faucibus purus in massa tempor nec feugiat nisl pretium fusce. Orci porta non pulvinar neque laoreet suspendisse.', user_id: 2, discussion_id: 2})
 Comment.create({body: 'Fermentum odio eu feugiat pretium. Quisque non tellus orci ac auctor augue mauris. Morbi tristique senectus et netus et malesuada. Feugiat sed lectus vestibulum mattis ullamcorper.', user_id: 1, discussion_id: 1})
+
+# Post 4
+Comment.create({body: 'Hahaha please upload some pictures!', user_id: 2, discussion_id: 4})
+Comment.create({body: 'Give him more food', user_id: 6, discussion_id: 4})
+Comment.create({body: 'Fluffy is eating better than me!', user_id: 8, discussion_id: 4})
+
+# Post 5
+Comment.create({body: 'Hmmm, give him more treats!', user_id: 6, discussion_id: 5})
+
+# Post 6
+Comment.create({body: 'Meow', user_id: 2, discussion_id: 6})
+Comment.create({body: 'Will be there if it does not rain!', user_id: 3, discussion_id: 6})
+Comment.create({body: 'Great, see you there!', user_id: 6, discussion_id: 6})
+Comment.create({body: 'Yes, cant wait!', user_id: 3, discussion_id: 6})
+
+# Post 7
+Comment.create({body: 'Interested! I have some extra puzzle toys that my puppy does not use anymore. How many pads do you have?', user_id: 2, discussion_id: 7})
+Comment.create({body: 'Woof woof', user_id: 3, discussion_id: 7})
+Comment.create({body: 'Which brand have you been using? I am considering the AmazonBasics ones', user_id: 5, discussion_id: 7})
+Comment.create({body: 'They are the AmazonBasics ones! Very good for the price. Super absorbent and works great for my pupper', user_id: 7, discussion_id: 7})
+
+# Post 8
+Comment.create({body: 'I am very interested! How much are you looking for?', user_id: 5, discussion_id: 8})
+Comment.create({body: 'What are the dimensions of the crate? How long have you owned it?', user_id: 6, discussion_id: 8})
+Comment.create({body: 'Sold, sorry friends :( Thanks for the interest though!', user_id: 8, discussion_id: 8})
+
