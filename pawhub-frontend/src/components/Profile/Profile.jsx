@@ -81,9 +81,6 @@ export default function Profile({ currentUser, setCurrentUser }) {
         },
       })
       .then((res) => {
-        setState((prevState) => ({
-          ...prevState,
-        }));
         setEditMode(true);
         setUploading(false);
         alert("Upload Successful");
