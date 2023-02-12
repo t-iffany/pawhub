@@ -1,7 +1,13 @@
 import Avatar from "@mui/material/Avatar";
 import moment from "moment";
 
-export default function DiscussionListItem({ title, timestamp, name, avatar, count }) {
+export default function DiscussionListItem({
+  title,
+  timestamp,
+  name,
+  avatar,
+  count,
+}) {
   return (
     <div className="discussion-list-item-class">
       <div>
