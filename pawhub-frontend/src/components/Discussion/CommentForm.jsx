@@ -9,7 +9,10 @@ export default function CommentForm({setAddComment, discussionId, currentUserId}
     event.preventDefault();
     axios
     .post("http://localhost:3001/api/comments", {body: comment, discussion_id: discussionId, user_id: currentUserId })
-    .then((res) => setAddComment(true))
+    .then((res) => {
+      setAddComment(true);
+      setComment("");
+    })
     .catch((err) => console.log(err));
   };
 
