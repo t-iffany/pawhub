@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import { Container, Row, Col, Form, Button, Dropdown, FormControl } from 'react-bootstrap';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import './SignUp.css';
-import DropdownTypeAhead from '../controls/DropdownTypeAhead';
 
 export default function SignUp ({setCurrentUser}) {
   const [formData, setFormData] = useState({
@@ -16,7 +15,18 @@ export default function SignUp ({setCurrentUser}) {
     avatar: ""
   });
 
+  const [options, setOptions] = useState([]);
+  const [showOptions, setShowOptions] = useState(false);
   const navigate = useNavigate();
+
+  const getBreeds = {
+    method: 'GET',
+    url: 'https://dog-breeds2.p.rapidapi.com/dog_breeds',
+    headers: {
+      'X-RapidAPI-Key': 'da1a663316mshd7457aea6fda466p18c83fjsn5db0b9b1ad56',
+      'X-RapidAPI-Host': 'dog-breeds2.p.rapidapi.com'
+    }
+  };
 
   const handleChange = (e) => {
     setFormData({
@@ -24,6 +34,32 @@ export default function SignUp ({setCurrentUser}) {
       [e.target.name]: e.target.value,
     });
   };
+
+  useEffect(() => {
+    axios.request(getBreeds).then(function (response) {
+      const newOpts = (response.data).map((res) => res.breed);
+      setOptions(newOpts);
+    }).catch(function (error) {
+      console.error(error);
+    });
+  }, []);
+
+  const handleToggle = () => {
+    setShowOptions(!showOptions);
+  };
+
+  const handleSelect = (selectedOption) => {
+    setFormData({
+      ...formData,
+      breed: selectedOption,
+    });
+    setShowOptions(false);
+  };
+
+  //filters the menu based on what's typed
+  const filteredOptions = options.filter(
+    (option) => option.toLowerCase().indexOf(formData.breed.toLowerCase()) !== -1
+  );
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -95,18 +131,28 @@ export default function SignUp ({setCurrentUser}) {
                 placeholder="Enter your dog's name"
               />
             </Form.Group>
-            <Form.Group controlId="breed">
-              <Form.Label>Dog's Breed</Form.Label>
-              <Form.Control
-                 type="text"
-                 name="breed"
-                 label="Dog's Breed"
-                 variant="outlined"
-                 onChange={handleChange}
-                 value={formData.breed}
-                placeholder="Enter your dog's breed"
-              />
-            </Form.Group>
+            <Dropdown onToggle={handleToggle} show={showOptions}>
+            <Form.Label>Dog's Breed</Form.Label>
+              <Dropdown.Toggle
+                as={FormControl}
+                type="text"
+                id="breed"
+                name="breed"
+                placeholder="Type and select your dog's breed"
+                value={formData.breed}
+                onChange={handleChange}
+                />
+              <Dropdown.Menu>
+                {filteredOptions.map((option) => (
+                <Dropdown.Item
+                  key={option}
+                  onClick={() => handleSelect(option)}
+                  >
+                    {option}
+                </Dropdown.Item>
+                ))}
+              </Dropdown.Menu>
+            </Dropdown>
             <Form.Group controlId="description">
               <Form.Label>Description</Form.Label>
               <Form.Control
@@ -133,7 +179,6 @@ export default function SignUp ({setCurrentUser}) {
                 placeholder="Enter avatar URL"
               />
             </Form.Group>
-            <DropdownTypeAhead />
             <Button variant="primary" type="submit">
               Sign-Up
             </Button>
