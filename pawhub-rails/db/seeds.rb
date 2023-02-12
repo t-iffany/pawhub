@@ -18,7 +18,7 @@ user1 = User.create({
   dog_name: 'bella',
   breed: 'poodle',
   description: 'woof',
-  avatar: 'https://imgur.com/a/xlfz5Ki'
+  avatar: 'https://i.imgur.com/IVtGnJj.png'
 })
 
 user2 = User.create({
@@ -41,6 +41,57 @@ user3 = User.create({
   avatar: 'https://www.publicdomainpictures.net/pictures/250000/nahled/dog-puppy-illustration.jpg'
 })
 
+user4 = User.create({
+  username: 'fluffy',
+  email: 'fluffy@gmail.com',
+  password: 'pass',
+  dog_name: 'Fluffy',
+  breed: 'Golden Retriever',
+  description: 'One big golden retriever. Loves people!',
+  avatar: 'https://www.rover.com/blog/wp-content/uploads/2018/11/golden-retriever-2061715_1920.jpg'
+})
+
+user5 = User.create({
+  username: 'wonton',
+  email: 'wonton@gmail.com',
+  password: 'pass',
+  dog_name: 'Wonton',
+  breed: 'Havanese',
+  description: 'Looks like a wonton. Loves to eat wontons too! You are what you eat!',
+  avatar: 'https://www.rd.com/wp-content/uploads/2021/03/GettyImages-560640849-e1617043874845.jpg?resize=1536,1025'
+})
+
+user6 = User.create({
+  username: 'bloopy',
+  email: 'bloopy@gmail.com',
+  password: 'pass',
+  dog_name: 'Bloopy',
+  breed: 'Siberian Husky',
+  description: 'Woof woof!!',
+  avatar: 'https://www.rd.com/wp-content/uploads/2021/03/GettyImages-1200336846.jpg?resize=1536,1024'
+})
+
+user7 = User.create({
+  username: 'tootsie',
+  email: 'tootsie@gmail.com',
+  password: 'pass',
+  dog_name: 'Tootsie',
+  breed: 'Pomeranian',
+  description: 'Small dog. Big attitude.',
+  avatar: 'https://www.rd.com/wp-content/uploads/2021/03/GettyImages-1014940472-scaled.jpg?resize=1536,1024'
+})
+
+user8 = User.create({
+  username: 'charlie',
+  email: 'charlie@gmail.com',
+  password: 'pass',
+  dog_name: 'Charlie',
+  breed: 'Labrador Retriever',
+  description: 'Hello, my name is Charlie :D.',
+  avatar: 'https://i.pinimg.com/originals/e9/46/02/e946026df22acfc533f37e95634cdf3e.jpg'
+})
+
+
 # Discussions
 
 Discussion.destroy_all
@@ -61,6 +112,36 @@ user3.discussions.create({
   title: 'Dog exercise or workout',
   content: 'How often should I be bringing my dog to a dog park and for how long?',
   category: 'Other',
+})
+
+user4.discussions.create({
+  title: 'Dog is getting fat...',
+  content: 'So my doggy is getting a lil chonky. Anyone have tips on how to slowly help a dog lose weight? He is a picky one..',
+  category: 'Other',
+})
+
+user5.discussions.create({
+  title: 'Anyone have this problem?',
+  content: 'My puppy has been really mean to me and I cannot figure out why. He is turning one, and I have not done anything bad! ',
+  category: 'Other',
+})
+
+user6.discussions.create({
+  title: 'Anyone want to meet at the dog park later?',
+  content: 'I will be going at 2 PM. See you there.',
+  category: 'Meetup',
+})
+
+user7.discussions.create({
+  title: 'Extra peepads.',
+  content: 'Bought too many peepads on Amazon. Would anyone like to take some off my hands?',
+  category: 'Swap',
+})
+
+user8.discussions.create({
+  title: 'Looking to sell my crate!',
+  content: 'My puppy quickly outgrew this crate I bought, and I am looking to sell it. Anyone interested, please comment!',
+  category: 'Swap',
 })
 
 # Comments
