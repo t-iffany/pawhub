@@ -33,6 +33,10 @@ export default function Explore() {
     return state.users.find((user) => user.id === state.images[index].user_id);
   };
 
+  const handleClick = (index) => {
+    navigate(`/profile/${getUserByImage(index).id}`);
+  };
+
   const items = Array(state.images.length)
     .fill("")
     .map((image, index) => ({
@@ -40,17 +44,12 @@ export default function Explore() {
       image: `data:image/jpeg;base64,${state.images[index].file_data}`,
 
       content: (
-        <div key={index} onClick={() => handleClick()}>
+        <div key={index} onClick={() => handleClick(index)}>
           <strong>{getUserByImage(index).username}</strong>
           <span>{getUserByImage(index).dog_name}</span>
         </div>
       ),
     }));
-
-  const handleClick = () => {
-    // redirect to another page
-    navigate("/");
-  };
 
   return (
     <div>
