@@ -1,6 +1,6 @@
 import { getGeocode, getLatLng } from "use-places-autocomplete";
 import Autocomplete from "react-google-autocomplete";
-import { googleAPIKey } from "../../helpers/GooglePlacesAPI";
+import API_KEY from "../api_keys";
 
 export default function Places(props) {
   const handleSelect = async (val) => {
@@ -16,7 +16,7 @@ export default function Places(props) {
   return (
     <Autocomplete
       className="search"
-      apiKey={googleAPIKey}
+      apiKey={API_KEY.googleAPIKey}
       style={{ width: "100%" }}
       onPlaceSelected={handleSelect}
       options={{

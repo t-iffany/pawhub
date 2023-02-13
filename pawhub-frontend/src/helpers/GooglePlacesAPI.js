@@ -1,4 +1,5 @@
-const googleAPIKey = "AIzaSyDRii-QG1bSXUWEz7bypIOSrFS7y68PDtM";
+import API_KEY from "../components/api_keys";
+
 const mapId = "30817c9c0541d59e";
 const libraries = ["places"];
 const closeOptions = {
@@ -21,12 +22,11 @@ const homeIcon = "http://maps.google.com/mapfiles/kml/pal3/icon56.png";
 const petStoreIcon = "http://maps.google.com/mapfiles/kml/pal3/icon26.png";
 const vetIcon = "http://maps.google.com/mapfiles/kml/pal3/icon46.png";
 
-const getUrl = (lat, lng, radius, placeType) => `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=${radius}&type=${placeType}&key=${googleAPIKey}`;
+const getUrl = (lat, lng, radius, placeType) => `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=${radius}&type=${placeType}&key=${API_KEY.googleAPIKey}`;
 
 
 
 export {
-  googleAPIKey,
   libraries,
   closeOptions,
   defaultLat,

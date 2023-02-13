@@ -16,7 +16,6 @@ import {
 } from "@react-google-maps/api";
 import Places from "./Places";
 import {
-  googleAPIKey,
   libraries,
   closeOptions,
   defaultLat,
@@ -34,6 +33,7 @@ import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
 import Spinner from "react-bootstrap/Spinner";
 import Slider from "./Slider";
 import Distance from "./Distance";
+import API_KEY from "../api_keys";
 
 /* eslint-disable no-undef */
 
@@ -101,7 +101,7 @@ export default function Map() {
   };
 
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: googleAPIKey,
+    googleMapsApiKey: API_KEY.googleAPIKey,
     libraries,
   });
 
