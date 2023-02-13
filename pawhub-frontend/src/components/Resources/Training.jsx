@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import API_KEY from '../api_keys';
+import './Training.css';
 
 
 export default function TrainingVideos() {
   const [videos, setVideos] = useState([]);
-  const [videoTitles, setVIdeoTitles] = useState([]);
+  const [videoTitles, setVideoTitles] = useState([]);
 
   //console.log("api key: ", API_KEY)
 
@@ -33,7 +34,7 @@ export default function TrainingVideos() {
         .then(response => {
           setVideos(response.data.items);
           const videoTitles = response.data.items.map(item => item.snippet.title);
-          setVIdeoTitles(videoTitles);
+          setVideoTitles(videoTitles);
         })
         .catch(error => {
           console.log(error);
@@ -44,18 +45,20 @@ export default function TrainingVideos() {
 
 
   return (
-    // use Youtube iframe player API to embed the videos
-    <div>
-      {videos.map((video, index) => (
-        <iframe
-          key={video.id.videoId}
-          src={`https://www.youtube.com/embed/${video.id.videoId}`}
-          frameBorder="0"
-          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in- picture"
-          allowFullScreen
-          title={videoTitles[index]}
-        />
-      ))}
-    </div>
+      <div className="video-container">
+        {videos.map((video, index) => (
+          <div className="video" key={video.id.videoId}>
+            <h3>{videoTitles[index]}</h3>
+          <iframe
+            key={video.id.videoId}
+            src={`https://www.youtube.com/embed/${video.id.videoId}`}
+            frameBorder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in- picture"
+            allowFullScreen
+            title={videoTitles[index]}
+           />
+          </div>
+       ))}
+     </div>
   );
 };
