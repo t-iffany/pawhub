@@ -3,10 +3,12 @@ import axios from "axios";
 import { ListGroup } from "react-bootstrap";
 import BreedsItem from "./BreedsItem";
 import { TextField } from "@mui/material";
+import Spinner from "react-bootstrap/Spinner";
 
 export default function Breeds() {
   const [breedList, setBreedList] = useState([]);
   const [query, setQuery] = useState(null);
+  const [loaded, setLoaded] = useState(false);
 
   const options = {
     method: "GET",
@@ -18,7 +20,7 @@ export default function Breeds() {
   };
 
   const openInNewTab = (url) => {
-    window.open(url, "_blank", "noreferrer");
+    window.open(url, "_blank");
   };
 
   function filterByQuery(breedsList, query) {
@@ -27,8 +29,8 @@ export default function Breeds() {
     );
   }
 
-  console.log(breedList);
-  console.log(query);
+  // console.log(breedList);
+  // console.log(query);
 
   useEffect(() => {
     axios
@@ -36,6 +38,7 @@ export default function Breeds() {
       .then((res) => {
         console.log(res.data);
         setBreedList(res.data);
+        setLoaded(true);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -44,17 +47,26 @@ export default function Breeds() {
     <div>
       <h1 className="page-header">Breeds</h1>
 
-      <TextField
-        id="outlined-basic"
-        label="Search for any dog!"
-        variant="outlined"
-        className="breed-search"
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-      />
+      {!loaded && (
+        <Spinner className="spinner" animation="border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+      )}
+
+      {loaded && (
+        <TextField
+          id="outlined-basic"
+          label="Search for any dog!"
+          variant="outlined"
+          className="breed-search"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+        />
+      )}
 
       <ListGroup>
-        {breedList &&
+        {loaded &&
+          breedList &&
           !query &&
           breedList.map((breed) => {
             return (
@@ -63,12 +75,13 @@ export default function Breeds() {
                 breed={breed.breed}
                 origin={breed.origin}
                 img={breed.img}
-                onClick={() => openInNewTab(breed.url)}
+                onClick={openInNewTab(breed.url)}
               />
             );
           })}
 
-        {breedList &&
+        {loaded &&
+          breedList &&
           query &&
           filterByQuery(breedList, query).map((breed) => {
             return (
@@ -77,7 +90,7 @@ export default function Breeds() {
                 breed={breed.breed}
                 origin={breed.origin}
                 img={breed.img}
-                onClick={() => openInNewTab(breed.url)}
+                onClick={openInNewTab(breed.url)}
               />
             );
           })}
