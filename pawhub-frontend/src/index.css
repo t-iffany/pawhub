@@ -102,10 +102,11 @@
   vertical-align: middle;
 }
 
-/* .btn-primary {
-  background-color: #fff !important;
-  color: #889bae !important;
-} */
+.navbar .navbar-collapse .navbar-nav .nav-item .nav-link {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
 
 /*  */
 .blog-post {
