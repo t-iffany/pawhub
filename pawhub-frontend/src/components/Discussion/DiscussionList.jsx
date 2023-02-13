@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import DiscussionForm from "./DiscussionForm";
 import Popup from "../controls/Popup";
 import { Link } from "react-router-dom";
+import ReactPaginate from 'react-paginate';
 
 export default function DiscussionList({ currentUser }) {
   const [state, setState] = useState({
@@ -41,23 +42,67 @@ export default function DiscussionList({ currentUser }) {
     ).length;
   };
 
-  const discussionPosts = state.discussions
-    .sort((a, b) => (b.id > a.id ? 1 : -1))
-    .map((discussion) => {
-      const user = findUserById(discussion.user_id);
+  function Items({ currentItems }) {
+    return (
+      <>
+        {currentItems &&
+          currentItems.sort((a, b) => (b.id > a.id ? 1 : -1))
+          .map((discussion) => {
+            const user = findUserById(discussion.user_id);
+      
+            return (
+              <Link to={`/discussions/${discussion.id}`} key={discussion.id}>
+                <DiscussionListItem
+                  title={discussion.title}
+                  count={commentCount(discussion.id)}
+                  timestamp={discussion.created_at}
+                  name={user.username}
+                  avatar={user.avatar}
+                />
+              </Link>
+            );
+        })}
+      </>
+    );
+  }
 
-      return (
-        <Link to={`/discussions/${discussion.id}`} key={discussion.id}>
-          <DiscussionListItem
-            title={discussion.title}
-            count={commentCount(discussion.id)}
-            timestamp={discussion.created_at}
-            name={user.username}
-            avatar={user.avatar}
-          />
-        </Link>
+  function PaginatedItems({ itemsPerPage }) {
+    // Here we use item offsets; we could also use page offsets
+    // following the API or data you're working with.
+    const [itemOffset, setItemOffset] = useState(0);
+  
+    // Simulate fetching items from another resources.
+    // (This could be items from props; or items loaded in a local state
+    // from an API endpoint with useEffect and useState)
+    const endOffset = itemOffset + itemsPerPage;
+    console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+    const currentItems = state.discussions.slice(itemOffset, endOffset);
+    const pageCount = Math.ceil(state.discussions.length / itemsPerPage);
+  
+    // Invoke when user click to request another page.
+    const handlePageClick = (event) => {
+      const newOffset = (event.selected * itemsPerPage) % state.discussions.length;
+      console.log(
+        `User requested page number ${event.selected}, which is offset ${newOffset}`
       );
-    });
+      setItemOffset(newOffset);
+    };
+  
+    return (
+      <>
+        <Items currentItems={currentItems} />
+        <ReactPaginate
+          breakLabel="..."
+          nextLabel="next >"
+          onPageChange={handlePageClick}
+          pageRangeDisplayed={5}
+          pageCount={pageCount}
+          previousLabel="< previous"
+          renderOnZeroPageCount={null}
+        />
+      </>
+    );
+  }
 
   return (
     <div className="discussion-list">
@@ -66,7 +111,7 @@ export default function DiscussionList({ currentUser }) {
         <Buttons variant="outlined">Meetup</Buttons>
         <Buttons variant="outlined">Other</Buttons>
       </div>
-      {discussionPosts}
+      <PaginatedItems itemsPerPage={5} />
       {currentUser && (
         <div>
           <Popup
