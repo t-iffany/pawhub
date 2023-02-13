@@ -1,6 +1,5 @@
 import Buttons from "../controls/Buttons";
 import DiscussionListItem from "./DiscussionListItem";
-import SimpleContainer from "./SimpleContainer";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import DiscussionForm from "./DiscussionForm";
@@ -67,7 +66,7 @@ export default function DiscussionList({ currentUser }) {
         <Buttons variant="outlined">Meetup</Buttons>
         <Buttons variant="outlined">Other</Buttons>
       </div>
-      <SimpleContainer>{discussionPosts}</SimpleContainer>
+      {discussionPosts}
       {currentUser && (
         <div>
           <Popup
