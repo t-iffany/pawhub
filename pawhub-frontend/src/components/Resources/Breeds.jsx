@@ -30,7 +30,6 @@ export default function Breeds() {
   }
 
   // console.log(breedList);
-  // console.log(query);
 
   useEffect(() => {
     axios
@@ -47,54 +46,56 @@ export default function Breeds() {
     <div>
       <h1 className="page-header">Breeds</h1>
 
-      {!loaded && (
-        <Spinner className="spinner" animation="border" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </Spinner>
-      )}
+      <div className="breed-page">
+        {!loaded && (
+          <Spinner className="spinner" animation="border" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </Spinner>
+        )}
 
-      {loaded && (
-        <TextField
-          id="outlined-basic"
-          label="Search for any dog!"
-          variant="outlined"
-          className="breed-search"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-        />
-      )}
+        {loaded && (
+          <TextField
+            id="outlined-basic"
+            label="Search for any dog!"
+            variant="outlined"
+            className="breed-search"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          />
+        )}
 
-      <ListGroup>
-        {loaded &&
-          breedList &&
-          !query &&
-          breedList.map((breed) => {
-            return (
-              <BreedsItem
-                key={breed.id}
-                breed={breed.breed}
-                origin={breed.origin}
-                img={breed.img}
-                onClick={() => openInNewTab(breed.url)}
-              />
-            );
-          })}
+        {loaded && breedList && !query && (
+          <ListGroup>
+            {breedList.map((breed) => {
+              return (
+                <BreedsItem
+                  key={breed.id}
+                  breed={breed.breed}
+                  origin={breed.origin}
+                  img={breed.img}
+                  onClick={() => openInNewTab(breed.url)}
+                />
+              );
+            })}
+          </ListGroup>
+        )}
 
-        {loaded &&
-          breedList &&
-          query &&
-          filterByQuery(breedList, query).map((breed) => {
-            return (
-              <BreedsItem
-                key={breed.id}
-                breed={breed.breed}
-                origin={breed.origin}
-                img={breed.img}
-                onClick={() => openInNewTab(breed.url)}
-              />
-            );
-          })}
-      </ListGroup>
+        {loaded && breedList && query && (
+          <ListGroup>
+            {filterByQuery(breedList, query).map((breed) => {
+              return (
+                <BreedsItem
+                  key={breed.id}
+                  breed={breed.breed}
+                  origin={breed.origin}
+                  img={breed.img}
+                  onClick={() => openInNewTab(breed.url)}
+                />
+              );
+            })}
+          </ListGroup>
+        )}
+      </div>
     </div>
   );
 }

@@ -2,7 +2,11 @@ import { ListGroup } from "react-bootstrap";
 
 export default function BreedsItem({ breed, origin, img, onClick }) {
   return (
-    <ListGroup.Item onClick={onClick} style={{ cursor: "pointer" }}>
+    <ListGroup.Item
+      className="breed-list-item"
+      onClick={onClick}
+      style={{ cursor: "pointer" }}
+    >
       <div className="breed-item">
         <img className="breed-image" src={img} />
 
