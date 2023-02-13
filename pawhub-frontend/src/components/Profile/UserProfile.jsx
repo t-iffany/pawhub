@@ -21,7 +21,7 @@ export default function UserProfile({ currentUser }) {
         }));
       })
       .catch((err) => console.log(err));
-  });
+  }, []);
 
   return (
     <div
