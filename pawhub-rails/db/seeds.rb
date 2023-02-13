@@ -188,3 +188,21 @@ Comment.create({body: 'I am very interested! How much are you looking for?', use
 Comment.create({body: 'What are the dimensions of the crate? How long have you owned it?', user_id: 6, discussion_id: 8})
 Comment.create({body: 'Sold, sorry friends :( Thanks for the interest though!', user_id: 8, discussion_id: 8})
 
+def base64_encode(file)
+  require 'base64'
+  Base64.strict_encode64(File.open(file, 'rb').read)
+end
+
+Image.destroy_all
+Image.create(user_id: 1, file_data: base64_encode(File.open(Rails.root.join("public/images/bella_glasses.jpeg"))))
+Image.create(user_id: 2, file_data: base64_encode(File.open(Rails.root.join("public/images/d1.webp"))))
+Image.create(user_id: 3, file_data: base64_encode(File.open(Rails.root.join("public/images/d2.webp"))))
+Image.create(user_id: 4, file_data: base64_encode(File.open(Rails.root.join("public/images/d3.jpg"))))
+Image.create(user_id: 1, file_data: base64_encode(File.open(Rails.root.join("public/images/d4.jpg"))))
+Image.create(user_id: 2, file_data: base64_encode(File.open(Rails.root.join("public/images/d6.jpg"))))
+Image.create(user_id: 3, file_data: base64_encode(File.open(Rails.root.join("public/images/d7.jpg"))))
+Image.create(user_id: 1, file_data: base64_encode(File.open(Rails.root.join("public/images/d8.jpg"))))
+Image.create(user_id: 2, file_data: base64_encode(File.open(Rails.root.join("public/images/d9.jpg"))))
+Image.create(user_id: 3, file_data: base64_encode(File.open(Rails.root.join("public/images/d10.jpg"))))
+Image.create(user_id: 1, file_data: base64_encode(File.open(Rails.root.join("public/images/husky.jpeg"))))
+Image.create(user_id: 2, file_data: base64_encode(File.open(Rails.root.join("public/images/iam21.jpeg"))))
