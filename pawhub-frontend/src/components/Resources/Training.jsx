@@ -29,6 +29,7 @@ export default function TrainingVideos() {
           `?part=id` +
           `&q=dog+training` +
           `&type=video` +
+          `&maxResults=6` +
           `&key=${YOUTUBE_API_KEY}`
         )
         .then(response => {
