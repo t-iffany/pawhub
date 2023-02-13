@@ -97,11 +97,6 @@
   margin: 5px 0;
 }
 
-#collapsible-nav-dropdown {
-  text-align: center;
-  vertical-align: middle;
-}
-
 .navbar .navbar-collapse .navbar-nav .nav-item .nav-link {
   display: flex;
   align-items: center;
@@ -216,4 +211,15 @@
 
 .breed-name {
   font-size: 24px;
+}
+
+.breed-search {
+  margin-left: 5em;
+  padding-left: 5em;
+}
+
+.spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

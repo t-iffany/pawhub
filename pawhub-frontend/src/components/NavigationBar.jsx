@@ -10,6 +10,12 @@ export default function NavigationBar({ currentUser, setCurrentUser }) {
     localStorage.removeItem("userInfo");
   };
 
+  const getLoginInfo = () => {
+    if (currentUser) {
+      return `Logged in as: ${currentUser.username}`;
+    }
+  };
+
   return (
     <Navbar collapseOnSelect expand="lg">
       <Container>
@@ -46,37 +52,18 @@ export default function NavigationBar({ currentUser, setCurrentUser }) {
 
           <Nav>
             {currentUser && (
-              <Nav.Link>
-                <Link className="nav-link" to="/profile">
-                  Logged In As: {currentUser.username}
-                </Link>
-              </Nav.Link>
-            )}
-
-            {currentUser && (
-              <Nav.Link>
-                <Link className="nav-link" to="/profile">
-                  Profile
-                </Link>
-              </Nav.Link>
+              <NavDropdown title={getLoginInfo()} id="collapsible-nav-dropdown">
+                <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
+                <NavDropdown.Item href="/discussions" onClick={handleClick}>
+                  Log out
+                </NavDropdown.Item>
+              </NavDropdown>
             )}
 
             {!currentUser && (
               <Nav.Link>
                 <Link className="nav-link" to="/login">
                   Login
-                </Link>
-              </Nav.Link>
-            )}
-
-            {currentUser && (
-              <Nav.Link>
-                <Link
-                  className="nav-link"
-                  to="/discussions"
-                  onClick={handleClick}
-                >
-                  Log out
                 </Link>
               </Nav.Link>
             )}
