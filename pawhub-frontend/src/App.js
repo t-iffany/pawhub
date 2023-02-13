@@ -13,6 +13,7 @@ import Explore from './components/Explore';
 import SignUp from './components/User/SignUp';
 import UserProfile from './components/Profile/UserProfile';
 import Breeds from './components/Resources/Breeds';
+import TrainingVideos from './components/Resources/Training'
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
@@ -39,6 +40,7 @@ function App() {
             <Route path="/profile/:id" element={<UserProfile currentUser={currentUser} setCurrentUser={setCurrentUser} />} />
             <Route path="/profile" element={<Profile currentUser={currentUser} setCurrentUser={setCurrentUser} />} />
             <Route path="/breeds" element={<Breeds currentUser={currentUser} setCurrentUser={setCurrentUser} />} />
+            <Route path="/training" element={<TrainingVideos currentUser={currentUser} setCurrentUser={setCurrentUser} />} />
             {/* <Route path="/resources/other" element={<Other currentUser={currentUser} setCurrentUser={setCurrentUser} />} /> */}
           </Routes>
         </div>
