@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import API_KEY from '../api_keys';
-import './Training.css';
+import './Videos.css';
 
 
-export default function TrainingVideos() {
+export default function Videos() {
   const [videos, setVideos] = useState([]);
   const [videoTitles, setVideoTitles] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('dog training');
@@ -17,7 +17,7 @@ export default function TrainingVideos() {
     const fetchData = () => {
       const obj = API_KEY;
       const YOUTUBE_API_KEY = obj.key;
-      //console.log("KEY: ", KEY)
+      //console.log("YOUTUBE_API_KEY: ", YOUTUBE_API_KEY)
 
       // search.list allows you to search for videos that match a specified query term
       // 'part' paramenter specifies the query term you want to search, typically for videos set it to 'id'
