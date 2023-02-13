@@ -217,3 +217,8 @@
 .breed-name {
   font-size: 24px;
 }
+
+.breed-search {
+  margin-left: 5em;
+  padding-left: 5em;
+}
