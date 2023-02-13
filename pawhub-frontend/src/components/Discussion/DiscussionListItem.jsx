@@ -1,5 +1,6 @@
 import Avatar from "@mui/material/Avatar";
 import moment from "moment";
+import "./DiscussionListItem.css"
 
 export default function DiscussionListItem({
   title,
@@ -9,21 +10,16 @@ export default function DiscussionListItem({
   count,
 }) {
   return (
-    <div className="discussion-list-item-class">
-      <div>
+    <div className="discussion-list-item">
+      <div className="avatar">
         <Avatar alt={name} src={avatar} />
-        <span>{name}</span>
       </div>
-
-      <div>{title}</div>
-
-      <div>
-        <div className="post-likes-comments">
-          <i className="fa-solid fa-heart">50</i>
-          <i className="fa-solid fa-comment">{count}</i>
-        </div>
-        <div>{moment(timestamp).fromNow()}</div>
+      <div className="details">
+        <h3 className="title">{title}</h3>
+        <p className="timestamp">{moment(timestamp).fromNow()}</p>
+        <p className="name">{name}</p>
       </div>
+      <div className="count"><i className="fa-solid fa-comment">{count}</i></div>
     </div>
   );
 }
