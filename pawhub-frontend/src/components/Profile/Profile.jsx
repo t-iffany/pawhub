@@ -99,7 +99,8 @@ export default function Profile({ currentUser, setCurrentUser }) {
 
   const handleDelete = (event, imageId) => {
     event.preventDefault();
-    setUploading(true);
+    if (window.confirm("Are you sure you want to delete this image?")) {
+      setUploading(true);
 
     axios
       .delete(`http://localhost:3001/api/images/${imageId}`, {
@@ -122,6 +123,7 @@ export default function Profile({ currentUser, setCurrentUser }) {
         console.log(err);
         setUploading(false);
       });
+    }
   };
 
   const handleCancel = () => {
