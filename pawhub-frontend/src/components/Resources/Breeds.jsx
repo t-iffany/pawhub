@@ -29,13 +29,12 @@ export default function Breeds() {
     );
   }
 
-  // console.log(breedList);
+  console.log(breedList);
 
   useEffect(() => {
     axios
       .request(options)
       .then((res) => {
-        console.log(res.data);
         setBreedList(res.data);
         setLoaded(true);
       })
