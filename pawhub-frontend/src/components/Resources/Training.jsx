@@ -7,6 +7,7 @@ import './Training.css';
 export default function TrainingVideos() {
   const [videos, setVideos] = useState([]);
   const [videoTitles, setVideoTitles] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState('dog training');
 
   //console.log("api key: ", API_KEY)
 
@@ -27,7 +28,7 @@ export default function TrainingVideos() {
         .get(
           `https://www.googleapis.com/youtube/v3/search` +
           `?part=id` +
-          `&q=dog+training` +
+          `&q=${selectedCategory}` +
           `&type=video` +
           `&maxResults=6` +
           `&key=${YOUTUBE_API_KEY}`
@@ -42,10 +43,19 @@ export default function TrainingVideos() {
         });
     };
     fetchData();
-  }, []);
+  }, [selectedCategory]);
+
+  const handleChange = event => {
+    setSelectedCategory(event.target.value);
+  }
 
 
   return (
+    <div>
+    <select value={selectedCategory} onChange={handleChange}>
+    <option value="dog training">Training</option>
+    <option value="dog dental health">Dental Health</option>
+    </select>
       <div className="video-container">
         {videos.map((video, index) => (
           <div className="video" key={video.id.videoId}>
@@ -60,6 +70,7 @@ export default function TrainingVideos() {
            />
           </div>
        ))}
+     </div>
      </div>
   );
 };
