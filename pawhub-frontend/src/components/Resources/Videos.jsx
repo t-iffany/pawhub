@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import API_KEY from '../api_keys';
-import './Training.css';
+import './Videos.css';
 
 
-export default function TrainingVideos() {
+export default function Videos() {
   const [videos, setVideos] = useState([]);
   const [videoTitles, setVideoTitles] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState('dog training');
 
   //console.log("api key: ", API_KEY)
 
@@ -16,7 +17,7 @@ export default function TrainingVideos() {
     const fetchData = () => {
       const obj = API_KEY;
       const YOUTUBE_API_KEY = obj.key;
-      //console.log("KEY: ", KEY)
+      //console.log("YOUTUBE_API_KEY: ", YOUTUBE_API_KEY)
 
       // search.list allows you to search for videos that match a specified query term
       // 'part' paramenter specifies the query term you want to search, typically for videos set it to 'id'
@@ -27,7 +28,7 @@ export default function TrainingVideos() {
         .get(
           `https://www.googleapis.com/youtube/v3/search` +
           `?part=id` +
-          `&q=dog+training` +
+          `&q=${selectedCategory}` +
           `&type=video` +
           `&maxResults=6` +
           `&key=${YOUTUBE_API_KEY}`
@@ -42,10 +43,19 @@ export default function TrainingVideos() {
         });
     };
     fetchData();
-  }, []);
+  }, [selectedCategory]);
+
+  const handleChange = event => {
+    setSelectedCategory(event.target.value);
+  }
 
 
   return (
+    <div>
+    <select value={selectedCategory} onChange={handleChange}>
+    <option value="dog training">Training</option>
+    <option value="dog dental health">Dental Health</option>
+    </select>
       <div className="video-container">
         {videos.map((video, index) => (
           <div className="video" key={video.id.videoId}>
@@ -60,6 +70,7 @@ export default function TrainingVideos() {
            />
           </div>
        ))}
+     </div>
      </div>
   );
 };
