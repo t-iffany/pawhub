@@ -1,6 +1,7 @@
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
+import NavDropdown from "react-bootstrap/NavDropdown";
 import { Link } from "react-router-dom";
 
 export default function NavigationBar({ currentUser, setCurrentUser }) {
@@ -37,19 +38,17 @@ export default function NavigationBar({ currentUser, setCurrentUser }) {
               </Link>
             </Nav.Link>
 
-            <Nav.Link>
-              <Link className="nav-link" to="/resources">
-                Resources
-              </Link>
-            </Nav.Link>
+            <NavDropdown title="Resources" id="collapsible-nav-dropdown">
+              <NavDropdown.Item href="#action3">Breeds</NavDropdown.Item>
+              <NavDropdown.Item href="#action4">Other</NavDropdown.Item>
+            </NavDropdown>
           </Nav>
 
           <Nav>
-
             {currentUser && (
               <Nav.Link>
                 <Link className="nav-link" to="/profile">
-                Logged In As: {currentUser.username}
+                  Logged In As: {currentUser.username}
                 </Link>
               </Nav.Link>
             )}

@@ -37,7 +37,8 @@ export default function Distance(props) {
               : step.instructions
                   .replace(/<\/?b>/g, "")
                   .replace(/<div style="font-size:0.9em">/g, `.`)
-                  .replace(/<\/div>/g, " ")}
+                  .replace(/<\/div>/g, " ")
+                  .replace(/<wbr\/>/g, "")}
             {index !== steps.length - 1 &&
               `, and drive for ${step.distance.text}.`}
           </p>
