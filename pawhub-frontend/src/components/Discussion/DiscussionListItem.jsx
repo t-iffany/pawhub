@@ -17,7 +17,7 @@ export default function DiscussionListItem({
       <div className="details">
         <h3 className="title">{title}</h3>
         <p className="timestamp">{moment(timestamp).fromNow()}</p>
-        <p className="name">{name}</p>
+        <p className="name">by {name}</p>
       </div>
       <div className="count"><i className="fa-solid fa-comment">{count}</i></div>
     </div>
