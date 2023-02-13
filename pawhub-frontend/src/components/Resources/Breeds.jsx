@@ -4,11 +4,14 @@ import { ListGroup } from "react-bootstrap";
 import BreedsItem from "./BreedsItem";
 import { TextField } from "@mui/material";
 import Spinner from "react-bootstrap/Spinner";
+import ReactPaginate from "react-paginate";
 
 export default function Breeds() {
   const [breedList, setBreedList] = useState([]);
   const [query, setQuery] = useState(null);
   const [loaded, setLoaded] = useState(false);
+
+  console.log(breedList);
 
   const options = {
     method: "GET",
@@ -18,6 +21,16 @@ export default function Breeds() {
       "X-RapidAPI-Host": "dog-breeds2.p.rapidapi.com",
     },
   };
+
+  useEffect(() => {
+    axios
+      .request(options)
+      .then((res) => {
+        setBreedList(res.data);
+        setLoaded(true);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   const openInNewTab = (url) => {
     window.open(url, "_blank");
@@ -29,17 +42,72 @@ export default function Breeds() {
     );
   }
 
-  console.log(breedList);
+  const breedListOutput = (breedList, query) => {
+    if (query) {
+      return filterByQuery(breedList, query);
+    }
 
-  useEffect(() => {
-    axios
-      .request(options)
-      .then((res) => {
-        setBreedList(res.data);
-        setLoaded(true);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+    return breedList;
+  };
+
+  function BreedListItems({ currentItems }) {
+    return (
+      <>
+        {currentItems.map((breed) => {
+          return (
+            <BreedsItem
+              key={breed.id}
+              breed={breed.breed}
+              origin={breed.origin}
+              img={breed.img}
+              onClick={() => openInNewTab(breed.url)}
+            />
+          );
+        })}
+      </>
+    );
+  }
+
+  function PaginatedItems({ itemsPerPage }) {
+    const filteredList = breedListOutput(breedList, query);
+    const [itemOffset, setItemOffset] = useState(0);
+
+    // Simulate fetching items from another resources.
+    // (This could be items from props; or items loaded in a local state
+    // from an API endpoint with useEffect and useState)
+    const endOffset = itemOffset + itemsPerPage;
+    console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+    const currentItems = filteredList.slice(itemOffset, endOffset);
+    const pageCount = Math.ceil(filteredList.length / itemsPerPage);
+
+    // Invoke when user click to request another page.
+    const handlePageClick = (event) => {
+      const newOffset = (event.selected * itemsPerPage) % filteredList.length;
+      console.log(
+        `User requested page number ${event.selected}, which is offset ${newOffset}`
+      );
+      setItemOffset(newOffset);
+    };
+
+    return (
+      <>
+        <ListGroup>
+          <BreedListItems currentItems={currentItems} />
+        </ListGroup>
+        <ReactPaginate
+          breakLabel="..."
+          nextLabel="next >"
+          onPageChange={handlePageClick}
+          pageRangeDisplayed={5}
+          pageCount={pageCount}
+          previousLabel="< previous"
+          renderOnZeroPageCount={null}
+        />
+      </>
+    );
+  }
+
+  console.log("breedlistoutput", breedListOutput());
 
   return (
     <div>
@@ -63,37 +131,7 @@ export default function Breeds() {
           />
         )}
 
-        {loaded && breedList && !query && (
-          <ListGroup>
-            {breedList.map((breed) => {
-              return (
-                <BreedsItem
-                  key={breed.id}
-                  breed={breed.breed}
-                  origin={breed.origin}
-                  img={breed.img}
-                  onClick={() => openInNewTab(breed.url)}
-                />
-              );
-            })}
-          </ListGroup>
-        )}
-
-        {loaded && breedList && query && (
-          <ListGroup>
-            {filterByQuery(breedList, query).map((breed) => {
-              return (
-                <BreedsItem
-                  key={breed.id}
-                  breed={breed.breed}
-                  origin={breed.origin}
-                  img={breed.img}
-                  onClick={() => openInNewTab(breed.url)}
-                />
-              );
-            })}
-          </ListGroup>
-        )}
+        <PaginatedItems itemsPerPage={10} />
       </div>
     </div>
   );
