@@ -2,8 +2,8 @@ import { ListGroup } from "react-bootstrap";
 
 export default function BreedsItem({ breed, origin, img, onClick }) {
   return (
-    <ListGroup.Item>
-      <div className="breed-item" onClick={onClick}>
+    <ListGroup.Item onClick={onClick}>
+      <div className="breed-item">
         <img className="breed-image" src={img} />
 
         <div className="breed-item-info">

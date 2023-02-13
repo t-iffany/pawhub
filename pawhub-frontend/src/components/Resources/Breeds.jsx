@@ -75,7 +75,7 @@ export default function Breeds() {
                 breed={breed.breed}
                 origin={breed.origin}
                 img={breed.img}
-                onClick={openInNewTab(breed.url)}
+                onClick={() => openInNewTab(breed.url)}
               />
             );
           })}
@@ -90,7 +90,7 @@ export default function Breeds() {
                 breed={breed.breed}
                 origin={breed.origin}
                 img={breed.img}
-                onClick={openInNewTab(breed.url)}
+                onClick={() => openInNewTab(breed.url)}
               />
             );
           })}
