@@ -53,11 +53,11 @@ export default function Profile({ currentUser, setCurrentUser }) {
             }
             return user;
           });
-          console.log(res.data);
+          // console.log(res.data);
           setCurrentUser(res.data);
           localStorage.setItem("userInfo", JSON.stringify(res.data));
           setEditMode(false);
-          alert("Edits Saved!");
+          // alert("Edits Saved!");
           return { ...prevState, users: updatedUsers };
         });
       })
@@ -83,17 +83,24 @@ export default function Profile({ currentUser, setCurrentUser }) {
       .then((res) => {
         setEditMode(true);
         setUploading(false);
-        alert("Upload Successful");
+        setSelectedFile(null);
+        // alert("Upload Successful");
+        // reset the file input
+        document.querySelector("input[type='file']").value = "";
       })
       .catch((err) => {
         console.log(err);
         setUploading(false);
+        setSelectedFile(null);
+        console.log("selectedFile: ", selectedFile)
+
       });
   };
 
   const handleDelete = (event, imageId) => {
     event.preventDefault();
-    setUploading(true);
+    if (window.confirm("Are you sure you want to delete this image?")) {
+      setUploading(true);
 
     axios
       .delete(`http://localhost:3001/api/images/${imageId}`, {
@@ -110,12 +117,13 @@ export default function Profile({ currentUser, setCurrentUser }) {
 
         setEditMode(true);
         setUploading(false);
-        alert("Image Deleted!");
+        // alert("Image Deleted!");
       })
       .catch((err) => {
         console.log(err);
         setUploading(false);
       });
+    }
   };
 
   const handleCancel = () => {
