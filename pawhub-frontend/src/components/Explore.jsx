@@ -53,7 +53,7 @@ export default function Explore() {
 
   return (
     <div>
-      <h1 className="explore-header">Explore</h1>
+      <h1 className="page-header">Explore</h1>
       <Carousel itemWidth="275" showControls={false} items={items} />
     </div>
   );

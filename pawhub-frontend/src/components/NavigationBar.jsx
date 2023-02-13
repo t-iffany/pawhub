@@ -39,7 +39,7 @@ export default function NavigationBar({ currentUser, setCurrentUser }) {
             </Nav.Link>
 
             <NavDropdown title="Resources" id="collapsible-nav-dropdown">
-              <NavDropdown.Item href="#action3">Breeds</NavDropdown.Item>
+              <NavDropdown.Item href="/breeds">Breeds</NavDropdown.Item>
               <NavDropdown.Item href="#action4">Other</NavDropdown.Item>
             </NavDropdown>
           </Nav>
