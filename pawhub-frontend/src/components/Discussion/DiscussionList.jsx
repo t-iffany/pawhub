@@ -27,15 +27,29 @@ export default function DiscussionList({ currentUser }) {
     ])
       // Our res is an array of the response received: [{discussions}, {users}]
       .then((res) => {
+        let filtered = [];
+        if (filter === 'All') {
+          filtered = res[0].data;
+        }
+        if (filter === 'Swap') {
+          filtered = res[0].data.filter((discussion) => discussion.category === 'Swap');
+        }
+        if (filter === 'Meetup') {
+          filtered = res[0].data.filter((discussion) => discussion.category === 'Meetup');
+        }
+        if (filter === 'Other') {
+          filtered = res[0].data.filter((discussion) => discussion.category === 'Other');
+        }
+        console.log('Filtered', filtered);
         setState((prev) => ({
           ...prev,
-          discussions: res[0].data,
+          discussions: filtered,
           users: res[1].data,
           comments: res[2].data,
         }));
       })
       .catch((err) => console.log(err));
-  }, [openPopup]);
+  }, [openPopup, filter]);
 
   const findUserById = (userId) =>
     state.users.find((user) => user.id === userId);
