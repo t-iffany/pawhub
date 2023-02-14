@@ -8,8 +8,9 @@ const styles = {
     padding: "20px 0",
   },
   container: {
+    bottom: "0",
     display: "flex",
-    justifyContent: "space-between",
+    justifyContent: "center",
     alignItems: "center",
     maxWidth: "960px",
     margin: "0 auto",
@@ -26,12 +27,8 @@ const Footer = () => {
   return (
     <footer style={styles.footer}>
       <div style={styles.container}>
-        <p style={styles.copyright}>Copyright &copy; 2023 Company Name</p>
-        <div style={styles.links}>
-          <Link to="#">About</Link>
-          <Link to="#">Contact</Link>
-          <Link to="#">Privacy Policy</Link>
-        </div>
+        <p style={styles.copyright}>Copyright &copy; 2023 Pawhub</p>
+        <div style={styles.links}></div>
       </div>
     </footer>
   );

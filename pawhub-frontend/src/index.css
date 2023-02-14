@@ -1,6 +1,7 @@
 * {
   margin: 0;
   color: #333;
+  font-family: "Poppins";
 }
 
 .discussion-list-item-class {
@@ -213,6 +214,9 @@
   border: solid 2px black;
   padding: 10px;
   margin: 0 20px;
+  background-color: #c6e2e9;
+  border-radius: 10px;
+  list-style-type: none;
 }
 
 /* Carousel */
