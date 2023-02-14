@@ -55,7 +55,7 @@ const Login = ({setCurrentUser}) => {
         </Col>
         <Col md={6} className="form-container">
           <h3 className="form-header">Login</h3>
-          <Form onSubmit={handleSubmit}>
+          <Form className="container-form" onSubmit={handleSubmit}>
             <Form.Group controlId="username">
               <Form.Label className="form-label">Username</Form.Label>
               <Form.Control
