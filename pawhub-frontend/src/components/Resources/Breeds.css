@@ -1,0 +1,64 @@
+/* Breed Page */
+
+.breed-list-item {
+  width: 75em;
+  margin: 5px;
+}
+
+.breed-item {
+  display: flex;
+  flex-direction: row;
+}
+
+.breed-item-info {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+}
+
+.breed-name {
+  font-size: 27px;
+}
+
+.breed-search {
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+}
+
+.breed-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.modal-images {
+  display: flex;
+  flex-direction: row;
+  margin: 5px;
+}
+
+.modal-image {
+  padding: 0px 5px;
+}
+
+#popup-header {
+  font-family: "Poppins", sans-serif;
+}
+
+#popup-button {
+  background-color: #c6e9df;
+  color: black;
+}
+
+#popup-container {
+  background-color: #c6e2e9;
+}
