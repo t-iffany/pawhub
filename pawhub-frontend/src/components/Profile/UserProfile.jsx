@@ -9,6 +9,7 @@ import PolaroidImage from "./PolaroidImage";
 export default function UserProfile({ currentUser }) {
   const { id } = useParams();
   const [state, setState] = useState({ user: {}, images: [] });
+  const [clickedImage, setClickedImage] = useState(null);
 
   useEffect(() => {
     Promise.all([
@@ -24,6 +25,11 @@ export default function UserProfile({ currentUser }) {
       })
       .catch((err) => console.log(err));
   }, []);
+
+
+  const handleImageClick = (src) => {
+    setClickedImage(src);
+  }
 
   return (
     <div
@@ -86,9 +92,17 @@ export default function UserProfile({ currentUser }) {
                     style={{
                       transform: `rotate(${index % 4 !== 0 ? "-45" : "45"}deg`,
                     }}
+                    onClick={() => handleImageClick(`data:image/jpeg;base64,${image.file_data}`)}
                   />
                 ))}
           </div>
+          {clickedImage && (
+  <div className="clicked-image">
+    <img src={clickedImage} alt="clicked-image" />
+    <button onClick={() => setClickedImage(null)}>Close</button>
+  </div>
+)}
+
         </div>
       </div>
     </div>
