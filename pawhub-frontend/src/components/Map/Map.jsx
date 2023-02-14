@@ -194,6 +194,7 @@ export default function Map() {
           mapContainerClassName="map-container"
           options={options}
           onLoad={onLoad}
+          id="google-map"
         >
           {state.directions && (
             <DirectionsRenderer directions={state.directions} />

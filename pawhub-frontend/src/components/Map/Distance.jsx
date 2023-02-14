@@ -15,7 +15,7 @@ export default function Distance(props) {
   }
 
   return (
-    <Card style={{ width: "100%" }}>
+    <Card className="directions-card" style={{ width: "100%" }}>
       <Card.Body>
         <Card.Title>Directions</Card.Title>
         <Card.Text>
