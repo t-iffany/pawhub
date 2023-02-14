@@ -1,6 +1,7 @@
 import Avatar from "@mui/material/Avatar";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import ModalImage from "react-modal-image";
 
 export default function Profile({ currentUser, setCurrentUser }) {
   const [state, setState] = useState({ users: [], images: [] });
@@ -92,8 +93,7 @@ export default function Profile({ currentUser, setCurrentUser }) {
         console.log(err);
         setUploading(false);
         setSelectedFile(null);
-        console.log("selectedFile: ", selectedFile)
-
+        console.log("selectedFile: ", selectedFile);
       });
   };
 
@@ -102,27 +102,27 @@ export default function Profile({ currentUser, setCurrentUser }) {
     if (window.confirm("Are you sure you want to delete this image?")) {
       setUploading(true);
 
-    axios
-      .delete(`http://localhost:3001/api/images/${imageId}`, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
-      .then((res) => {
-        // console.log("res.data: ", res.data);
-        setState((prevState) => ({
-          ...prevState,
-          images: res.data,
-        }));
+      axios
+        .delete(`http://localhost:3001/api/images/${imageId}`, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .then((res) => {
+          // console.log("res.data: ", res.data);
+          setState((prevState) => ({
+            ...prevState,
+            images: res.data,
+          }));
 
-        setEditMode(true);
-        setUploading(false);
-        // alert("Image Deleted!");
-      })
-      .catch((err) => {
-        console.log(err);
-        setUploading(false);
-      });
+          setEditMode(true);
+          setUploading(false);
+          // alert("Image Deleted!");
+        })
+        .catch((err) => {
+          console.log(err);
+          setUploading(false);
+        });
     }
   };
 
@@ -254,9 +254,10 @@ export default function Profile({ currentUser, setCurrentUser }) {
                 state.images
                   .filter((image) => image.user_id === currentUser.id)
                   .map((image, index) => (
-                    <img
+                    <ModalImage
                       key={index}
-                      src={`data:image/jpeg;base64,${image.file_data}`}
+                      small={`data:image/jpeg;base64,${image.file_data}`}
+                      large={`data:image/jpeg;base64,${image.file_data}`}
                       alt={currentUser.dog_name}
                       width="210"
                       height="210"
