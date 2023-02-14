@@ -40,7 +40,7 @@
 .map-controls {
   width: 20%;
   padding: 1rem;
-  background: #889bae;
+  background: #c6e2e9;
   color: #fff;
 }
 
@@ -79,7 +79,7 @@
 }
 
 .slider-value {
-  color: #889bae;
+  color: #c6e2e9;
   background: #fff;
   border-radius: 15px;
   border-color: #fff;
@@ -97,7 +97,12 @@
   margin: 5px 0;
 }
 
-.navbar .navbar-collapse .navbar-nav .nav-item .nav-link {
+.navbar {
+  background-color: #c6e2e9;
+  /* C6D1E9, C6E9DF */
+}
+
+.navbar-collapse .navbar-nav .nav-item .nav-link {
   display: flex;
   align-items: center;
   height: 100%;
@@ -124,7 +129,6 @@
 }
 
 .content {
-  margin-top: 16px;
   font-size: 16px;
   color: #3e3e3e;
 }
@@ -192,6 +196,25 @@
   color: black;
 }
 
+/* User Profile */
+.profile-page {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 5em 0px;
+}
+
+.profile-user-info {
+  border: solid 2px black;
+  padding: 10px;
+  margin: 0 20px;
+}
+
 /* Carousel */
 
 .page-header {
@@ -239,4 +262,14 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
+}
+
+.modal-images {
+  display: flex;
+  flex-direction: row;
+  margin: 5px;
+}
+
+.modal-image {
+  padding: 0px 5px;
 }

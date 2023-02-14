@@ -17,7 +17,7 @@ export default function NavigationBar({ currentUser, setCurrentUser }) {
   };
 
   return (
-    <Navbar collapseOnSelect expand="lg">
+    <Navbar className="navbar" collapseOnSelect expand="lg">
       <Container>
         <Navbar.Brand>
           <Link className="nav-link" to="/">
