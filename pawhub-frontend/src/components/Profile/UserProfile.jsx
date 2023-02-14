@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import axios from "axios";
+import './UserProfile.css';
+import PolaroidImage from "./PolaroidImage";
 
 export default function UserProfile({ currentUser }) {
   const { id } = useParams();
@@ -75,12 +77,15 @@ export default function UserProfile({ currentUser }) {
               state.images
                 .filter((image) => image.user_id === state.user.id)
                 .map((image, index) => (
-                  <img
+                  <PolaroidImage
                     key={index}
                     src={`data:image/jpeg;base64,${image.file_data}`}
                     alt={state.user.dog_name}
-                    width="150"
-                    height="150"
+                    width="210"
+                    height="210"
+                    style={{
+                      transform: `rotate(${index % 4 !== 0 ? "-45" : "45"}deg`,
+                    }}
                   />
                 ))}
           </div>
