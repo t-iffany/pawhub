@@ -44,6 +44,7 @@
   flex-direction: column;
   align-items: center;
   font-family: 'Poppins', sans-serif;
+  padding: 40px;
 }
 
 .form-container form h2 {

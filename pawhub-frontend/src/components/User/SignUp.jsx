@@ -81,7 +81,7 @@ export default function SignUp ({setCurrentUser}) {
       <Row className="justify-content-center">
         <Col xs={12} sm={8} md={6} lg={4}>
           <h1 className="text-center">Sign Up to PawHub</h1>
-          <p>Join the fun in the discussions and connect with other users</p>
+          <p className="signup-parg">Join the fun in the discussions and connect with other users</p>
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId="username">
               <Form.Label>Username</Form.Label>
@@ -179,7 +179,8 @@ export default function SignUp ({setCurrentUser}) {
                 placeholder="Enter avatar URL"
               />
             </Form.Group>
-            <Button variant="primary" type="submit">
+            <br></br>
+            <Button className="signup-button" variant="primary" type="submit">
               Sign-Up
             </Button>
           </Form>
