@@ -217,8 +217,8 @@ export default function Profile({ currentUser, setCurrentUser }) {
                         key={index}
                         src={`data:image/jpeg;base64,${image.file_data}`}
                         alt={currentUser.dog_name}
-                        width="150"
-                        height="150"
+                        width="210"
+                        height="210"
                       />
                       <button
                         type="button"
@@ -258,8 +258,8 @@ export default function Profile({ currentUser, setCurrentUser }) {
                       key={index}
                       src={`data:image/jpeg;base64,${image.file_data}`}
                       alt={currentUser.dog_name}
-                      width="150"
-                      height="150"
+                      width="210"
+                      height="210"
                     />
                   ))}
             </div>
