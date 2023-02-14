@@ -43,6 +43,10 @@
   height: 100%;
 }
 
+.navbar .navbar .navbar-expand-lg .navbar-light {
+  border: 2px black;
+}
+
 /*  */
 .blog-post {
   padding: 16px;

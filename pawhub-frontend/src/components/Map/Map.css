@@ -4,7 +4,7 @@
   justify-content: space-between;
   height: 85vh;
   margin-top: 20px;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 
 .map-controls {
@@ -60,9 +60,18 @@
   background-color: #c6e9dfbe !important;
 }
 
+.btn-primary:active {
+  background: #e5e5e5 !important;
+  -webkit-box-shadow: inset 0px 0px 5px #c1c1c1 !important;
+  -moz-box-shadow: inset 0px 0px 5px #c1c1c1 !important;
+  box-shadow: inset 0px 0px 5px #c1c1c1 !important;
+  outline: none !important;
+}
+
 .search {
   border: solid 2px black !important;
   border-radius: 10px !important;
+  margin-bottom: 2.5px;
 }
 
 .slider-row {
@@ -98,7 +107,7 @@
   border: solid 2px black !important;
   border-radius: 10px !important;
   overflow-y: auto;
-  height: 600px !important;
+  height: 520px !important;
 }
 
 .directions-card::-webkit-scrollbar {
@@ -119,7 +128,6 @@
 
 input[type="range"] {
   height: 34px;
-  -webkit-appearance: none;
   margin: 10px 0;
   width: 100%;
 }
@@ -130,7 +138,6 @@ input[type="range"]::-webkit-slider-runnable-track {
   width: 100%;
   height: 11px;
   cursor: pointer;
-  animate: 0.2s;
   background: white;
   border-radius: 1px;
   border: 2px solid black;
@@ -154,7 +161,6 @@ input[type="range"]::-moz-range-track {
   width: 100%;
   height: 11px;
   cursor: pointer;
-  animate: 0.2s;
   background: white;
   border-radius: 1px;
   border: 2px solid black;
@@ -173,7 +179,6 @@ input[type="range"]::-ms-track {
   width: 100%;
   height: 11px;
   cursor: pointer;
-  animate: 0.2s;
   background: transparent;
   border-color: transparent;
   color: transparent;

@@ -18,9 +18,9 @@ const closeOptions = {
 const defaultLat = 49.232332;
 const defaultLng = -123.116773;
 
-const homeIcon = "http://maps.google.com/mapfiles/kml/pal3/icon56.png";
-const petStoreIcon = "http://maps.google.com/mapfiles/kml/pal3/icon26.png";
-const vetIcon = "http://maps.google.com/mapfiles/kml/pal3/icon46.png";
+const homeIcon = "https://img.icons8.com/ios/35/null/puppy.png";
+const petStoreIcon = "https://img.icons8.com/ios/35/000000/shopaholic.png";
+const vetIcon = "https://img.icons8.com/ios/35/000000/dog-paw-print.png";
 
 const getUrl = (lat, lng, radius, placeType) => `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=${radius}&type=${placeType}&key=${API_KEY.googleAPIKey}`;
 

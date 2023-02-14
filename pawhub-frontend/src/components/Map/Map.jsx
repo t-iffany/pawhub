@@ -54,6 +54,7 @@ export default function Map() {
   // console.log("circle", state.circle);
   // console.log(state.nearbyLocations);
   // console.log("directions", state.directions);
+  console.log("radius", state.radius);
 
   useEffect(() => {
     // console.log("circleref", circleRef);
