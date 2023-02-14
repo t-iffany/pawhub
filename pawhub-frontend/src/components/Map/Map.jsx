@@ -152,7 +152,6 @@ export default function Map() {
           name="options"
         >
           <ToggleButton
-            className=""
             id="tbg-radio-1"
             value={1}
             onClick={() =>

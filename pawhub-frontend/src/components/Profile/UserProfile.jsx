@@ -36,7 +36,11 @@ export default function UserProfile({ currentUser }) {
 
         <div className="profile-user-info">
           <div>
-            {state.user.username}
+            <div className="profile-header">
+              <div className="profile-username">{state.user.username}</div>
+              <div>8 posts</div>
+            </div>
+
             <ul>
               <li>
                 Name:{" "}

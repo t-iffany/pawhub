@@ -41,8 +41,8 @@
 .map-controls {
   width: 20%;
   padding: 1rem;
-  background: #c6e2e9;
-  color: #fff;
+  background: white;
+  color: #85c9d3;
 }
 
 .map-controls input {
@@ -55,7 +55,7 @@
 }
 
 .map-text {
-  color: #fff;
+  color: #c6e9df;
 }
 
 .map-container {
@@ -69,6 +69,24 @@
   justify-content: center;
   width: 100%;
 }
+
+.btn-primary {
+  color: black !important;
+  background-color: #c6e9df !important;
+  border: solid 2px black !important;
+  /* border-radius: 10px !important; */
+}
+
+.btn-primary:hover {
+  color: #c6e9df !important;
+  background-color: white !important;
+}
+
+.search {
+  border: solid 2px black !important;
+  border-radius: 10px !important;
+}
+
 .slider-row {
   display: flex;
   justify-content: space-between;
@@ -80,16 +98,22 @@
 }
 
 .slider-value {
-  color: #c6e2e9;
-  background: #fff;
-  border-radius: 15px;
-  border-color: #fff;
+  background-color: #c6e2e9;
+  color: black;
+  border: solid 2px black;
+  border-radius: 10px;
   margin: 2.5px;
   margin-left: 5px;
   font-size: 12.5px;
-  width: 50px;
+  width: 60px;
   padding: 0 2.5px;
   text-align: center;
+}
+
+.card-body {
+  background-color: #c6e2e977;
+  border: solid 2px black;
+  border-radius: 10px;
 }
 
 .infobox-buttons {
@@ -198,6 +222,7 @@
 }
 
 /* User Profile */
+
 .profile-page {
   display: flex;
   flex-direction: column;
@@ -217,6 +242,22 @@
   background-color: #c6e2e9;
   border-radius: 10px;
   list-style-type: none;
+}
+
+.profile-user-info ul {
+  list-style-type: none;
+}
+
+.profile-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+}
+
+.profile-username {
+  font-size: 24px;
 }
 
 /* Carousel */
