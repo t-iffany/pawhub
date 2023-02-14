@@ -6,6 +6,8 @@ import DiscussionForm from "./DiscussionForm";
 import Popup from "../controls/Popup";
 import { Link } from "react-router-dom";
 import ReactPaginate from 'react-paginate';
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
 
 export default function DiscussionList({ currentUser }) {
   const [state, setState] = useState({
@@ -14,6 +16,8 @@ export default function DiscussionList({ currentUser }) {
     comments: [],
   });
   const [openPopup, setOpenPopup] = useState(false);
+  const [filter, setFilter] = useState('All');
+  const categories = ["All", "Swap", "Meetup", "Other"];
 
   useEffect(() => {
     Promise.all([
@@ -23,15 +27,29 @@ export default function DiscussionList({ currentUser }) {
     ])
       // Our res is an array of the response received: [{discussions}, {users}]
       .then((res) => {
+        let filtered = [];
+        if (filter === 'All') {
+          filtered = res[0].data;
+        }
+        if (filter === 'Swap') {
+          filtered = res[0].data.filter((discussion) => discussion.category === 'Swap');
+        }
+        if (filter === 'Meetup') {
+          filtered = res[0].data.filter((discussion) => discussion.category === 'Meetup');
+        }
+        if (filter === 'Other') {
+          filtered = res[0].data.filter((discussion) => discussion.category === 'Other');
+        }
+        console.log('Filtered', filtered);
         setState((prev) => ({
           ...prev,
-          discussions: res[0].data,
+          discussions: filtered,
           users: res[1].data,
           comments: res[2].data,
         }));
       })
       .catch((err) => console.log(err));
-  }, [openPopup]);
+  }, [openPopup, filter]);
 
   const findUserById = (userId) =>
     state.users.find((user) => user.id === userId);
@@ -41,6 +59,11 @@ export default function DiscussionList({ currentUser }) {
       (comment) => comment.discussion_id === Number(discussionId)
     ).length;
   };
+
+  const handleChange = (e) => {
+    setFilter(e.target.value);
+  };
+
 
   function Items({ currentItems }) {
     return (
@@ -106,11 +129,19 @@ export default function DiscussionList({ currentUser }) {
 
   return (
     <div className="discussion-list">
-      <div className="buttons">
-        <Buttons variant="outlined">Swap</Buttons>
-        <Buttons variant="outlined">Meetup</Buttons>
-        <Buttons variant="outlined">Other</Buttons>
-      </div>
+      <span>Filter by: </span>
+      <Select
+            labelId="category"
+            id="category"
+            value={filter}
+            label="Category"
+            onChange={handleChange}
+            name="category"
+          >
+            {categories.map((category, id) => (
+              <MenuItem value={category} key={id}>{category}</MenuItem>
+            ))}
+      </Select>
       <PaginatedItems itemsPerPage={5} />
       {currentUser && (
         <div>
