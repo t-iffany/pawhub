@@ -4,17 +4,17 @@ export default function Popup(props) {
   const {title, children, openPopup, setOpenPopup} = props;
 
   return (
-    <div>
+    <div id="popup-container">
       <Dialog open={openPopup}>
-        <DialogTitle>
+        <DialogTitle sx={{backgroundColor: "#C6E2E9"}}>
           <div style={{display: 'flex'}}>
-            <Typography variant="h6" component="div" style={{flexGrow: 1}}>
+            <Typography id="popup-header" variant="h6" component="div" style={{flexGrow: 1}}>
               {title}
             </Typography>
-            <Buttons onClick={() => setOpenPopup(false)}>X</Buttons>
+            <Buttons sx={{border: "solid 2px black", fontWeight: "bold"}} onClick={() => setOpenPopup(false)}>X</Buttons>
           </div>
         </DialogTitle>
-        <DialogContent dividers>
+        <DialogContent  sx={{backgroundColor: "#C6E2E9"}}>
           <div>{children}</div>
         </DialogContent>
       </Dialog>

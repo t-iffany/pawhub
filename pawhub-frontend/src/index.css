@@ -240,3 +240,16 @@
   justify-content: center;
   height: 100vh;
 }
+
+#popup-header {
+  font-family: 'Poppins', sans-serif;
+}
+
+#popup-button {
+  background-color: #C6E9DF;
+  color: black;
+}
+
+#popup-container {
+  background-color: #C6E2E9;
+}
