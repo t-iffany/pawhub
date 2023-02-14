@@ -11,7 +11,7 @@ export default function Breeds() {
   const [query, setQuery] = useState(null);
   const [loaded, setLoaded] = useState(false);
 
-  console.log(breedList);
+  // console.log(breedList);
 
   const options = {
     method: "GET",
@@ -107,7 +107,7 @@ export default function Breeds() {
     );
   }
 
-  console.log("breedlistoutput", breedListOutput());
+  // console.log("breedlistoutput", breedListOutput());
 
   return (
     <div>
