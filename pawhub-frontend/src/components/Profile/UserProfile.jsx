@@ -36,7 +36,7 @@ export default function UserProfile({ currentUser }) {
 
         <div className="profile-user-info">
           <div>
-            Profile
+            {state.user.username}
             <ul>
               <li>
                 Name:{" "}

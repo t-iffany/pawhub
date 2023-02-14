@@ -29,16 +29,16 @@ export default function DiscussionList({ currentUser }) {
       .then((res) => {
         let filtered = [];
         if (filter === 'All') {
-          filtered = res[0].data;
+          filtered = res[0].data.sort((a, b) => (b.id > a.id ? 1 : -1));
         }
         if (filter === 'Swap') {
-          filtered = res[0].data.filter((discussion) => discussion.category === 'Swap');
+          filtered = res[0].data.filter((discussion) => discussion.category === 'Swap').sort((a, b) => (b.id > a.id ? 1 : -1));
         }
         if (filter === 'Meetup') {
-          filtered = res[0].data.filter((discussion) => discussion.category === 'Meetup');
+          filtered = res[0].data.filter((discussion) => discussion.category === 'Meetup').sort((a, b) => (b.id > a.id ? 1 : -1));
         }
         if (filter === 'Other') {
-          filtered = res[0].data.filter((discussion) => discussion.category === 'Other');
+          filtered = res[0].data.filter((discussion) => discussion.category === 'Other').sort((a, b) => (b.id > a.id ? 1 : -1));
         }
         console.log('Filtered', filtered);
         setState((prev) => ({
@@ -69,7 +69,7 @@ export default function DiscussionList({ currentUser }) {
     return (
       <>
         {currentItems &&
-          currentItems.sort((a, b) => (b.id > a.id ? 1 : -1))
+          currentItems
           .map((discussion) => {
             const user = findUserById(discussion.user_id);
       

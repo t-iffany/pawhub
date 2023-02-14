@@ -273,3 +273,16 @@
 .modal-image {
   padding: 0px 5px;
 }
+
+#popup-header {
+  font-family: "Poppins", sans-serif;
+}
+
+#popup-button {
+  background-color: #c6e9df;
+  color: black;
+}
+
+#popup-container {
+  background-color: #c6e2e9;
+}
