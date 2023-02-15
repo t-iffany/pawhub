@@ -1,0 +1,35 @@
+.discussion-list {
+  display: flex;
+  flex-direction: column;
+  min-width: 675px;
+  width: 850px;
+  max-width: 960px;
+  align-self: center;
+  margin: 24px 0;
+  padding: 16px;
+  
+}
+
+.discussion-list-item-class {
+  display: flex;
+  justify-content: space-between;
+  border: solid #85c9d3;
+  border-radius: 20px;
+  /* padding-left: 15px;
+  padding-right: 15px; */
+  padding: 10px;
+  margin-bottom: 5px;
+}
+
+.discussion-container {
+  padding: 10px;
+  margin-bottom: 5px;
+}
+
+.category {
+  margin-bottom: 10px;
+}
+
+#add-discussion {
+  align-self: center;
+}
