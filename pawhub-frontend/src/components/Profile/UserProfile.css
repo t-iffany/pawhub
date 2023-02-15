@@ -81,7 +81,7 @@
   border: solid 2px black;
   padding: 10px;
   margin: 0 35px;
-  background-color: #c6e9df;
+  background-color: #c6e2e9;
   border-radius: 10px;
   list-style-type: none;
   width: 35em;
@@ -122,4 +122,48 @@
   box-shadow: 0 0 2.5px 2.5px rgba(0, 0, 0, 0.125);
   width: 250px;
   height: 250px;
+}
+
+.avatar-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+}
+
+.profile-edit-button {
+  margin: 5px;
+  width: 50px;
+  border-radius: 10px;
+  border: solid 2px black;
+  background-color: #c6e9df;
+}
+
+.edit-form {
+  margin: 10px 500px;
+}
+
+.edit-form-input {
+  margin: 5px;
+}
+.edit-images {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.edit-form-button {
+  margin: 5px;
+}
+.upload-image {
+  margin-top: 10px;
+}
+
+.delete-button {
+  margin-left: 10px;
+}
+.saved-images {
+  padding: 5px;
 }

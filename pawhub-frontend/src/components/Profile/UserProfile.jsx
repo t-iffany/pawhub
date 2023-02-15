@@ -9,6 +9,13 @@ export default function UserProfile({ currentUser }) {
   const { id } = useParams();
   const [state, setState] = useState({ user: {}, images: [] });
 
+  let imageCount = () => {
+    if (state.images) {
+      return state.images.filter((image) => image.user_id === state.user.id)
+        .length;
+    }
+  };
+
   useEffect(() => {
     Promise.all([
       axios.get(`http://localhost:3001/api/users/${id}`),
@@ -41,7 +48,7 @@ export default function UserProfile({ currentUser }) {
           <div>
             <div className="profile-header">
               <div className="profile-username">{state.user.username}</div>
-              <div>8 posts</div>
+              <div>{imageCount()} posts</div>
             </div>
 
             <ul>
@@ -73,9 +80,6 @@ export default function UserProfile({ currentUser }) {
                 key={index}
                 src={`data:image/jpeg;base64,${image.file_data}`}
                 alt={state.user.dog_name}
-                // style={{
-                //   transform: `rotate(${index % 2 !== 0 ? "-4" : "4"}deg)`,
-                // }}
               />
             ))}
       </div>

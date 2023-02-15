@@ -1,7 +1,6 @@
 import Avatar from "@mui/material/Avatar";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import ModalImage from "react-modal-image";
 
 export default function Profile({ currentUser, setCurrentUser }) {
   const [state, setState] = useState({ users: [], images: [] });
@@ -10,6 +9,13 @@ export default function Profile({ currentUser, setCurrentUser }) {
   const [uploading, setUploading] = useState(false);
 
   console.log("current user", currentUser);
+
+  let imageCount = () => {
+    if (state.images) {
+      return state.images.filter((image) => image.user_id === currentUser.id)
+        .length;
+    }
+  };
 
   useEffect(() => {
     Promise.all([
@@ -139,21 +145,25 @@ export default function Profile({ currentUser, setCurrentUser }) {
   return (
     <div className="profile-page">
       <div className="profile-info">
-        <Avatar
-          alt="avatar"
-          src={currentUser ? currentUser.avatar : "user.avatar not found"}
-          sx={{ width: 130, height: 130 }}
-        />
-        <button onClick={handleEdit}>Edit</button>
-      </div>
+        <div className="avatar-div">
+          <Avatar
+            alt="avatar"
+            src={currentUser ? currentUser.avatar : "user.avatar not found"}
+            sx={{ width: 130, height: 130 }}
+          />
+          <button className="profile-edit-button" onClick={handleEdit}>
+            Edit
+          </button>
+        </div>
 
-      <div className="profile-user-info">
-        <div>
-          <div className="profile-header">
-            <div className="profile-username">
-              {currentUser ? currentUser.username : "user.username not found"}
+        <div className="profile-user-info">
+          <div>
+            <div className="profile-header">
+              <div className="profile-username">
+                {currentUser ? currentUser.username : "user.username not found"}
+              </div>
+              <div>{imageCount()} posts</div>
             </div>
-            <div>8 posts</div>
           </div>
 
           <ul>
@@ -174,90 +184,102 @@ export default function Profile({ currentUser, setCurrentUser }) {
         </div>
       </div>
 
-      <div
-      // style={{ width: "50%", height: "50%", backgroundColor: "transparent" }}
-      >
-        {editMode ? (
-          <>
-            <form onSubmit={handleSubmit}>
-              <input
-                type="text"
-                name="username"
-                defaultValue={currentUser ? currentUser.username : "username"}
-              />
-              <input
-                type="text"
-                name="dog_name"
-                defaultValue={currentUser ? currentUser.dog_name : "dog_name"}
-              />
-              <input
-                type="text"
-                name="breed"
-                defaultValue={currentUser ? currentUser.breed : "breed"}
-              />
-              <textarea
-                type="text"
-                name="description"
-                defaultValue={
-                  currentUser ? currentUser.description : "description/content"
-                }
-              />
-              <button type="submit">Save</button>
-              <button type="button" onClick={handleCancel}>
-                Cancel
-              </button>
-            </form>
-            <form onSubmit={handleUpload}>
-              <input
-                type="file"
-                name="image"
-                onChange={handleFileSelect}
-                accept="image/*"
-              />
-              <button type="button" onClick={handleUpload}>
-                Upload Image
-              </button>
-            </form>
+      {editMode ? (
+        <>
+          <form className="edit-form" onSubmit={handleSubmit}>
+            <input
+              className="edit-form-input"
+              type="text"
+              name="username"
+              defaultValue={currentUser ? currentUser.username : "username"}
+            />
+            <input
+              className="edit-form-input"
+              type="text"
+              name="dog_name"
+              defaultValue={currentUser ? currentUser.dog_name : "dog_name"}
+            />
+            <input
+              className="edit-form-input"
+              type="text"
+              name="breed"
+              defaultValue={currentUser ? currentUser.breed : "breed"}
+            />
+            <textarea
+              className="edit-form-input"
+              type="text"
+              name="description"
+              defaultValue={
+                currentUser ? currentUser.description : "description/content"
+              }
+            />
+            <button className="edit-form-button" type="submit">
+              Save
+            </button>
+            <button
+              className="edit-form-button"
+              type="button"
+              onClick={handleCancel}
+            >
+              Cancel
+            </button>
+          </form>
+          <form className="edit-form" onSubmit={handleUpload}>
+            <input
+              type="file"
+              name="image"
+              onChange={handleFileSelect}
+              accept="image/*"
+            />
+            <button
+              className="upload-image"
+              type="button"
+              onClick={handleUpload}
+            >
+              Upload Image
+            </button>
+          </form>
+          <div className="edit-images">
             <div> Saved images: </div>
-            <div>
-              {state.images &&
-                state.images
-                  .filter((image) => image.user_id === currentUser.id)
-                  .map((image, index) => (
-                    <div key={index}>
-                      <img
-                        key={index}
-                        src={`data:image/jpeg;base64,${image.file_data}`}
-                        alt={currentUser.dog_name}
-                        width="210"
-                        height="210"
-                      />
-                      <button
-                        type="button"
-                        onClick={(event) => handleDelete(event, image.id)}
-                      >
-                        Delete Image
-                      </button>
-                    </div>
-                  ))}
-            </div>
-          </>
-        ) : (
-          <div className="profile-images">
             {state.images &&
               state.images
                 .filter((image) => image.user_id === currentUser.id)
                 .map((image, index) => (
-                  <img
-                    className="profile-image"
-                    key={index}
-                    src={`data:image/jpeg;base64,${image.file_data}`}
-                    alt={currentUser.dog_name}
-                  />
+                  <div key={index}>
+                    <img
+                      className="saved-images"
+                      key={index}
+                      src={`data:image/jpeg;base64,${image.file_data}`}
+                      alt={currentUser.dog_name}
+                      width="210"
+                      height="210"
+                    />
+                    <button
+                      className="delete-button"
+                      type="button"
+                      onClick={(event) => handleDelete(event, image.id)}
+                    >
+                      Delete Image
+                    </button>
+                  </div>
                 ))}
           </div>
-        )}
-      </div>
+        </>
+      ) : (
+        <div className="profile-images">
+          {state.images &&
+            state.images
+              .filter((image) => image.user_id === currentUser.id)
+              .map((image, index) => (
+                <img
+                  className="profile-image"
+                  key={index}
+                  src={`data:image/jpeg;base64,${image.file_data}`}
+                  alt={currentUser.dog_name}
+                />
+              ))}
+        </div>
+      )}
     </div>
   );
 }
