@@ -97,6 +97,7 @@
   font-size: 18px;
   line-height: 1.5;
 }
+
 .toggle-button {
   display: flex;
   margin-top: 7.5px;
@@ -107,7 +108,21 @@
 
 /* Carousel */
 
+.carousel-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 77vh;
+  padding-bottom: 125px;
+}
+
 .page-header {
   margin-left: 5em;
-  margin-top: 25px;
+  margin-top: 35px;
+  margin-bottom: 0px;
+}
+
+.carousel-wrapper .carousel-container {
+  max-width: "70% !important";
+  margin: "0 auto";
 }
