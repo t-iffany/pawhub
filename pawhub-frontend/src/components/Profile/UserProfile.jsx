@@ -28,12 +28,13 @@ export default function UserProfile({ currentUser }) {
     <div className="profile-page">
       <div className="profile-info">
         <Avatar
+          className="avatar"
           alt="avatar"
           src={state.user ? state.user.avatar : "user.avatar not found"}
           sx={{ width: 150, height: 150 }}
-          style={{
-            border: "2px solid black",
-          }}
+          // style={{
+          //   border: "2px solid black",
+          // }}
         />
 
         <div className="profile-user-info">
