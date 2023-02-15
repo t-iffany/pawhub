@@ -43,9 +43,18 @@
 }
 
 .page-header {
-  margin-left: 5em;
+  /* margin-left: 18em;
+  margin-right: 18em;*/
   margin-top: 35px;
+  padding: 10px;
+  margin-left: 550px;
+  margin-right: 550px;
+  display: flex;
+  justify-content: center;
   margin-bottom: 0px;
+  border-radius: 10px;
+  background-color: #c6e2e9 !important;
+  border: 2px solid black !important;
 }
 
 .carousel-wrapper .carousel-container {

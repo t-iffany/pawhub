@@ -51,6 +51,8 @@ export default function Videos() {
   };
 
   return (
+    <div>
+      <h1 className="page-header">Videos</h1>
     <div className="video-page">
       {!loaded && (
         <Spinner className="spinner" animation="border" role="status">
@@ -88,6 +90,7 @@ export default function Videos() {
           </div>
         </>
       )}
+    </div>
     </div>
   );
 }
