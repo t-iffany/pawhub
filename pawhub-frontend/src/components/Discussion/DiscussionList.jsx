@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import ReactPaginate from 'react-paginate';
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
+import "./DiscussionList.css"
 
 export default function DiscussionList({ currentUser }) {
   const [state, setState] = useState({
@@ -74,7 +75,7 @@ export default function DiscussionList({ currentUser }) {
             const user = findUserById(discussion.user_id);
       
             return (
-              <Link to={`/discussions/${discussion.id}`} key={discussion.id}>
+              <Link className="discussion-links" to={`/discussions/${discussion.id}`} key={discussion.id}>
                 <DiscussionListItem
                   title={discussion.title}
                   count={commentCount(discussion.id)}
@@ -133,6 +134,7 @@ export default function DiscussionList({ currentUser }) {
       <Select
             labelId="category"
             id="category"
+            className="category"
             value={filter}
             label="Category"
             onChange={handleChange}
@@ -144,7 +146,7 @@ export default function DiscussionList({ currentUser }) {
       </Select>
       <PaginatedItems itemsPerPage={5} />
       {currentUser && (
-        <div>
+        <div id="add-discussion">
           <Popup
             title="Create a new discussion"
             openPopup={openPopup}
@@ -155,6 +157,7 @@ export default function DiscussionList({ currentUser }) {
               setOpenPopup={setOpenPopup}
             />
           </Popup>
+          
           <Buttons variant="outlined" onClick={() => setOpenPopup(true)}>
             Add a discussion
           </Buttons>

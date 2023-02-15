@@ -3,6 +3,21 @@
   align-items: center;
   padding: 1rem;
   border-bottom: 1px solid #ccc;
+  border: solid 2px black;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  background-color: #c6e2e9;
+}
+
+.discussion-list-item:hover {
+  
+    -o-transition:.5s;
+    -ms-transition:.5s;
+    -moz-transition:.5s;
+    -webkit-transition:.5s;
+    transition:.5s;
+    box-shadow: 5px 5px 5px #888888;
+  
 }
 
 .avatar {
