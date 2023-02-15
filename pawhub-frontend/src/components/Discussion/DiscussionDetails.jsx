@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import moment from "moment";
 import CommentList from "./CommentList";
 import CommentForm from "./CommentForm";
+import "./DiscussionDetails.css"
 
 export default function DiscussionDetails({currentUser}) {
   const { id } = useParams();
