@@ -136,8 +136,6 @@ export default function Profile({ currentUser, setCurrentUser }) {
     setSelectedFile(event.target.files[0]);
   };
 
-  console.log("Current User", currentUser);
-
   return (
     <div className="profile-page">
       <div className="profile-info">

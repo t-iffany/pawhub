@@ -24,6 +24,9 @@
   display: flex;
   justify-content: center;
   margin: 10px;
+  border: 2px solid black !important;
+  border-radius: 10px !important;
+  background-color: white;
 }
 
 .breed-page {
@@ -34,10 +37,12 @@
 }
 
 .spinner {
-  display: flex;
+  display: block;
   align-items: center;
   justify-content: center;
+  align-self: center;
   height: 100vh;
+  margin-top: 250px;
 }
 
 .modal-images {

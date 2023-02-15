@@ -123,7 +123,7 @@ export default function Breeds() {
         {loaded && (
           <TextField
             id="outlined-basic"
-            label="Search for any dog!"
+            placeholder="Search for any dog!"
             variant="outlined"
             className="breed-search"
             value={query}

@@ -2,11 +2,13 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import API_KEY from "../api_keys";
 import "./Videos.css";
+import Spinner from "react-bootstrap/Spinner";
 
 export default function Videos() {
   const [videos, setVideos] = useState([]);
   const [videoTitles, setVideoTitles] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("dog training");
+  const [loaded, setLoaded] = useState(false);
 
   //console.log("api key: ", API_KEY)
 
@@ -34,10 +36,8 @@ export default function Videos() {
         )
         .then((response) => {
           setVideos(response.data.items);
-          const videoTitles = response.data.items.map(
-            (item) => item.snippet.title
-          );
           setVideoTitles(videoTitles);
+          setLoaded(true);
         })
         .catch((error) => {
           console.log(error);
@@ -52,32 +52,42 @@ export default function Videos() {
 
   return (
     <div className="video-page">
-      <div className="video-select">
-        <select
-          className="video-select-input"
-          value={selectedCategory}
-          onChange={handleChange}
-        >
-          <option value="dog training">Training</option>
-          <option value="dog dental health">Dental Health</option>
-        </select>
-      </div>
+      {!loaded && (
+        <Spinner className="spinner" animation="border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+      )}
 
-      <div className="video-container">
-        {videos.map((video, index) => (
-          <div className="video" key={video.id.videoId}>
-            <h3>{videoTitles[index]}</h3>
-            <iframe
-              key={video.id.videoId}
-              src={`https://www.youtube.com/embed/${video.id.videoId}`}
-              frameBorder="0"
-              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in- picture"
-              allowFullScreen
-              title={videoTitles[index]}
-            />
+      {loaded && (
+        <>
+          <div className="video-select">
+            <select
+              className="video-select-input"
+              value={selectedCategory}
+              onChange={handleChange}
+            >
+              <option value="dog training">Training</option>
+              <option value="dog dental health">Dental Health</option>
+            </select>
           </div>
-        ))}
-      </div>
+
+          <div className="video-container">
+            {videos.map((video, index) => (
+              <div className="video" key={video.id.videoId}>
+                <h3>{videoTitles[index]}</h3>
+                <iframe
+                  key={video.id.videoId}
+                  src={`https://www.youtube.com/embed/${video.id.videoId}`}
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in- picture"
+                  allowFullScreen
+                  title={videoTitles[index]}
+                />
+              </div>
+            ))}
+          </div>
+        </>
+      )}
     </div>
   );
 }
