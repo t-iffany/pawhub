@@ -53,8 +53,17 @@ export default function Explore() {
 
   return (
     <div>
-      <h1 className="page-header">Explore</h1>
-      <Carousel itemWidth="275" showControls={false} items={items} />
+      <h1 className="page-header">Find new friends!</h1>
+      <div className="carousel-container">
+        <div className="carousel-wrapper">
+          <Carousel
+            className="carousel"
+            itemWidth="275"
+            showControls={false}
+            items={items}
+          />
+        </div>
+      </div>
     </div>
   );
 }
