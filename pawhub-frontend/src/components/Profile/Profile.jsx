@@ -9,6 +9,8 @@ export default function Profile({ currentUser, setCurrentUser }) {
   const [selectedFile, setSelectedFile] = useState(null);
   const [uploading, setUploading] = useState(false);
 
+  console.log("current user", currentUser);
+
   useEffect(() => {
     Promise.all([
       axios.get("http://localhost:3001/api/users"),
@@ -134,27 +136,11 @@ export default function Profile({ currentUser, setCurrentUser }) {
     setSelectedFile(event.target.files[0]);
   };
 
+  console.log("Current User", currentUser);
+
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "100vh",
-      }}
-    >
-      <div
-        style={{
-          width: "25%",
-          height: "50%",
-          backgroundColor: "transparent",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <div>{currentUser ? currentUser.username : "user not found"}</div>
+    <div className="profile-page">
+      <div className="profile-info">
         <Avatar
           alt="avatar"
           src={currentUser ? currentUser.avatar : "user.avatar not found"}
@@ -162,8 +148,36 @@ export default function Profile({ currentUser, setCurrentUser }) {
         />
         <button onClick={handleEdit}>Edit</button>
       </div>
+
+      <div className="profile-user-info">
+        <div>
+          <div className="profile-header">
+            <div className="profile-username">
+              {currentUser ? currentUser.username : "user.username not found"}
+            </div>
+            <div>8 posts</div>
+          </div>
+
+          <ul>
+            <li>
+              Name:{" "}
+              {currentUser ? currentUser.dog_name : "user.breed not found"}
+            </li>
+            <li>
+              Breed: {currentUser ? currentUser.breed : "user.breed not found"}
+            </li>
+            <li>
+              Description:{" "}
+              {currentUser
+                ? currentUser.description
+                : "user.description not found"}
+            </li>
+          </ul>
+        </div>
+      </div>
+
       <div
-        style={{ width: "50%", height: "50%", backgroundColor: "transparent" }}
+      // style={{ width: "50%", height: "50%", backgroundColor: "transparent" }}
       >
         {editMode ? (
           <>
@@ -231,39 +245,18 @@ export default function Profile({ currentUser, setCurrentUser }) {
             </div>
           </>
         ) : (
-          <div>
-            Profile
-            <ul>
-              <li>
-                Name:{" "}
-                {currentUser ? currentUser.dog_name : "user.breed not found"}
-              </li>
-              <li>
-                Breed:{" "}
-                {currentUser ? currentUser.breed : "user.breed not found"}
-              </li>
-              <li>
-                Description:{" "}
-                {currentUser
-                  ? currentUser.description
-                  : "user.description not found"}
-              </li>
-            </ul>
-            <div>
-              {state.images &&
-                state.images
-                  .filter((image) => image.user_id === currentUser.id)
-                  .map((image, index) => (
-                    <ModalImage
-                      key={index}
-                      small={`data:image/jpeg;base64,${image.file_data}`}
-                      large={`data:image/jpeg;base64,${image.file_data}`}
-                      alt={currentUser.dog_name}
-                      width="210"
-                      height="210"
-                    />
-                  ))}
-            </div>
+          <div className="profile-images">
+            {state.images &&
+              state.images
+                .filter((image) => image.user_id === currentUser.id)
+                .map((image, index) => (
+                  <img
+                    className="profile-image"
+                    key={index}
+                    src={`data:image/jpeg;base64,${image.file_data}`}
+                    alt={currentUser.dog_name}
+                  />
+                ))}
           </div>
         )}
       </div>

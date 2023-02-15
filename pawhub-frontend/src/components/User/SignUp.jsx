@@ -1,10 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Form, Button, Dropdown, FormControl } from 'react-bootstrap';
+import React, { useState, useEffect } from "react";
+import {
+  Container,
+  Row,
+  Col,
+  Form,
+  Button,
+  Dropdown,
+  FormControl,
+} from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import axios from 'axios';
-import './SignUp.css';
+import axios from "axios";
+import "./SignUp.css";
 
-export default function SignUp ({setCurrentUser}) {
+export default function SignUp({ setCurrentUser }) {
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -12,7 +20,7 @@ export default function SignUp ({setCurrentUser}) {
     dog_name: "",
     breed: "",
     description: "",
-    avatar: ""
+    avatar: "",
   });
 
   const [options, setOptions] = useState([]);
@@ -20,12 +28,12 @@ export default function SignUp ({setCurrentUser}) {
   const navigate = useNavigate();
 
   const getBreeds = {
-    method: 'GET',
-    url: 'https://dog-breeds2.p.rapidapi.com/dog_breeds',
+    method: "GET",
+    url: "https://dog-breeds2.p.rapidapi.com/dog_breeds",
     headers: {
-      'X-RapidAPI-Key': 'da1a663316mshd7457aea6fda466p18c83fjsn5db0b9b1ad56',
-      'X-RapidAPI-Host': 'dog-breeds2.p.rapidapi.com'
-    }
+      "X-RapidAPI-Key": "da1a663316mshd7457aea6fda466p18c83fjsn5db0b9b1ad56",
+      "X-RapidAPI-Host": "dog-breeds2.p.rapidapi.com",
+    },
   };
 
   const handleChange = (e) => {
@@ -36,12 +44,15 @@ export default function SignUp ({setCurrentUser}) {
   };
 
   useEffect(() => {
-    axios.request(getBreeds).then(function (response) {
-      const newOpts = (response.data).map((res) => res.breed);
-      setOptions(newOpts);
-    }).catch(function (error) {
-      console.error(error);
-    });
+    axios
+      .request(getBreeds)
+      .then(function (response) {
+        const newOpts = response.data.map((res) => res.breed);
+        setOptions(newOpts);
+      })
+      .catch(function (error) {
+        console.error(error);
+      });
   }, []);
 
   const handleToggle = () => {
@@ -58,7 +69,8 @@ export default function SignUp ({setCurrentUser}) {
 
   //filters the menu based on what's typed
   const filteredOptions = options.filter(
-    (option) => option.toLowerCase().indexOf(formData.breed.toLowerCase()) !== -1
+    (option) =>
+      option.toLowerCase().indexOf(formData.breed.toLowerCase()) !== -1
   );
 
   function handleSubmit(e) {
@@ -67,13 +79,13 @@ export default function SignUp ({setCurrentUser}) {
     const userCreds = { ...formData };
 
     axios
-    .post("http://localhost:3001/api/users", userCreds)
-    .then((user) => {
-      setCurrentUser(user);
-      localStorage.setItem("userInfo", JSON.stringify(user));
-      navigate("/discussions")
-    })
-    .catch((err) => console.log(err));
+      .post("http://localhost:3001/api/users", userCreds)
+      .then((user) => {
+        setCurrentUser(user.data);
+        localStorage.setItem("userInfo", JSON.stringify(user.data));
+        navigate("/discussions");
+      })
+      .catch((err) => console.log(err));
   }
 
   return (
@@ -81,7 +93,9 @@ export default function SignUp ({setCurrentUser}) {
       <Row className="justify-content-center">
         <Col xs={12} sm={8} md={6} lg={4}>
           <h1 className="text-center">Sign Up to PawHub</h1>
-          <p className="signup-parg">Join the fun in the discussions and connect with other users</p>
+          <p className="signup-parg">
+            Join the fun in the discussions and connect with other users
+          </p>
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId="username">
               <Form.Label>Username</Form.Label>
@@ -132,7 +146,7 @@ export default function SignUp ({setCurrentUser}) {
               />
             </Form.Group>
             <Dropdown onToggle={handleToggle} show={showOptions}>
-            <Form.Label>Dog's Breed</Form.Label>
+              <Form.Label>Dog's Breed</Form.Label>
               <Dropdown.Toggle
                 as={FormControl}
                 type="text"
@@ -141,15 +155,15 @@ export default function SignUp ({setCurrentUser}) {
                 placeholder="Type and select your dog's breed"
                 value={formData.breed}
                 onChange={handleChange}
-                />
+              />
               <Dropdown.Menu>
                 {filteredOptions.map((option) => (
-                <Dropdown.Item
-                  key={option}
-                  onClick={() => handleSelect(option)}
+                  <Dropdown.Item
+                    key={option}
+                    onClick={() => handleSelect(option)}
                   >
                     {option}
-                </Dropdown.Item>
+                  </Dropdown.Item>
                 ))}
               </Dropdown.Menu>
             </Dropdown>
@@ -170,12 +184,12 @@ export default function SignUp ({setCurrentUser}) {
             <Form.Group controlId="avatar">
               <Form.Label>Avatar</Form.Label>
               <Form.Control
-               type="text"
-               name="avatar"
-               label="Avatar"
-               variant="outlined"
-               onChange={handleChange}
-               value={formData.avatar}
+                type="text"
+                name="avatar"
+                label="Avatar"
+                variant="outlined"
+                onChange={handleChange}
+                value={formData.avatar}
                 placeholder="Enter avatar URL"
               />
             </Form.Group>
@@ -188,4 +202,4 @@ export default function SignUp ({setCurrentUser}) {
       </Row>
     </Container>
   );
-};
+}
