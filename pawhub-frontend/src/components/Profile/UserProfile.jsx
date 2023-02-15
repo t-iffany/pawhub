@@ -4,7 +4,6 @@ import { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import axios from "axios";
 import "./UserProfile.css";
-import ModalImage from "react-modal-image";
 
 export default function UserProfile({ currentUser }) {
   const { id } = useParams();
@@ -32,6 +31,9 @@ export default function UserProfile({ currentUser }) {
           alt="avatar"
           src={state.user ? state.user.avatar : "user.avatar not found"}
           sx={{ width: 150, height: 150 }}
+          style={{
+            border: "2px solid black",
+          }}
         />
 
         <div className="profile-user-info">
@@ -60,20 +62,19 @@ export default function UserProfile({ currentUser }) {
         </div>
       </div>
 
-      <div className="modal-images">
+      <div className="profile-images">
         {state.images &&
           state.images
             .filter((image) => image.user_id === state.user.id)
             .map((image, index) => (
-              <ModalImage
-                className="modal-image"
+              <img
+                className="profile-image"
                 key={index}
-                small={`data:image/jpeg;base64,${image.file_data}`}
-                large={`data:image/jpeg;base64,${image.file_data}`}
+                src={`data:image/jpeg;base64,${image.file_data}`}
                 alt={state.user.dog_name}
-                style={{
-                  transform: `rotate(${index % 4 !== 0 ? "-45" : "45"}deg`,
-                }}
+                // style={{
+                //   transform: `rotate(${index % 2 !== 0 ? "-4" : "4"}deg)`,
+                // }}
               />
             ))}
       </div>
