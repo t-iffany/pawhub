@@ -27,7 +27,10 @@ export default function CommentForm({setAddComment, discussionId, currentUserId}
           onChange={(event) => setComment(event.target.value)}
         />
       </div>
-      <Buttons variant="outlined" onClick={handleSubmit}>Add comment</Buttons>
+      <br></br>
+      <div className="Add-Comment">
+        <Buttons variant="outlined" onClick={handleSubmit}>Add comment</Buttons>
+      </div>
     </form>
   );
 };
