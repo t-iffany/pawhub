@@ -79,10 +79,11 @@
 .profile-user-info {
   border: solid 2px black;
   padding: 10px;
-  margin: 0 20px;
-  background-color: #c6e2e9;
+  margin: 0 50px;
+  background-color: #c6e9df;
   border-radius: 10px;
   list-style-type: none;
+  width: 25em;
 }
 
 .profile-user-info ul {
@@ -99,4 +100,23 @@
 
 .profile-username {
   font-size: 24px;
+}
+
+.profile-images {
+  display: grid;
+  align-self: center;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto;
+  column-gap: 20px;
+  row-gap: 20px;
+  border: solid 2px black;
+  border-radius: 10px;
+  padding: 35px;
+  background-color: #c6e2e9;
+}
+
+.profile-image {
+  border-radius: 10px;
+  /* border: solid 2px black; */
+  box-shadow: 0 0 2.5px 2.5px rgba(0, 0, 0, 0.15);
 }

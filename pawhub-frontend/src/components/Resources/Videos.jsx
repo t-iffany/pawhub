@@ -1,13 +1,12 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
-import API_KEY from '../api_keys';
-import './Videos.css';
-
+import { useState, useEffect } from "react";
+import axios from "axios";
+import API_KEY from "../api_keys";
+import "./Videos.css";
 
 export default function Videos() {
   const [videos, setVideos] = useState([]);
   const [videoTitles, setVideoTitles] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState('dog training');
+  const [selectedCategory, setSelectedCategory] = useState("dog training");
 
   //console.log("api key: ", API_KEY)
 
@@ -27,50 +26,58 @@ export default function Videos() {
       axios
         .get(
           `https://www.googleapis.com/youtube/v3/search` +
-          `?part=id` +
-          `&q=${selectedCategory}` +
-          `&type=video` +
-          `&maxResults=6` +
-          `&key=${YOUTUBE_API_KEY}`
+            `?part=id` +
+            `&q=${selectedCategory}` +
+            `&type=video` +
+            `&maxResults=6` +
+            `&key=${YOUTUBE_API_KEY}`
         )
-        .then(response => {
+        .then((response) => {
           setVideos(response.data.items);
-          const videoTitles = response.data.items.map(item => item.snippet.title);
+          const videoTitles = response.data.items.map(
+            (item) => item.snippet.title
+          );
           setVideoTitles(videoTitles);
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
         });
     };
     fetchData();
   }, [selectedCategory]);
 
-  const handleChange = event => {
+  const handleChange = (event) => {
     setSelectedCategory(event.target.value);
-  }
-
+  };
 
   return (
-    <div>
-    <select value={selectedCategory} onChange={handleChange}>
-    <option value="dog training">Training</option>
-    <option value="dog dental health">Dental Health</option>
-    </select>
+    <div className="video-page">
+      <div className="video-select">
+        <select
+          className="video-select-input"
+          value={selectedCategory}
+          onChange={handleChange}
+        >
+          <option value="dog training">Training</option>
+          <option value="dog dental health">Dental Health</option>
+        </select>
+      </div>
+
       <div className="video-container">
         {videos.map((video, index) => (
           <div className="video" key={video.id.videoId}>
             <h3>{videoTitles[index]}</h3>
-          <iframe
-            key={video.id.videoId}
-            src={`https://www.youtube.com/embed/${video.id.videoId}`}
-            frameBorder="0"
-            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in- picture"
-            allowFullScreen
-            title={videoTitles[index]}
-           />
+            <iframe
+              key={video.id.videoId}
+              src={`https://www.youtube.com/embed/${video.id.videoId}`}
+              frameBorder="0"
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in- picture"
+              allowFullScreen
+              title={videoTitles[index]}
+            />
           </div>
-       ))}
-     </div>
-     </div>
+        ))}
+      </div>
+    </div>
   );
-};
+}
