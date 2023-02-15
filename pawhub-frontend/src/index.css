@@ -4,34 +4,6 @@
   font-family: "Poppins";
 }
 
-.discussion-list-item-class {
-  display: flex;
-  justify-content: space-between;
-  border: solid #85c9d3;
-  border-radius: 20px;
-  /* padding-left: 15px;
-  padding-right: 15px; */
-  padding: 10px;
-  margin-bottom: 5px;
-}
-
-.discussion-list {
-  display: flex;
-  flex-direction: column;
-}
-
-.buttons {
-  display: flex;
-  justify-content: space-evenly;
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-
-.discussion-container {
-  padding: 10px;
-  margin-bottom: 5px;
-}
-
 .navbar {
   background-color: #c6e2e9;
   /* C6D1E9, C6E9DF */
@@ -66,6 +38,8 @@
 .content {
   font-size: 16px;
   color: #3e3e3e;
+  display: flex;
+  flex-direction: column;
 }
 
 .date {
