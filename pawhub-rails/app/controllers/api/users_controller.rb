@@ -17,6 +17,12 @@ class Api::UsersController < ApplicationController
   def create
     @user = User.new(user_params)
 
+    uploaded_file = params[:avatar]
+    avatar = uploaded_file.read
+    encoded_file = Base64.encode64(avatar)
+
+    @user.avatar = encoded_file
+
     if @user.save
       session[:user_id] = @user.id #sets their session
       render json: @user, status: 201

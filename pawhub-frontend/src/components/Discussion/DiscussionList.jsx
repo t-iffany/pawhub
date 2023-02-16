@@ -9,6 +9,7 @@ import ReactPaginate from 'react-paginate';
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import "./DiscussionList.css"
+import styles from './styles.module.css';
 
 export default function DiscussionList({ currentUser }) {
   const [state, setState] = useState({
@@ -123,6 +124,11 @@ export default function DiscussionList({ currentUser }) {
           pageCount={pageCount}
           previousLabel="< previous"
           renderOnZeroPageCount={null}
+          containerClassName={styles.container}
+          pageClassName={styles.page}
+          previousClassName={styles.previous}
+          nextClassName={styles.next}
+          activeClassName={styles.active}
         />
       </>
     );
