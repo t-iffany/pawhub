@@ -46,11 +46,8 @@ const Login = ({setCurrentUser}) => {
         <Col md={6} className="description-container">
           <h3 className="description-header">Welcome to PawHub</h3>
           <p className="description-text">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam
-            placerat mauris vel dolor maximus, id commodo nibh euismod.
-            Aliquam eget elit velit. Sed hendrerit, risus vitae congue
-            blandit, urna massa euismod quam, vel pharetra odio velit vel
-            eros.
+          Your one-stop destination for pet resources! We offer a variety of tools to help you take better 
+          care of your furry friends, including discussions, training videos, and maps to help you find nearby veterinarians and pet stores.
           </p>
         </Col>
         <Col md={6} className="form-container">
