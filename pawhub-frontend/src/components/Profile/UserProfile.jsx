@@ -4,6 +4,7 @@ import { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import axios from "axios";
 import "./UserProfile.css";
+import { SocialIcon } from "react-social-icons";
 
 export default function UserProfile({ currentUser }) {
   const { id } = useParams();
@@ -34,42 +35,61 @@ export default function UserProfile({ currentUser }) {
   return (
     <div className="profile-page">
       <div className="profile-info">
-        <Avatar
-          className="avatar"
-          alt="avatar"
-          src={
-            state.user
-              ? `data:image/jpeg;base64,${state.user.avatar}`
-              : "user.avatar not found"
-          }
-          sx={{ width: 150, height: 150 }}
-          // style={{
-          //   border: "2px solid black",
-          // }}
-        />
-
+        <div className="avatar-div">
+          <div className="profile-username">
+            {state.user ? state.user.username : "user.username not found"}
+          </div>
+          <Avatar
+            alt="avatar"
+            src={
+              state.user
+                ? `data:image/jpeg;base64,${state.user.avatar}`
+                : "user.avatar not found"
+            }
+            sx={{ width: 130, height: 130 }}
+          />
+        </div>
         <div className="profile-user-info">
           <div>
             <div className="profile-header">
-              <div className="profile-username">{state.user.username}</div>
+              <div className="profile-username">
+                Hello, my name is{" "}
+                {state.user ? state.user.dog_name : "user.breed not found"}!
+              </div>
               <div>{imageCount()} posts</div>
             </div>
+          </div>
 
-            <ul>
-              <li>
-                Name:{" "}
-                {state.user ? state.user.dog_name : "user.breed not found"}
-              </li>
-              <li>
-                Breed: {state.user ? state.user.breed : "user.breed not found"}
-              </li>
-              <li>
-                Description:{" "}
-                {state.user
-                  ? state.user.description
-                  : "user.description not found"}
-              </li>
-            </ul>
+          <div className="profile-user-breed">
+            I am a {state.user ? state.user.breed : "user.breed not found"}.
+          </div>
+
+          <div className="profile-description">
+            {state.user ? state.user.description : "user.description not found"}
+          </div>
+
+          <div className="social-media-links">
+            <SocialIcon
+              bgColor="white"
+              fgColor="#A5DCCC"
+              className="social-link"
+              url="https://www.instagram.com/udonthecoton/"
+              target="_blank"
+            />
+            <SocialIcon
+              bgColor="white"
+              fgColor="#A5DCCC"
+              className="social-link"
+              url="https://www.facebook.com"
+              target="_blank"
+            />
+            <SocialIcon
+              bgColor="white"
+              fgColor="#A5DCCC"
+              className="social-link"
+              url="https://www.tiktok.com"
+              target="_blank"
+            />
           </div>
         </div>
       </div>
