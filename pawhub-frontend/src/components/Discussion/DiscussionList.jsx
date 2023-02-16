@@ -130,6 +130,24 @@ export default function DiscussionList({ currentUser }) {
 
   return (
     <div className="discussion-list">
+      {currentUser && (
+      <div id="add-discussion">
+        <Popup
+          title="Create a new discussion"
+          openPopup={openPopup}
+          setOpenPopup={setOpenPopup}
+        >
+          <DiscussionForm
+            currentUser={currentUser}
+            setOpenPopup={setOpenPopup}
+          />
+        </Popup>
+        
+        <Buttons variant="outlined" onClick={() => setOpenPopup(true)}>
+          Add a discussion
+        </Buttons>
+      </div>
+    )}
       <span>Filter by: </span>
       <Select
             labelId="category"
@@ -145,24 +163,6 @@ export default function DiscussionList({ currentUser }) {
             ))}
       </Select>
       <PaginatedItems itemsPerPage={5} />
-      {currentUser && (
-        <div id="add-discussion">
-          <Popup
-            title="Create a new discussion"
-            openPopup={openPopup}
-            setOpenPopup={setOpenPopup}
-          >
-            <DiscussionForm
-              currentUser={currentUser}
-              setOpenPopup={setOpenPopup}
-            />
-          </Popup>
-          
-          <Buttons variant="outlined" onClick={() => setOpenPopup(true)}>
-            Add a discussion
-          </Buttons>
-        </div>
-      )}
     </div>
   );
 }
