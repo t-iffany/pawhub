@@ -23,7 +23,9 @@ export default function NavigationBar({ currentUser, setCurrentUser }) {
       <Container>
         <Navbar.Brand>
           <Link className="nav-link" to="/">
-            Pawhub
+            Paw
+            <img src="https://img.icons8.com/ios/35/null/puppy.png" alt="logo"/>
+            Hub
           </Link>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
