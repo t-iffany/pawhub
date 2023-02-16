@@ -23,7 +23,8 @@
 .breed-search {
   display: flex;
   justify-content: center;
-  margin: 10px;
+  margin-top: 25px !important;
+  margin-bottom: 25px !important;
   border: 2px solid black !important;
   border-radius: 10px !important;
   background-color: white;
