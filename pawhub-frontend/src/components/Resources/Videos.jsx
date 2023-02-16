@@ -3,6 +3,7 @@ import axios from "axios";
 import API_KEY from "../api_keys";
 import "./Videos.css";
 import Spinner from "react-bootstrap/Spinner";
+// import Select from "@mui/material/Select";
 
 export default function Videos() {
   const [videos, setVideos] = useState([]);
@@ -63,13 +64,19 @@ export default function Videos() {
       {loaded && (
         <>
           <div className="video-select">
-            <label className="label">Select a video category</label><br></br>
+            <label className="label">Select a topic</label>
             <select
               id="video-category"
               className="video-select-input"
               value={selectedCategory}
               onChange={handleChange}
             >
+            {/* <Select
+            id="video-category"
+            className="video-select-input"
+            value={selectedCategory}
+            onChange={handleChange}
+            > */}
               <option value="dog training">Training</option>
               <option value="dog dental health">Dental Health</option>
             </select>
