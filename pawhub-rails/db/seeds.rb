@@ -6,7 +6,10 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-
+def base64_encode(file)
+  require 'base64'
+  Base64.strict_encode64(File.open(file, 'rb').read)
+end
 # Users
 
 User.destroy_all
@@ -18,7 +21,7 @@ user1 = User.create({
   dog_name: 'bella',
   breed: 'poodle',
   description: 'woof',
-  avatar: 'https://i.imgur.com/IVtGnJj.png'
+  avatar: base64_encode(File.open(Rails.root.join("public/images/bella/bella.png")))
 })
 
 user2 = User.create({
@@ -28,7 +31,7 @@ user2 = User.create({
   dog_name: 'Bear',
   breed: 'Bernese Mountain',
   description: 'A giant goofball',
-  avatar: 'https://designoholic.com/wp-content/uploads/2017/07/avatar-rogemon.png'
+  avatar: base64_encode(File.open(Rails.root.join("public/images/bear/bear (1).jpg")))
 })
 
 user3 = User.create({
@@ -38,7 +41,7 @@ user3 = User.create({
   dog_name: 'Udon',
   breed: 'Coton De Tulear',
   description: 'A splooting floof',
-  avatar: 'https://www.publicdomainpictures.net/pictures/250000/nahled/dog-puppy-illustration.jpg'
+  avatar: base64_encode(File.open(Rails.root.join("public/images/Udon.webp")))
 })
 
 user4 = User.create({
@@ -48,7 +51,7 @@ user4 = User.create({
   dog_name: 'Fluffy',
   breed: 'Golden Retriever',
   description: 'One big golden retriever. Loves people!',
-  avatar: 'https://www.rover.com/blog/wp-content/uploads/2018/11/golden-retriever-2061715_1920.jpg'
+  avatar: base64_encode(File.open(Rails.root.join("public/images/more_dogs/more_dogs (1).jpeg")))
 })
 
 user5 = User.create({
@@ -58,7 +61,7 @@ user5 = User.create({
   dog_name: 'Wonton',
   breed: 'Havanese',
   description: 'Looks like a wonton. Loves to eat wontons too! You are what you eat!',
-  avatar: 'https://www.rd.com/wp-content/uploads/2021/03/GettyImages-560640849-e1617043874845.jpg?resize=1536,1025'
+  avatar: base64_encode(File.open(Rails.root.join("public/images/d6.jpg")))
 })
 
 user6 = User.create({
@@ -68,7 +71,7 @@ user6 = User.create({
   dog_name: 'Bloopy',
   breed: 'Siberian Husky',
   description: 'Woof woof!!',
-  avatar: 'https://www.rd.com/wp-content/uploads/2021/03/GettyImages-1200336846.jpg?resize=1536,1024'
+  avatar: base64_encode(File.open(Rails.root.join("public/images/more_dogs/more_dogs (6).jpg")))
 })
 
 user7 = User.create({
@@ -78,7 +81,7 @@ user7 = User.create({
   dog_name: 'Tootsie',
   breed: 'Pomeranian',
   description: 'Small dog. Big attitude.',
-  avatar: 'https://www.rd.com/wp-content/uploads/2021/03/GettyImages-1014940472-scaled.jpg?resize=1536,1024'
+  avatar: base64_encode(File.open(Rails.root.join("public/images/more_dogs/more_dogs (12).jpg")))
 })
 
 user8 = User.create({
@@ -88,7 +91,7 @@ user8 = User.create({
   dog_name: 'Charlie',
   breed: 'Labrador Retriever',
   description: 'Hello, my name is Charlie :D.',
-  avatar: 'https://i.pinimg.com/originals/e9/46/02/e946026df22acfc533f37e95634cdf3e.jpg'
+  avatar: base64_encode(File.open(Rails.root.join("public/images/more_dogs/more_dogs (7).jpg")))
 })
 
 
@@ -187,11 +190,6 @@ Comment.create({body: 'They are the AmazonBasics ones! Very good for the price. 
 Comment.create({body: 'I am very interested! How much are you looking for?', user_id: 5, discussion_id: 8})
 Comment.create({body: 'What are the dimensions of the crate? How long have you owned it?', user_id: 6, discussion_id: 8})
 Comment.create({body: 'Sold, sorry friends :( Thanks for the interest though!', user_id: 8, discussion_id: 8})
-
-def base64_encode(file)
-  require 'base64'
-  Base64.strict_encode64(File.open(file, 'rb').read)
-end
 
 Image.destroy_all
 

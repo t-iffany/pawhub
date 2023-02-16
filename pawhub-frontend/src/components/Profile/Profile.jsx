@@ -148,7 +148,7 @@ export default function Profile({ currentUser, setCurrentUser }) {
         <div className="avatar-div">
           <Avatar
             alt="avatar"
-            src={currentUser ? currentUser.avatar : "user.avatar not found"}
+            src={currentUser ? `data:image/jpeg;base64,${currentUser.avatar}` : "user.avatar not found"}
             sx={{ width: 130, height: 130 }}
           />
           <button className="profile-edit-button" onClick={handleEdit}>
