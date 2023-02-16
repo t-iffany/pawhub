@@ -19,8 +19,7 @@ export default function SignUp({ setCurrentUser }) {
     password: "",
     dog_name: "",
     breed: "",
-    description: "",
-    avatar: "",
+    description: ""
   });
 
   const [options, setOptions] = useState([]);
@@ -81,10 +80,21 @@ export default function SignUp({ setCurrentUser }) {
   function handleSubmit(e) {
     e.preventDefault();
 
-    const userCreds = { ...formData };
+    const signupData = new FormData();
+    signupData.append("username", formData.username);
+    signupData.append("password", formData.password);
+    signupData.append("email", formData.email);
+    signupData.append("dog_name", formData.dog_name);
+    signupData.append("breed", formData.breed);
+    signupData.append("description", formData.description);
+    signupData.append("avatar", selectedFile);
 
     axios
-      .post("http://localhost:3001/api/users", userCreds)
+      .post("http://localhost:3001/api/users", signupData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
       .then((user) => {
         setCurrentUser(user.data);
         localStorage.setItem("userInfo", JSON.stringify(user.data));
@@ -188,7 +198,7 @@ export default function SignUp({ setCurrentUser }) {
             </Form.Group>
             <Form.Group controlId="avatar">
               <Form.Label>Avatar</Form.Label>
-              <Form.Control
+              {/* <Form.Control
                 type="text"
                 name="avatar"
                 label="Avatar"
@@ -196,6 +206,12 @@ export default function SignUp({ setCurrentUser }) {
                 onChange={handleChange}
                 value={formData.avatar}
                 placeholder="Enter avatar URL"
+              /> */}
+              <input
+              type="file"
+              name="avatar"
+              onChange={handleFileSelect}
+              accept="image/*"
               />
             </Form.Group>
             <br></br>
