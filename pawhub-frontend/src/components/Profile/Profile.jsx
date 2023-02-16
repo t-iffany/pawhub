@@ -9,8 +9,6 @@ export default function Profile({ currentUser, setCurrentUser }) {
   const [selectedFile, setSelectedFile] = useState(null);
   const [uploading, setUploading] = useState(false);
 
-  console.log("current user", currentUser);
-
   let imageCount = () => {
     if (state.images) {
       return state.images.filter((image) => image.user_id === currentUser.id)
@@ -63,7 +61,6 @@ export default function Profile({ currentUser, setCurrentUser }) {
             }
             return user;
           });
-          // console.log(res.data);
           setCurrentUser(res.data);
           localStorage.setItem("userInfo", JSON.stringify(res.data));
           setEditMode(false);
@@ -118,7 +115,6 @@ export default function Profile({ currentUser, setCurrentUser }) {
           },
         })
         .then((res) => {
-          // console.log("res.data: ", res.data);
           setState((prevState) => ({
             ...prevState,
             images: res.data,
@@ -237,6 +233,7 @@ export default function Profile({ currentUser, setCurrentUser }) {
             />
             <textarea
               className="edit-form-input"
+              id="edit-form-description"
               type="text"
               name="description"
               defaultValue={

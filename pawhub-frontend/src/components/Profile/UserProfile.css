@@ -75,7 +75,7 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  margin: 5em 0px;
+  margin: 2.5em 0px;
   padding-left: 25px;
 }
 
@@ -168,7 +168,9 @@
   align-items: center;
   align-self: center;
   margin: 10px 300px;
+  margin-top: 0px;
   width: 25em;
+  padding: 10px 0;
 }
 
 .edit-form-upload {
@@ -177,6 +179,8 @@
   justify-content: center;
   align-self: center;
   width: 25em;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .choose-image {
@@ -189,6 +193,7 @@
   width: 20em;
   border: 2px solid black;
   border-radius: 10px;
+  margin-bottom: 10px;
 }
 
 .edit-image {

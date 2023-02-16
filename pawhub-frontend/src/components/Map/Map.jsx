@@ -48,17 +48,7 @@ export default function Map() {
     directions: null,
   });
 
-  // console.log("place type", placeType);
-  // console.log("nearby", state.nearbyLocations);
-  // console.log("opening hours", selectedCenter);
-  // console.log("circle", state.circle);
-  // console.log(state.nearbyLocations);
-  // console.log("directions", state.directions);
-  console.log("radius", state.radius);
-
   useEffect(() => {
-    // console.log("circleref", circleRef);
-
     if (state.location) {
       setState((prev) => ({ ...prev, circle: true }));
 

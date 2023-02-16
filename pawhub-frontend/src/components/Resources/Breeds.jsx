@@ -5,14 +5,12 @@ import BreedsItem from "./BreedsItem";
 import { TextField } from "@mui/material";
 import Spinner from "react-bootstrap/Spinner";
 import ReactPaginate from "react-paginate";
-import styles from '../Discussion/styles.module.css';
+import styles from "../Discussion/styles.module.css";
 
 export default function Breeds() {
   const [breedList, setBreedList] = useState([]);
   const [query, setQuery] = useState(null);
   const [loaded, setLoaded] = useState(false);
-
-  // console.log(breedList);
 
   const options = {
     method: "GET",
@@ -112,8 +110,6 @@ export default function Breeds() {
       </>
     );
   }
-
-  // console.log("breedlistoutput", breedListOutput());
 
   return (
     <div>

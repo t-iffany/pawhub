@@ -1,8 +1,6 @@
 import Card from "react-bootstrap/Card";
 
 export default function Distance(props) {
-  console.log(props.leg);
-
   // Making address into a google maps url query
   let address = props.leg.end_address.replace(/ /g, "+");
   let mapsUrl = "https://www.google.com/maps/place/" + address;

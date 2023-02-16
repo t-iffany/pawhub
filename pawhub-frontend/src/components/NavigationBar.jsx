@@ -24,8 +24,6 @@ export default function NavigationBar({ currentUser, setCurrentUser }) {
     }
   };
 
-  console.log("Navbar Current User", currentUser);
-
   return (
     <Navbar className="navbar" collapseOnSelect expand="lg">
       <Container>
