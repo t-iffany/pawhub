@@ -26,6 +26,7 @@ export default function SignUp({ setCurrentUser }) {
   const [options, setOptions] = useState([]);
   const [showOptions, setShowOptions] = useState(false);
   const navigate = useNavigate();
+  const [selectedFile, setSelectedFile] = useState(null);
 
   const getBreeds = {
     method: "GET",
@@ -41,6 +42,10 @@ export default function SignUp({ setCurrentUser }) {
       ...formData,
       [e.target.name]: e.target.value,
     });
+  };
+
+  const handleFileSelect = (event) => {
+    setSelectedFile(event.target.files[0]);
   };
 
   useEffect(() => {
