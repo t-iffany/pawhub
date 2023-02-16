@@ -5,6 +5,18 @@
   margin: 5px;
 }
 
+.breed-list-item.list-group-item {
+  background-color: #c6e9df;
+  border-radius: 10px;
+  border: 2px solid black;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.breed-image {
+  border-radius: 10px;
+}
+
 .breed-item {
   display: flex;
   flex-direction: row;
