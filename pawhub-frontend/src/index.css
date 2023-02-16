@@ -15,6 +15,38 @@
   height: 100%;
 }
 
+.nav-link.active {
+  border-radius: 10px !important;
+  background-color: #aae5d3 !important;
+  font-weight: bold !important;
+}
+
+.nav-link:hover {
+  border-radius: 10px !important;
+  background-color: #aae5d3 !important;
+  font-weight: bold !important;
+}
+
+.navbar .active > .nav-link {
+  border-radius: 10px !important;
+  background-color: #aae5d3 !important;
+  font-weight: bold !important;
+}
+
+.navbar .active .dropdown-menu {
+  background-color: #f8f9fa;
+}
+
+.dropdown-item {
+  font-weight: bold !important;
+}
+
+.dropdown-item:hover {
+  border-radius: 10px !important;
+  background-color: #c6e9df !important;
+  font-weight: bold !important;
+}
+
 /*  */
 .blog-post {
   padding: 16px;
