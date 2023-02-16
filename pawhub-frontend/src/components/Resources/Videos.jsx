@@ -63,7 +63,9 @@ export default function Videos() {
       {loaded && (
         <>
           <div className="video-select">
+            <label className="label">Select a video category</label><br></br>
             <select
+              id="video-category"
               className="video-select-input"
               value={selectedCategory}
               onChange={handleChange}
