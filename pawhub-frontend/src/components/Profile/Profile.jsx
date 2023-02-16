@@ -217,57 +217,60 @@ export default function Profile({ currentUser, setCurrentUser }) {
                 currentUser ? currentUser.description : "description/content"
               }
             />
-            <button className="edit-form-button" type="submit">
+            <button className="profile-button edit" type="submit">
               Save
             </button>
             <button
-              className="edit-form-button"
+              className="profile-button edit"
               type="button"
               onClick={handleCancel}
             >
               Cancel
             </button>
           </form>
-          <form className="edit-form" onSubmit={handleUpload}>
+          <form className="edit-form-upload" onSubmit={handleUpload}>
             <input
+              className="choose-image"
               type="file"
               name="image"
               onChange={handleFileSelect}
               accept="image/*"
             />
             <button
-              className="upload-image"
+              className="profile-button upload"
               type="button"
               onClick={handleUpload}
             >
               Upload Image
             </button>
           </form>
-          <div className="edit-images">
-            <div> Saved images: </div>
-            {state.images &&
-              state.images
-                .filter((image) => image.user_id === currentUser.id)
-                .reverse()
-                .map((image, index) => (
-                  <div key={index}>
-                    <img
-                      className="saved-images"
-                      key={index}
-                      src={`data:image/jpeg;base64,${image.file_data}`}
-                      alt={currentUser.dog_name}
-                      width="210"
-                      height="210"
-                    />
-                    <button
-                      className="delete-button"
-                      type="button"
-                      onClick={(event) => handleDelete(event, image.id)}
-                    >
-                      Delete Image
-                    </button>
-                  </div>
-                ))}
+          <div className="saved-images-container">
+            <div className="saved-images-header"> Saved images </div>
+            <div className="saved-images">
+              {state.images &&
+                state.images
+                  .filter((image) => image.user_id === currentUser.id)
+                  .reverse()
+                  .map((image, index) => (
+                    <div className="edit-image" key={index}>
+                      <img
+                        className="saved-image"
+                        key={index}
+                        src={`data:image/jpeg;base64,${image.file_data}`}
+                        alt={currentUser.dog_name}
+                        width="210"
+                        height="210"
+                      />
+                      <button
+                        className="profile-button delete"
+                        type="button"
+                        onClick={(event) => handleDelete(event, image.id)}
+                      >
+                        Delete Image
+                      </button>
+                    </div>
+                  ))}
+            </div>
           </div>
         </>
       ) : (
