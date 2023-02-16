@@ -148,7 +148,11 @@ export default function Profile({ currentUser, setCurrentUser }) {
         <div className="avatar-div">
           <Avatar
             alt="avatar"
-            src={currentUser ? `data:image/jpeg;base64,${currentUser.avatar}` : "user.avatar not found"}
+            src={
+              currentUser
+                ? `data:image/jpeg;base64,${currentUser.avatar}`
+                : "user.avatar not found"
+            }
             sx={{ width: 130, height: 130 }}
           />
           <button className="profile-edit-button" onClick={handleEdit}>
@@ -244,6 +248,7 @@ export default function Profile({ currentUser, setCurrentUser }) {
             {state.images &&
               state.images
                 .filter((image) => image.user_id === currentUser.id)
+                .reverse()
                 .map((image, index) => (
                   <div key={index}>
                     <img
@@ -270,6 +275,7 @@ export default function Profile({ currentUser, setCurrentUser }) {
           {state.images &&
             state.images
               .filter((image) => image.user_id === currentUser.id)
+              .reverse()
               .map((image, index) => (
                 <img
                   className="profile-image"

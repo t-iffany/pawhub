@@ -37,7 +37,11 @@ export default function UserProfile({ currentUser }) {
         <Avatar
           className="avatar"
           alt="avatar"
-          src={state.user ? `data:image/jpeg;base64,${state.user.avatar}` : "user.avatar not found"}
+          src={
+            state.user
+              ? `data:image/jpeg;base64,${state.user.avatar}`
+              : "user.avatar not found"
+          }
           sx={{ width: 150, height: 150 }}
           // style={{
           //   border: "2px solid black",
@@ -74,6 +78,7 @@ export default function UserProfile({ currentUser }) {
         {state.images &&
           state.images
             .filter((image) => image.user_id === state.user.id)
+            .reverse()
             .map((image, index) => (
               <img
                 className="profile-image"
