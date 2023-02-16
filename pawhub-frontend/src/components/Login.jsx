@@ -49,6 +49,7 @@ const Login = ({setCurrentUser}) => {
           Your one-stop destination for pet resources! We offer a variety of tools to help you take better 
           care of your furry friends, including discussions, training videos, and maps to help you find nearby veterinarians and pet stores.
           </p>
+          <img src="https://img.icons8.com/ios/45/null/puppy.png" alt="logo"/>
         </Col>
         <Col md={6} className="form-container">
           <h3 className="form-header">Login</h3>

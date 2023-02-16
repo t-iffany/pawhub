@@ -167,7 +167,7 @@ export default function Profile({ currentUser, setCurrentUser }) {
           <div>
             <div className="profile-header">
               <div className="profile-username">
-                Hello, my name is{" "}
+                Hi, my name is{" "}
                 {currentUser ? currentUser.dog_name : "user.breed not found"}!
               </div>
               <div>{imageCount()} posts</div>
@@ -175,7 +175,7 @@ export default function Profile({ currentUser, setCurrentUser }) {
           </div>
 
           <div className="profile-user-breed">
-            I am a {currentUser ? currentUser.breed : "user.breed not found"}.
+            I am a {currentUser ? currentUser.breed : "user.breed not found"}
           </div>
 
           <div className="profile-description">
@@ -240,6 +240,7 @@ export default function Profile({ currentUser, setCurrentUser }) {
                 currentUser ? currentUser.description : "description/content"
               }
             />
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             <button className="profile-button edit" type="submit">
               Save
             </button>
@@ -250,6 +251,7 @@ export default function Profile({ currentUser, setCurrentUser }) {
             >
               Cancel
             </button>
+            </div>
           </form>
           <form className="edit-form-upload" onSubmit={handleUpload}>
             <input

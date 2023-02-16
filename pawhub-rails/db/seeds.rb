@@ -18,8 +18,8 @@ user1 = User.create({
   username: 'bella69',
   email: 'jimmy@test.com',
   password: '123',
-  dog_name: 'bella',
-  breed: 'poodle',
+  dog_name: 'Bella',
+  breed: 'Poodle',
   description: 'A really silly doggo that loves getting in trouble. Rawr XD',
   avatar: base64_encode(File.open(Rails.root.join("public/images/bella/bella.png")))
 })
@@ -27,7 +27,7 @@ user1 = User.create({
 user2 = User.create({
   username: 'jonix',
   email: 'nikko@test.com',
-  password: '123456789',
+  password: '123',
   dog_name: 'Bear',
   breed: 'Bernese Mountain',
   description: 'A giant goofball',
@@ -37,17 +37,17 @@ user2 = User.create({
 user3 = User.create({
   username: 'udon_the_coton',
   email: 'udon@gmail.com',
-  password: 'pass',
+  password: '123',
   dog_name: 'Udon',
   breed: 'Coton De Tulear',
-  description: 'A splooting floof',
+  description: 'Smol pupper and 100% floof. Want chimken.',
   avatar: base64_encode(File.open(Rails.root.join("public/images/Udon.webp")))
 })
 
 user4 = User.create({
-  username: 'fluffy',
+  username: 'fluffy-golden',
   email: 'fluffy@gmail.com',
-  password: 'pass',
+  password: '123',
   dog_name: 'Fluffy',
   breed: 'Golden Retriever',
   description: 'One big golden retriever. Loves people!',
@@ -55,9 +55,9 @@ user4 = User.create({
 })
 
 user5 = User.create({
-  username: 'wonton',
+  username: 'wontonsoup',
   email: 'wonton@gmail.com',
-  password: 'pass',
+  password: '123',
   dog_name: 'Wonton',
   breed: 'Havanese',
   description: 'Looks like a wonton. Loves to eat wontons too! You are what you eat!',
@@ -65,9 +65,9 @@ user5 = User.create({
 })
 
 user6 = User.create({
-  username: 'bloopy',
+  username: 'am_bloopy',
   email: 'bloopy@gmail.com',
-  password: 'pass',
+  password: '123',
   dog_name: 'Bloopy',
   breed: 'Siberian Husky',
   description: 'Woof woof!!',
@@ -75,9 +75,9 @@ user6 = User.create({
 })
 
 user7 = User.create({
-  username: 'tootsie',
+  username: 'tootsie-roll',
   email: 'tootsie@gmail.com',
-  password: 'pass',
+  password: '123',
   dog_name: 'Tootsie',
   breed: 'Pomeranian',
   description: 'Small dog. Big attitude.',
@@ -85,12 +85,12 @@ user7 = User.create({
 })
 
 user8 = User.create({
-  username: 'charlie',
+  username: 'charlie-labber',
   email: 'charlie@gmail.com',
-  password: 'pass',
+  password: '123',
   dog_name: 'Charlie',
   breed: 'Labrador Retriever',
-  description: 'Hello, my name is Charlie :D.',
+  description: 'Likes to sploot',
   avatar: base64_encode(File.open(Rails.root.join("public/images/more_dogs/more_dogs (7).jpg")))
 })
 
@@ -137,13 +137,13 @@ user6.discussions.create({
 
 user7.discussions.create({
   title: 'Extra peepads.',
-  content: 'Bought too many peepads on Amazon. Would anyone like to take some off my hands?',
+  content: 'Bought too many pee pads on Amazon. Would anyone like to take some off my hands?',
   category: 'Swap',
 })
 
 user8.discussions.create({
   title: 'Looking to sell my crate!',
-  content: 'My puppy quickly outgrew this crate I bought, and I am looking to sell it. Anyone interested, please comment!',
+  content: 'My puppy quickly outgrew this crate I bought and I am looking to sell it. Anyone interested, please comment!',
   category: 'Swap',
 })
 

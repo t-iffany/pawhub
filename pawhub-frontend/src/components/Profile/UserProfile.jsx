@@ -53,7 +53,7 @@ export default function UserProfile({ currentUser }) {
           <div>
             <div className="profile-header">
               <div className="profile-username">
-                Hello, my name is{" "}
+                Hi, my name is{" "}
                 {state.user ? state.user.dog_name : "user.breed not found"}!
               </div>
               <div className="profile-post-count">{imageCount()} posts</div>
@@ -61,7 +61,7 @@ export default function UserProfile({ currentUser }) {
           </div>
 
           <div className="profile-user-breed">
-            I am a {state.user ? state.user.breed : "user.breed not found"}.
+            I am a {state.user ? state.user.breed : "user.breed not found"}
           </div>
 
           <div className="profile-description">
