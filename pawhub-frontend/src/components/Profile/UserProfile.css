@@ -89,8 +89,14 @@
   width: 35em;
 }
 
-.profile-user-info ul {
-  list-style-type: none;
+.social-media-links {
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+}
+
+.social-link {
+  margin: 10px;
 }
 
 .profile-header {

@@ -1,6 +1,7 @@
 import Avatar from "@mui/material/Avatar";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { SocialIcon } from "react-social-icons";
 
 export default function Profile({ currentUser, setCurrentUser }) {
   const [state, setState] = useState({ users: [], images: [] });
@@ -171,24 +172,52 @@ export default function Profile({ currentUser, setCurrentUser }) {
             <div className="profile-header">
               <div className="profile-username">
                 {" "}
-                Name:{" "}
+                Pet name:{" "}
                 {currentUser ? currentUser.dog_name : "user.breed not found"}
               </div>
               <div>{imageCount()} posts</div>
             </div>
           </div>
 
-          <ul>
-            <li>
-              Breed: {currentUser ? currentUser.breed : "user.breed not found"}
-            </li>
-            <li>
-              Description:{" "}
-              {currentUser
-                ? currentUser.description
-                : "user.description not found"}
-            </li>
-          </ul>
+          <div>
+            Breed: {currentUser ? currentUser.breed : "user.breed not found"}
+          </div>
+
+          <div>
+            Description:{" "}
+            {currentUser
+              ? currentUser.description
+              : "user.description not found"}
+          </div>
+
+          <div className="social-media-links">
+            <SocialIcon
+              className="social-link"
+              url="https://www.instagram.com/udonthecoton/"
+              target="_blank"
+            />
+            <SocialIcon
+              className="social-link"
+              url="https://www.facebook.com"
+            />
+            <SocialIcon className="social-link" url="https://www.tiktok.com" />
+            <SocialIcon
+              className="social-link"
+              url="https://twitter.com/jaketrent"
+            />
+            <SocialIcon
+              className="social-link"
+              url="https://www.youtube.com/@zakgeorge"
+            />
+            <SocialIcon
+              className="social-link"
+              url="https://www.snapchat.com"
+            />
+            <SocialIcon
+              className="social-link"
+              url="https://www.hotmail.com/"
+            />
+          </div>
         </div>
       </div>
 
