@@ -171,20 +171,18 @@ export default function Profile({ currentUser, setCurrentUser }) {
           <div>
             <div className="profile-header">
               <div className="profile-username">
-                {" "}
-                Pet name:{" "}
-                {currentUser ? currentUser.dog_name : "user.breed not found"}
+                Hello, my name is{" "}
+                {currentUser ? currentUser.dog_name : "user.breed not found"}!
               </div>
               <div>{imageCount()} posts</div>
             </div>
           </div>
 
-          <div>
-            Breed: {currentUser ? currentUser.breed : "user.breed not found"}
+          <div className="profile-user-breed">
+            I am a {currentUser ? currentUser.breed : "user.breed not found"}.
           </div>
 
-          <div>
-            Description:{" "}
+          <div className="profile-description">
             {currentUser
               ? currentUser.description
               : "user.description not found"}
@@ -192,30 +190,25 @@ export default function Profile({ currentUser, setCurrentUser }) {
 
           <div className="social-media-links">
             <SocialIcon
+              bgColor="white"
+              fgColor="#A5DCCC"
               className="social-link"
               url="https://www.instagram.com/udonthecoton/"
               target="_blank"
             />
             <SocialIcon
+              bgColor="white"
+              fgColor="#A5DCCC"
               className="social-link"
               url="https://www.facebook.com"
-            />
-            <SocialIcon className="social-link" url="https://www.tiktok.com" />
-            <SocialIcon
-              className="social-link"
-              url="https://twitter.com/jaketrent"
+              target="_blank"
             />
             <SocialIcon
+              bgColor="white"
+              fgColor="#A5DCCC"
               className="social-link"
-              url="https://www.youtube.com/@zakgeorge"
-            />
-            <SocialIcon
-              className="social-link"
-              url="https://www.snapchat.com"
-            />
-            <SocialIcon
-              className="social-link"
-              url="https://www.hotmail.com/"
+              url="https://www.tiktok.com"
+              target="_blank"
             />
           </div>
         </div>
