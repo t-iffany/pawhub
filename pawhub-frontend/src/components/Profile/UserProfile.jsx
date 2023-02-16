@@ -37,13 +37,13 @@ export default function UserProfile({ currentUser }) {
       <div className="profile-info">
         <div className="avatar-div">
           <div className="profile-username">
-            {currentUser ? currentUser.username : "user.username not found"}
+            {state.user ? state.user.username : "user.username not found"}
           </div>
           <Avatar
             alt="avatar"
             src={
-              currentUser
-                ? `data:image/jpeg;base64,${currentUser.avatar}`
+              state.user
+                ? `data:image/jpeg;base64,${state.user.avatar}`
                 : "user.avatar not found"
             }
             sx={{ width: 130, height: 130 }}
