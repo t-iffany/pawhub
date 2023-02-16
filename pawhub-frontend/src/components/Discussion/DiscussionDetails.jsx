@@ -40,15 +40,16 @@ export default function DiscussionDetails({currentUser}) {
 
   return (
     <div className="blog-post">
-      <h2 className="title">{state.discussion.title}</h2>
-      <p className="author">by {user ? user.username : ""}</p>
-      <p className="content">{state.discussion.content}</p>
-      <p className="date">posted {moment(state.discussion.created_at).fromNow()} </p>
+      <div className="post-header">
+        <h2 className="title">{state.discussion.title}</h2>
+        <p className="author">by {user ? user.username : ""}</p>
+        <p className="content">{state.discussion.content}</p>
+        <p className="date">posted {moment(state.discussion.created_at).fromNow()} </p>
+      </div>
       <CommentList discussionId={id} comments={state.comments} users={state.users}/>
       {currentUser && <div>
         <CommentForm discussionId={id} currentUserId={currentUser.id}setAddComment={setAddComment}/>
       </div>}
     </div>
-    
   );
 }
