@@ -25,6 +25,7 @@ export default function CommentForm({setAddComment, discussionId, currentUserId}
           rows="5"
           value={comment}
           onChange={(event) => setComment(event.target.value)}
+          style={{border: "2px solid black" }}
         />
       </div>
       <br></br>
