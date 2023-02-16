@@ -51,6 +51,8 @@ export default function Videos() {
   };
 
   return (
+    <div>
+      <h1 className="page-header">Videos</h1>
     <div className="video-page">
       {!loaded && (
         <Spinner className="spinner" animation="border" role="status">
@@ -61,7 +63,9 @@ export default function Videos() {
       {loaded && (
         <>
           <div className="video-select">
+            <label className="label">Select a video category</label><br></br>
             <select
+              id="video-category"
               className="video-select-input"
               value={selectedCategory}
               onChange={handleChange}
@@ -88,6 +92,7 @@ export default function Videos() {
           </div>
         </>
       )}
+    </div>
     </div>
   );
 }

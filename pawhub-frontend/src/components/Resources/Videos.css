@@ -1,19 +1,29 @@
 .video-page {
   display: flex;
-  flex-direction: column;
+  flex-direction: column !important;
   justify-content: center;
 }
 
 .video-select {
-  display: flex;
+  display: flex !important;
   justify-content: center;
   margin-top: 20px;
+  padding: 20px;
+  flex-direction: column !important;
+  align-items: center !important;
+}
+
+.video-select > label {
+  display: block;
+  margin-bottom: 0px;
+  font-size: 1rem;
 }
 
 .video-select-input {
   background-color: #c6e9df;
   border: 2px solid black;
   border-radius: 10px;
+  padding: 10px;
 }
 
 .video-container {
