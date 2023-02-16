@@ -146,6 +146,9 @@ export default function Profile({ currentUser, setCurrentUser }) {
     <div className="profile-page">
       <div className="profile-info">
         <div className="avatar-div">
+          <div className="profile-username">
+            {currentUser ? currentUser.username : "user.username not found"}
+          </div>
           <Avatar
             alt="avatar"
             src={
@@ -155,7 +158,10 @@ export default function Profile({ currentUser, setCurrentUser }) {
             }
             sx={{ width: 130, height: 130 }}
           />
-          <button className="profile-edit-button" onClick={handleEdit}>
+          <button
+            className="profile-button profile-edit-button"
+            onClick={handleEdit}
+          >
             Edit
           </button>
         </div>
@@ -164,17 +170,15 @@ export default function Profile({ currentUser, setCurrentUser }) {
           <div>
             <div className="profile-header">
               <div className="profile-username">
-                {currentUser ? currentUser.username : "user.username not found"}
+                {" "}
+                Name:{" "}
+                {currentUser ? currentUser.dog_name : "user.breed not found"}
               </div>
               <div>{imageCount()} posts</div>
             </div>
           </div>
 
           <ul>
-            <li>
-              Name:{" "}
-              {currentUser ? currentUser.dog_name : "user.breed not found"}
-            </li>
             <li>
               Breed: {currentUser ? currentUser.breed : "user.breed not found"}
             </li>
