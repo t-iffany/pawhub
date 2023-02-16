@@ -9,8 +9,6 @@
   /* C6D1E9, C6E9DF */
 }
 
-
-
 .navbar-collapse .navbar-nav .nav-item .nav-link {
   display: flex;
   align-items: center;
@@ -23,10 +21,20 @@
   font-weight: bold !important;
 }
 
-active > .nav-item .dropdown {
+.nav-link:hover {
   border-radius: 10px !important;
   background-color: #aae5d3 !important;
   font-weight: bold !important;
+}
+
+.navbar .active > .nav-link {
+  border-radius: 10px !important;
+  background-color: #aae5d3 !important;
+  font-weight: bold !important;
+}
+
+.navbar .active .dropdown-menu {
+  background-color: #f8f9fa;
 }
 
 .dropdown-item {
