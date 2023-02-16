@@ -20,7 +20,7 @@ user1 = User.create({
   password: '123',
   dog_name: 'Bella',
   breed: 'Poodle',
-  description: 'Woof woof!',
+  description: 'Woof! Want chimken!',
   avatar: base64_encode(File.open(Rails.root.join("public/images/bella/bella.png")))
 })
 
@@ -40,7 +40,7 @@ user3 = User.create({
   password: '123',
   dog_name: 'Udon',
   breed: 'Coton De Tulear',
-  description: 'Am a smol pupper and 100% floof',
+  description: 'Smol pupper and 100% floof',
   avatar: base64_encode(File.open(Rails.root.join("public/images/Udon.webp")))
 })
 
@@ -137,13 +137,13 @@ user6.discussions.create({
 
 user7.discussions.create({
   title: 'Extra peepads.',
-  content: 'Bought too many peepads on Amazon. Would anyone like to take some off my hands?',
+  content: 'Bought too many pee pads on Amazon. Would anyone like to take some off my hands?',
   category: 'Swap',
 })
 
 user8.discussions.create({
   title: 'Looking to sell my crate!',
-  content: 'My puppy quickly outgrew this crate I bought, and I am looking to sell it. Anyone interested, please comment!',
+  content: 'My puppy quickly outgrew this crate I bought and I am looking to sell it. Anyone interested, please comment!',
   category: 'Swap',
 })
 
