@@ -30,26 +30,29 @@ export default function Explore() {
   // console.log("State.images", state.images);
 
   const getUserByImage = (index) => {
-    return state.users.find((user) => user.id === state.images[index].user_id);
+    const userId = shuffledImages[index].user_id;
+    //return state.users.find((user) => user.id === state.images[index].user_id);
+    return state.users.find((user) => user.id === userId);
   };
 
   const handleClick = (index) => {
     navigate(`/profile/${getUserByImage(index).id}`);
   };
 
-  const items = Array(state.images.length)
-    .fill("")
-    .map((image, index) => ({
-      alt: `${getUserByImage(index).username}`,
-      image: `data:image/jpeg;base64,${state.images[index].file_data}`,
+  // Shuffle the images array
+  const shuffledImages = [...state.images].sort(() => Math.random() - 0.5);
 
-      content: (
-        <div key={index} onClick={() => handleClick(index)}>
-          <strong>{getUserByImage(index).username}</strong>
-          <span>{getUserByImage(index).dog_name}</span>
-        </div>
-      ),
-    }));
+  // Map the shuffled images array to the items array
+  const items = shuffledImages.map((image, index) => ({
+    alt: `${getUserByImage(index).username}`,
+    image: `data:image/jpeg;base64,${image.file_data}`,
+    content: (
+      <div key={index} onClick={() => handleClick(index)}>
+        <strong>{getUserByImage(index).username}</strong>
+        <span>{getUserByImage(index).dog_name}</span>
+      </div>
+    ),
+  }));
 
   return (
     <div>
