@@ -23,7 +23,7 @@ export default function CommentList({ comments, discussionId, users }) {
                 <div className="comment-author-info">
                   <Avatar
                     alt={findUserById(comment.user_id).username}
-                    src={findUserById(comment.user_id).avatar}
+                    src={`data:image/jpeg;base64,${findUserById(comment.user_id).avatar}`}
                     onClick={() => handleClick(comment.user_id)}
                     style={{ cursor: "pointer" }}
                   />

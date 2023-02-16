@@ -12,7 +12,7 @@ export default function DiscussionListItem({
   return (
     <div className="discussion-list-item">
       <div className="avatar">
-        <Avatar alt={name} src= {`data:image/jpeg;base64,${avatar}`}/>
+        <Avatar alt={name} src={`data:image/jpeg;base64,${avatar}`}/>
       </div>
       <div className="details">
         <h3 className="title">{title}</h3>
