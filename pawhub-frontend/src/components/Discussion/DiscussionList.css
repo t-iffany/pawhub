@@ -27,10 +27,16 @@
 
 .category {
   margin-bottom: 10px;
+  background-color: #c6e9df;
+  border-radius: 10px !important;
+  border: 2px solid black;
 }
 
 #add-discussion {
   align-self: center;
+  margin-top: 25px;
+  margin-bottom: 10px;
+
 }
 
 .discussion-links {

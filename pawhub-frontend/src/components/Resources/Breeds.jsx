@@ -5,6 +5,7 @@ import BreedsItem from "./BreedsItem";
 import { TextField } from "@mui/material";
 import Spinner from "react-bootstrap/Spinner";
 import ReactPaginate from "react-paginate";
+import styles from '../Discussion/styles.module.css';
 
 export default function Breeds() {
   const [breedList, setBreedList] = useState([]);
@@ -102,6 +103,11 @@ export default function Breeds() {
           pageCount={pageCount}
           previousLabel="< previous"
           renderOnZeroPageCount={null}
+          containerClassName={styles.container}
+          pageClassName={styles.page}
+          previousClassName={styles.previous}
+          nextClassName={styles.next}
+          activeClassName={styles.active}
         />
       </>
     );
