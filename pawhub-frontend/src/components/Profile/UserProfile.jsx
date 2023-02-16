@@ -56,7 +56,7 @@ export default function UserProfile({ currentUser }) {
                 Hello, my name is{" "}
                 {state.user ? state.user.dog_name : "user.breed not found"}!
               </div>
-              <div>{imageCount()} posts</div>
+              <div className="profile-post-count">{imageCount()} posts</div>
             </div>
           </div>
 

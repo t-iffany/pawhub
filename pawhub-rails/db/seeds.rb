@@ -15,12 +15,12 @@ end
 User.destroy_all
 
 user1 = User.create({
-  username: 'bella',
+  username: 'bella69',
   email: 'jimmy@test.com',
   password: '123',
   dog_name: 'bella',
   breed: 'poodle',
-  description: 'woof',
+  description: 'A really silly doggo that loves getting in trouble. Rawr XD',
   avatar: base64_encode(File.open(Rails.root.join("public/images/bella/bella.png")))
 })
 
@@ -35,7 +35,7 @@ user2 = User.create({
 })
 
 user3 = User.create({
-  username: 'udon',
+  username: 'udon_the_coton',
   email: 'udon@gmail.com',
   password: 'pass',
   dog_name: 'Udon',
