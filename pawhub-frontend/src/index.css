@@ -9,10 +9,34 @@
   /* C6D1E9, C6E9DF */
 }
 
+
+
 .navbar-collapse .navbar-nav .nav-item .nav-link {
   display: flex;
   align-items: center;
   height: 100%;
+}
+
+.nav-link.active {
+  border-radius: 10px !important;
+  background-color: #aae5d3 !important;
+  font-weight: bold !important;
+}
+
+active > .nav-item .dropdown {
+  border-radius: 10px !important;
+  background-color: #aae5d3 !important;
+  font-weight: bold !important;
+}
+
+.dropdown-item {
+  font-weight: bold !important;
+}
+
+.dropdown-item:hover {
+  border-radius: 10px !important;
+  background-color: #c6e9df !important;
+  font-weight: bold !important;
 }
 
 /*  */
