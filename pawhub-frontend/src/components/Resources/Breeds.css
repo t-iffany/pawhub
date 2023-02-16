@@ -8,7 +8,7 @@
 .breed-list-item.list-group-item {
   background-color: #c6e9df;
   border-radius: 10px;
-  border: 2px solid black;
+  border: 2px solid black !important;
   padding: 20px;
   margin-bottom: 20px;
 }
