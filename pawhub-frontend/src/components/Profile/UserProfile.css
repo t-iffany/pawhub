@@ -92,6 +92,11 @@
 .profile-user-breed,
 .profile-description {
   padding-top: 5px;
+  font-size: 16px;
+}
+
+.profile-post-count {
+  font-size: 16px;
 }
 
 .social-media-links {

@@ -20,7 +20,7 @@ user1 = User.create({
   password: '123',
   dog_name: 'Bella',
   breed: 'Poodle',
-  description: 'Woof! Want chimken!',
+  description: 'A really silly doggo that loves getting in trouble. Rawr XD',
   avatar: base64_encode(File.open(Rails.root.join("public/images/bella/bella.png")))
 })
 
@@ -40,7 +40,7 @@ user3 = User.create({
   password: '123',
   dog_name: 'Udon',
   breed: 'Coton De Tulear',
-  description: 'Smol pupper and 100% floof',
+  description: 'Smol pupper and 100% floof. Want chimken.',
   avatar: base64_encode(File.open(Rails.root.join("public/images/Udon.webp")))
 })
 
