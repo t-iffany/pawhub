@@ -136,7 +136,7 @@ user6.discussions.create({
 })
 
 user7.discussions.create({
-  title: 'Extra peepads.',
+  title: 'Extra pee pads.',
   content: 'Bought too many pee pads on Amazon. Would anyone like to take some off my hands?',
   category: 'Swap',
 })
