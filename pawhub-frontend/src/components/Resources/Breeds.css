@@ -5,6 +5,15 @@
   margin: 5px;
 }
 
+.breed-list-item:hover {
+  box-shadow: 0px 7.5px 10px 0px rgba(0, 0, 0, 0.5);
+}
+
+.breed-list-item:active {
+  box-shadow: 0px 2.5px 5px 0px rgba(0, 0, 0, 0.5);
+  transform: translateY(2px);
+}
+
 .breed-list-item.list-group-item {
   background-color: #c6e9df;
   border-radius: 10px;
