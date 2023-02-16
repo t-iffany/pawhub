@@ -19,7 +19,7 @@ export default function DiscussionListItem({
         <p className="timestamp">{moment(timestamp).fromNow()}</p>
         <p className="name">by {name}</p>
       </div>
-      <div className="count"><i className="fa-solid fa-comment">{count}</i></div>
+      <div className="count"><i className="fa-solid fa-comment" style={{marginRight: "0.3em"}}></i>{count}</div>
     </div>
   );
 }
