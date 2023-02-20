@@ -6,6 +6,7 @@ import { TextField } from "@mui/material";
 import Spinner from "react-bootstrap/Spinner";
 import ReactPaginate from "react-paginate";
 import styles from "../Discussion/styles.module.css";
+import API_KEY from "../api_keys";
 
 export default function Breeds() {
   const [breedList, setBreedList] = useState([]);
@@ -16,7 +17,7 @@ export default function Breeds() {
     method: "GET",
     url: "https://dog-breeds2.p.rapidapi.com/dog_breeds",
     headers: {
-      "X-RapidAPI-Key": "130e464c97mshc8ce165f8b9cc32p1ce945jsn99be0d1d68f1",
+      "X-RapidAPI-Key": API_KEY.dogBreedAPIKey,
       "X-RapidAPI-Host": "dog-breeds2.p.rapidapi.com",
     },
   };

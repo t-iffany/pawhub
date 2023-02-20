@@ -11,6 +11,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./SignUp.css";
+import API_KEY from "../api_keys";
 
 export default function SignUp({ setCurrentUser }) {
   const [formData, setFormData] = useState({
@@ -19,7 +20,7 @@ export default function SignUp({ setCurrentUser }) {
     password: "",
     dog_name: "",
     breed: "",
-    description: ""
+    description: "",
   });
 
   const [options, setOptions] = useState([]);
@@ -31,7 +32,7 @@ export default function SignUp({ setCurrentUser }) {
     method: "GET",
     url: "https://dog-breeds2.p.rapidapi.com/dog_breeds",
     headers: {
-      "X-RapidAPI-Key": "da1a663316mshd7457aea6fda466p18c83fjsn5db0b9b1ad56",
+      "X-RapidAPI-Key": API_KEY.dogBreedAPIKey,
       "X-RapidAPI-Host": "dog-breeds2.p.rapidapi.com",
     },
   };
@@ -109,7 +110,8 @@ export default function SignUp({ setCurrentUser }) {
         <Col xs={12} sm={8} md={6} lg={4}>
           <h1 className="text-center">Sign Up</h1>
           <p className="signup-parg">
-            Join in on the fun discussions and connect with other users on PawHub!
+            Join in on the fun discussions and connect with other users on
+            PawHub!
           </p>
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId="username">
@@ -208,10 +210,10 @@ export default function SignUp({ setCurrentUser }) {
                 placeholder="Enter avatar URL"
               /> */}
               <input
-              type="file"
-              name="avatar"
-              onChange={handleFileSelect}
-              accept="image/*"
+                type="file"
+                name="avatar"
+                onChange={handleFileSelect}
+                accept="image/*"
               />
             </Form.Group>
             <br></br>
