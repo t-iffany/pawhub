@@ -22,7 +22,33 @@ Pawhub was built with React, React Router, Ruby on Rails as a back-end API, Post
 
 ## Demo
 
+# Discussion Page
+
+![](pawhub-frontend/public/discussion.gif)
+
+# Profile Page
+
+![](pawhub-frontend/public/profile.gif)
+
+# Carousel Page
+
 ![](pawhub-frontend/public/carousel.gif)
+
+# Map Page
+
+![](pawhub-frontend/public/map.gif)
+
+# Breed Page
+
+![](pawhub-frontend/public/breed.gif)
+
+# Video Page
+
+![](pawhub-frontend/public/videos.gif)
+
+# Signup and Login Pages
+
+![](pawhub-frontend/public/signup.gif)
 
 ## Installation
 
