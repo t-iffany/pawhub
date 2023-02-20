@@ -1,6 +1,6 @@
 # PawHub
 
-PawHub is a web application that helps pet owners connect with other pet owners, find local resources for their pets, and learn about different breeds and pet care. This project includes a discussion board, explore page, map page, and a resources section, which includes a breed information page, and a video page.
+PawHub is a full-stack web application that helps pet owners connect with other pet owners, find local resources for their pets, and learn about different breeds and pet care. This project includes a discussion board, explore page, map page, and a resources section, which includes a breed information page, and a video page.
 
 ## Tech Stack
 
@@ -64,6 +64,6 @@ This project requires 3 API keys to run: Youtube API key, Google Maps API key, a
 
 To start the server, you would need two windows open in your terminal: one for the front end, and the other for the Rails API back end.
 
-7. Run `bin:rails start` in the pawhub-rails directory, then run `npm start` in the pawhub-frontend directory.
+6. Run `bin:rails start` in the pawhub-rails directory, then run `npm start` in the pawhub-frontend directory.
 
-8. Make some new furry friends!!
+7. Make some new furry friends!!
