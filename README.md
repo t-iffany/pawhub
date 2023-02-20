@@ -22,6 +22,8 @@ Pawhub was built with React, React Router, Ruby on Rails as a back-end API, Post
 
 ## Demo
 
+![](pawhub-frontend/public/carousel.gif)
+
 ## Installation
 
 To install this project, follow these steps:
