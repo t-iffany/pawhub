@@ -28,10 +28,15 @@ export default function NavigationBar({ currentUser, setCurrentUser }) {
     <Navbar className="navbar" collapseOnSelect expand="lg">
       <Container>
         <Navbar.Brand>
-          <Link className={`nav-link ${currentPage === "/" ? "active" : ""}`}
-          to="/">
+          <Link
+            className={`nav-link ${currentPage === "/" ? "active" : ""}`}
+            to="/"
+          >
             Paw
-            <img src="https://img.icons8.com/ios/35/null/puppy.png" alt="logo"/>
+            <img
+              src="https://img.icons8.com/ios/35/null/puppy.png"
+              alt="logo"
+            />
             Hub
           </Link>
         </Navbar.Brand>
@@ -39,26 +44,45 @@ export default function NavigationBar({ currentUser, setCurrentUser }) {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link>
-              <Link className={`nav-link ${currentPage === "/explore" ? "active" : ""}`} 
-              to="/explore">
+              <Link
+                className={`nav-link ${
+                  currentPage === "/explore" ? "active" : ""
+                }`}
+                to="/explore"
+              >
                 Explore
               </Link>
             </Nav.Link>
 
             <Nav.Link>
-              <Link className={`nav-link ${currentPage === "/discussions" ? "active" : ""}`} 
-              to="/discussions">
+              <Link
+                className={`nav-link ${
+                  currentPage === "/discussions" ? "active" : ""
+                }`}
+                to="/discussions"
+              >
                 Discussions
               </Link>
             </Nav.Link>
             <Nav.Link>
-              <Link className={`nav-link ${currentPage === "/map" ? "active" : ""}`}  
-              to="/map">
+              <Link
+                className={`nav-link ${currentPage === "/map" ? "active" : ""}`}
+                to="/map"
+              >
                 Map
               </Link>
             </Nav.Link>
 
-            <NavDropdown title="Resources" id="collapsible-nav-dropdown"className={location.pathname === "/breeds" || location.pathname === "/videos" ? "active" : ""}>
+            <NavDropdown
+              title="Resources"
+              id="collapsible-nav-dropdown"
+              className={
+                location.pathname === "/breeds" ||
+                location.pathname === "/videos"
+                  ? "active"
+                  : ""
+              }
+            >
               <NavDropdown.Item href="/breeds">Breeds</NavDropdown.Item>
               <NavDropdown.Item href="/videos">Videos</NavDropdown.Item>
             </NavDropdown>
@@ -66,7 +90,11 @@ export default function NavigationBar({ currentUser, setCurrentUser }) {
 
           <Nav>
             {currentUser && (
-              <NavDropdown title={getLoginInfo()} id="collapsible-nav-dropdown" className={location.pathname === "/profile" ? "active" : ""}>
+              <NavDropdown
+                title={getLoginInfo()}
+                id="collapsible-nav-dropdown"
+                className={location.pathname === "/profile" ? "active" : ""}
+              >
                 <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
                 <NavDropdown.Item href="/discussions" onClick={handleClick}>
                   Log out
@@ -76,8 +104,12 @@ export default function NavigationBar({ currentUser, setCurrentUser }) {
 
             {!currentUser && (
               <Nav.Link>
-                <Link className={`nav-link ${currentPage === "/login" ? "active" : ""}`} 
-                to="/login">
+                <Link
+                  className={`nav-link ${
+                    currentPage === "/login" ? "active" : ""
+                  }`}
+                  to="/login"
+                >
                   Login
                 </Link>
               </Nav.Link>
@@ -85,8 +117,12 @@ export default function NavigationBar({ currentUser, setCurrentUser }) {
 
             {!currentUser && (
               <Nav.Link>
-                <Link className={`nav-link ${currentPage === "/signup" ? "active" : ""}`} 
-                to="/signup">
+                <Link
+                  className={`nav-link ${
+                    currentPage === "/signup" ? "active" : ""
+                  }`}
+                  to="/signup"
+                >
                   Signup
                 </Link>
               </Nav.Link>

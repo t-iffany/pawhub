@@ -19,6 +19,7 @@
   border-radius: 10px !important;
   background-color: #aae5d3 !important;
   font-weight: bold !important;
+  height: 100%;
 }
 
 .nav-link:hover {
