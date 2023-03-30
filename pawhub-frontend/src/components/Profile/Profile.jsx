@@ -28,8 +28,6 @@ export default function Profile({ currentUser, setCurrentUser }) {
           users: response[0].data,
           images: response[1].data,
         }));
-
-        // console.log("state useeffect", state);
       })
 
       .catch((err) => console.log(err));
@@ -53,7 +51,6 @@ export default function Profile({ currentUser, setCurrentUser }) {
       })
       .then((res) => {
         // update user information in the state
-        // setState({ users: [...state.users, res.data] });
         setState((prevState) => {
           const updatedUsers = prevState.users.map((user) => {
             if (user.id === currentUser.id) {
@@ -64,7 +61,6 @@ export default function Profile({ currentUser, setCurrentUser }) {
           setCurrentUser(res.data);
           localStorage.setItem("userInfo", JSON.stringify(res.data));
           setEditMode(false);
-          // alert("Edits Saved!");
           return { ...prevState, users: updatedUsers };
         });
       })
@@ -91,7 +87,6 @@ export default function Profile({ currentUser, setCurrentUser }) {
         setEditMode(true);
         setUploading(false);
         setSelectedFile(null);
-        // alert("Upload Successful");
         // reset the file input
         document.querySelector("input[type='file']").value = "";
       })
@@ -122,7 +117,6 @@ export default function Profile({ currentUser, setCurrentUser }) {
 
           setEditMode(true);
           setUploading(false);
-          // alert("Image Deleted!");
         })
         .catch((err) => {
           console.log(err);
