@@ -38,35 +38,13 @@ export default function Profile({ currentUser, setCurrentUser }) {
     setEditMode(!editMode);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    setUploading(true);
-    // send PUT request to the server to update the user information
-    axios
-      .put(`http://localhost:3001/api/users/${currentUser.id}`, {
-        username: event.target.username.value,
-        dog_name: event.target.dog_name.value,
-        breed: event.target.breed.value,
-        description: event.target.description.value,
-      })
-      .then((res) => {
-        // update user information in the state
-        setState((prevState) => {
-          const updatedUsers = prevState.users.map((user) => {
-            if (user.id === currentUser.id) {
-              return res.data;
-            }
-            return user;
-          });
-          setCurrentUser(res.data);
-          localStorage.setItem("userInfo", JSON.stringify(res.data));
-          setEditMode(false);
-          return { ...prevState, users: updatedUsers };
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  // cancel and exit edit mode
+  const handleCancel = () => {
+    setEditMode(false);
+  };
+
+  const handleFileSelect = (event) => {
+    setSelectedFile(event.target.files[0]);
   };
 
   const handleUpload = (event) => {
@@ -87,7 +65,6 @@ export default function Profile({ currentUser, setCurrentUser }) {
         setEditMode(true);
         setUploading(false);
         setSelectedFile(null);
-        // reset the file input
         document.querySelector("input[type='file']").value = "";
       })
       .catch((err) => {
@@ -125,12 +102,35 @@ export default function Profile({ currentUser, setCurrentUser }) {
     }
   };
 
-  const handleCancel = () => {
-    setEditMode(false);
-  };
-
-  const handleFileSelect = (event) => {
-    setSelectedFile(event.target.files[0]);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setUploading(true);
+    // send PUT request to the server to update the user information
+    axios
+      .put(`http://localhost:3001/api/users/${currentUser.id}`, {
+        username: event.target.username.value,
+        dog_name: event.target.dog_name.value,
+        breed: event.target.breed.value,
+        description: event.target.description.value,
+      })
+      .then((res) => {
+        // update user information in the state
+        setState((prevState) => {
+          const updatedUsers = prevState.users.map((user) => {
+            if (user.id === currentUser.id) {
+              return res.data;
+            }
+            return user;
+          });
+          setCurrentUser(res.data);
+          localStorage.setItem("userInfo", JSON.stringify(res.data));
+          setEditMode(false);
+          return { ...prevState, users: updatedUsers };
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
